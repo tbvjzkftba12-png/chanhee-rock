@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>건모의 노량진 여행 🐟</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #E0F6FF 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    user-select: none;
+  }
+  .header {
+    text-align: center;
+    padding: 16px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header h1 { font-size: 24px; color: #1565C0; }
+  .header p { font-size: 13px; color: #555; margin-top: 4px; }
+  .date-badge {
+    display: inline-block;
+    background: #1565C0;
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 360px;
+    margin: 20px auto;
+    background: linear-gradient(180deg, #cdeffd 0%, #e8f8ff 70%, #d4f0d4 70%, #c0e8c0 100%);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.12);
+  }
+  /* clouds */
+  .cloud { position:absolute; background:#fff; border-radius:50px; opacity:0.85; }
+  .cloud::before, .cloud::after{content:'';position:absolute;background:#fff;border-radius:50%;}
+  .c1{width:70px;height:22px;top:30px;left:12%;}
+  .c1::before{width:34px;height:34px;top:-16px;left:10px;}
+  .c1::after{width:26px;height:26px;top:-10px;left:38px;}
+  .c2{width:90px;height:26px;top:60px;right:14%;}
+  .c2::before{width:40px;height:40px;top:-18px;left:14px;}
+  .c2::after{width:30px;height:30px;top:-12px;left:48px;}
+
+  /* ground road */
+  .road {
+    position:absolute; bottom:0; left:0; width:100%; height:30%;
+    background:#7d8a7d;
+  }
+  .road::after{
+    content:''; position:absolute; top:50%; left:0; width:100%; height:3px;
+    background:repeating-linear-gradient(90deg,#fff 0 24px,transparent 24px 48px);
+  }
+
+  /* location markers */
+  .spot {
+    position:absolute; bottom:34%; transform:translateX(-50%);
+    text-align:center; transition:opacity .3s;
+  }
+  .spot .icon{ font-size:30px; }
+  .spot .label{
+    font-size:10px; background:rgba(255,255,255,0.85);
+    padding:2px 6px; border-radius:8px; margin-top:2px; white-space:nowrap;
+    color:#333;
+  }
+  .spot.active .label{ background:#FFD54F; font-weight:bold; }
+  .spot.active .icon{ filter:drop-shadow(0 0 6px gold); }
+
+  /* character */
+  #gunmo {
+    position:absolute; bottom:30%; left:7%;
+    transform:translateX(-50%);
+    cursor:pointer; transition:left 1.6s cubic-bezier(.45,.05,.55,.95);
+    z-index:20; text-align:center;
+  }
+  #gunmo .body{ font-size:46px; display:inline-block; transition:transform .2s; }
+  #gunmo.walking .body{ animation:bob .4s infinite; }
+  @keyframes bob{ 0%,100%{transform:translateY(0) rotate(-3deg);} 50%{transform:translateY(-7px) rotate(3deg);} }
+  #gunmo .bag{ font-size:20px; position:absolute; bottom:6px; right:-4px; }
+  #gunmo .speech{
+    position:absolute; bottom:62px; left:50%; transform:translateX(-50%);
+    background:#fff; padding:6px 10px; border-radius:12px; font-size:12px;
+    white-space:nowrap; box-shadow:0 3px 8px rgba(0,0,0,0.15);
+    opacity:0; transition:opacity .3s; pointer-events:none;
+  }
+  #gunmo .speech::after{
+    content:''; position:absolute; bottom:-6px; left:50%; transform:translateX(-50%);
+    border:6px solid transparent; border-top-color:#fff;
+  }
+  #gunmo.talking .speech{ opacity:1; }
+
+  /* vehicle */
+  #vehicle{
+    position:absolute; bottom:31%; font-size:34px; opacity:0;
+    transition:opacity .4s; z-index:15;
+  }
+
+  .controls{ text-align:center; margin:8px 0 4px; }
+  .hint{ font-size:13px; color:#1565C0; animation:pulse 1.4s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.4;} }
+  .btn{
+    background:#1565C0; color:#fff; border:none; padding:8px 18px;
+    border-radius:20px; font-size:14px; cursor:pointer; margin:4px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
+  }
+  .btn:active{ transform:scale(.96); }
+  .btn.reset{ background:#789; }
+
+  /* itinerary list */
+  .timeline{
+    max-width:900px; margin:10px auto 40px; padding:0 16px;
+  }
+  .step{
+    display:flex; align-items:flex-start; gap:12px; padding:12px;
+    background:rgba(255,255,255,0.6); border-radius:12px; margin-bottom:8px;
+    opacity:.5; transition:all .3s; border-left:4px solid transparent;
+  }
+  .step.done{ opacity:1; }
+  .step.current{ opacity:1; background:#FFF8E1; border-left-color:#FFB300; transform:scale(1.02); }
+  .step .time{ font-weight:bold; color:#1565C0; min-width:54px; font-size:13px; }
+  .step .desc{ font-size:13px; color:#333; line-height:1.4; }
+  .step .em{ font-size:18px; }
+  .progress-wrap{ max-width:900px; margin:0 auto; padding:0 16px; }
+  .progress-bar{ height:8px; background:#fff; border-radius:8px; overflow:hidden; }
+  .progress-fill{ height:100%; width:0; background:linear-gradient(90deg,#42A5F5,#1565C0); transition:width 1s; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>🐟 건모의 노량진 회 원정대 🐟</h1>
+    <p>오산 → 노량진수산시장 오마카세 회 포장 → 천안</p>
+    <span class="date-badge">2026년 6월 27일 (토)</span>
+  </div>
+
+  <div class="controls">
+    <span class="hint" id="hint">👆 건모를 클릭하면 여행을 시작해요!</span>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+
+    <!-- 장소 마커들 -->
+    <div class="spot" data-pos="7"  style="left:7%"><div class="icon">🏠</div><div class="label">집</div></div>
+    <div class="spot" data-pos="28" style="left:28%"><div class="icon">🅿️</div><div class="label">오산역 주차장</div></div>
+    <div class="spot" data-pos="50" style="left:50%"><div class="icon">🚉</div><div class="label">노량진역</div></div>
+    <div class="spot" data-pos="72" style="left:72%"><div class="icon">🏪</div><div class="label">노량진수산시장</div></div>
+    <div class="spot" data-pos="93" style="left:93%"><div class="icon">🍣</div><div class="label">청양수산 오마카세</div></div>
+
+    <div class="road"></div>
+    <div id="vehicle">🚆</div>
+
+    <div id="gunmo">
+      <div class="speech" id="speech">출발 준비 완료!</div>
+      <div class="body">🧍<span class="bag">🎒</span></div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="nextBtn" onclick="nextStep()">다음 단계 ▶</button>
+    <button class="btn reset" onclick="resetTrip()">↺ 처음으로</button>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+<script>
+const steps = [
+  { time:"09:50", pos:7,  em:"🏠", veh:"", text:"집에서 코스트코 보냉 백팩 🎒 메고 출발!", say:"보냉백 챙겼다! 출발~" },
+  { time:"10:00", pos:28, em:"🅿️", veh:"", text:"오산역 도착, 공용주차장에 자차 주차 🅿️", say:"주차 완료!" },
+  { time:"10:13", pos:50, em:"🚆", veh:"🚆", text:"청량리행 급행 열차 탑승 🚆 (오산→노량진)", say:"청량리행 급행 탑니다!" },
+  { time:"11:11", pos:50, em:"🚉", veh:"", text:"노량진역 도착! 수산시장까지 도보 10분 🚶", say:"노량진 도착!" },
+  { time:"11:21", pos:72, em:"🏪", veh:"", text:"노량진수산시장 입장 🏪", say:"회 보러 가자!" },
+  { time:"11:30", pos:93, em:"🍣", veh:"", text:"청양수산에서 오마카세 2인세트 회 포장 🍣 → 보냉백에!", say:"오마카세 2인세트 포장!" },
+  { time:"12:00", pos:50, em:"🚶", veh:"", text:"포장한 회 보냉백에 넣고 노량진역으로 출발 🚶❄️", say:"신선하게 보관 완료!" },
+  { time:"12:17", pos:28, em:"🚆", veh:"🚆", text:"천안행 급행 탑승 🚆 (노량진→오산)", say:"천안행 급행 탑니다!" },
+  { time:"13:15", pos:28, em:"🅿️", veh:"", text:"오산 도착! 13:25 자차 타고 🚗 천안으로 출발", say:"집에 가서 회 먹자! 🍽️" }
+];
+
+let idx = -1;
+const gunmo = document.getElementById('gunmo');
+const body = gunmo.querySelector('.body');
+const speech = document.getElementById('speech');
+const vehicle = document.getElementById('vehicle');
+const fill = document.getElementById('fill');
+const hint = document.getElementById('hint');
+const stage = document.getElementById('stage');
+
+// build timeline
+const tl = document.getElementById('timeline');
+steps.forEach((s,i)=>{
+  const d = document.createElement('div');
+  d.className='step'; d.id='step'+i;
+  d.innerHTML = `<span class="time">${s.time}</span><span class="em">${s.em}</span><span class="desc">${s.text}</span>`;
+  tl.appendChild(d);
+});
+
+function render(){
+  const s = steps[idx];
+  // move character
+  const left = 7 + (s.pos-7); // pos is percent
+  gunmo.style.left = s.pos + '%';
+  body.firstChild ? null : null;
+  // change icon: keep person but show vehicle if train
+  if(s.veh){
+    vehicle.textContent = s.veh;
+    vehicle.style.left = s.pos + '%';
+    vehicle.style.transform = 'translateX(-50%)';
+    vehicle.style.opacity = 1;
+    body.innerHTML = '🚆<span class="bag" style="font-size:16px;">🎒</span>';
+  } else {
+    vehicle.style.opacity = 0;
+    body.innerHTML = (s.em && s.pos>=90 ? '🧍' : '🚶') + '<span class="bag">🎒</span>';
+  }
+  // speech
+  speech.textContent = s.say;
+  gunmo.classList.add('talking','walking');
+  setTimeout(()=>gunmo.classList.remove('walking'), 1600);
+
+  // highlight spot
+  document.querySelectorAll('.spot').forEach(sp=>{
+    sp.classList.toggle('active', Math.abs(+sp.dataset.pos - s.pos) < 3);
+  });
+  // timeline
+  document.querySelectorAll('.step').forEach((st,i)=>{
+    st.classList.toggle('done', i<=idx);
+    st.classList.toggle('current', i===idx);
+  });
+  document.getElementById('step'+idx).scrollIntoView({behavior:'smooth',block:'center'});
+  fill.style.width = ((idx+1)/steps.length*100) + '%';
+  hint.style.display='none';
+}
+
+function nextStep(){
+  idx++;
+  if(idx>=steps.length){ idx=steps.length-1; }
+  render();
+  if(idx===steps.length-1){
+    setTimeout(()=>{ speech.textContent='집에서 회 파티! 🎉🍣🍺'; }, 1700);
+  }
+}
+
+function resetTrip(){
+  idx=-1;
+  gunmo.style.left='7%';
+  body.innerHTML='🧍<span class="bag">🎒</span>';
+  speech.textContent='출발 준비 완료!';
+  vehicle.style.opacity=0;
+  fill.style.width='0';
+  hint.style.display='inline';
+  document.querySelectorAll('.step').forEach(st=>st.classList.remove('done','current'));
+  document.querySelectorAll('.spot').forEach(sp=>sp.classList.remove('active'));
+}
+
+gunmo.addEventListener('click', nextStep);
+</script>
+</body>
+</html>
