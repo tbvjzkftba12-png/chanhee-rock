@@ -42,13 +42,13 @@
 
   /* ── 탭 ── */
   nav{
-    position:sticky; top:0; z-index:50; display:flex; gap:6px;
-    padding:10px 14px; background:rgba(244,246,251,.92); backdrop-filter:blur(10px);
+    position:sticky; top:0; z-index:50; display:flex; gap:5px;
+    padding:10px 10px; background:rgba(244,246,251,.92); backdrop-filter:blur(10px);
   }
   nav button{
     flex:1; border:1px solid var(--line); background:var(--card); color:var(--sub);
-    padding:10px 0; border-radius:12px; font-size:13.5px; font-weight:700; cursor:pointer;
-    font-family:inherit; transition:.15s;
+    padding:10px 2px; border-radius:12px; font-size:12.3px; font-weight:700; cursor:pointer;
+    font-family:inherit; transition:.15s; white-space:nowrap; min-width:0;
   }
   nav button.on{background:var(--navy); border-color:var(--navy); color:#fff;}
 
@@ -204,6 +204,49 @@
   body.th-storm header{background:linear-gradient(140deg,#1f2438 0%,#3d3a63 55%,#6b5a8e 115%);}
   body.th-fog{background:#f1f2f4;}
   body.th-fog header{background:linear-gradient(140deg,#6d7787 0%,#98a2b0 55%,#c3cad4 115%);}
+
+  /* ── 인스타 탭 ── */
+  .igseg{display:flex; gap:8px;}
+  .igseg button{
+    flex:1; border:1px solid var(--line); background:var(--card); border-radius:14px;
+    padding:13px 6px; font-family:inherit; cursor:pointer; text-align:center; transition:.15s;
+  }
+  .igseg button .big{font-size:14.5px; font-weight:800; display:block; color:var(--ink);}
+  .igseg button .sm{font-size:11px; color:var(--sub); margin-top:2px; display:block;}
+  .igseg button.on{border-color:transparent; background:linear-gradient(135deg,#e1306c,#f77737); }
+  .igseg button.on .big{color:#fff;}
+  .igseg button.on .sm{color:rgba(255,255,255,.85);}
+  .locs{display:flex; flex-wrap:wrap; gap:7px; margin-top:14px;}
+  .locs button{
+    border:1px solid var(--line); background:#fff; color:var(--sub); border-radius:999px;
+    padding:7px 13px; font-size:12.5px; font-weight:700; font-family:inherit; cursor:pointer;
+  }
+  .locs button.on{background:var(--blue); border-color:var(--blue); color:#fff;}
+  .thh{font-size:12.5px; font-weight:800; color:var(--navy); margin:18px 2px 2px; display:flex; align-items:center; gap:6px;}
+  .thh:first-child{margin-top:14px;}
+  .pl-item{border:1px solid var(--line); border-radius:13px; margin-top:8px; overflow:hidden; background:#fff;}
+  .pl-item .ph{display:flex; align-items:center; gap:10px; padding:11px 12px; cursor:pointer; user-select:none;}
+  .pl-item .ph .pi2{flex:none; width:34px; height:34px; border-radius:10px; background:#eef2fa; display:flex; align-items:center; justify-content:center; font-size:17px;}
+  .pl-item .ph .pt{flex:1; min-width:0;}
+  .pl-item .ph b{font-size:13.5px; display:block;}
+  .pl-item .ph p{font-size:11.5px; color:var(--sub); margin-top:1px;}
+  .pl-item .ph .car{flex:none; color:#aab3c5; font-size:12px; transition:transform .2s;}
+  .pl-item.open .ph .car{transform:rotate(180deg); color:var(--blue);}
+  .pl-item .pd{display:none; padding:2px 13px 13px; font-size:12.6px; color:#3d4657; border-top:1px dashed var(--line);}
+  .pl-item.open .pd{display:block; animation:fade .2s ease;}
+  .pd .kv2{display:grid; grid-template-columns:66px 1fr; gap:6px 8px; margin-top:11px;}
+  .pd .kv2 dt{color:var(--sub); font-weight:700; font-size:11.5px; padding-top:1px;}
+  .pd .kv2 dd{font-weight:500;}
+  .pd .rct{
+    background:#fdf3f6; border:1px solid #f3d3de; border-radius:10px;
+    padding:8px 10px; margin-top:10px; font-size:12px; color:#a34d68;
+  }
+  .pd .lnks{margin-top:10px; display:flex; flex-wrap:wrap; gap:5px;}
+  .pd .lnks a{
+    font-size:11px; font-weight:700; background:#fff; border:1px solid #d8e0ef;
+    border-radius:999px; padding:4px 10px; color:var(--blue);
+  }
+  .igempty{font-size:12.5px; color:var(--sub); text-align:center; padding:18px 0 6px;}
 </style>
 </head>
 <body>
@@ -223,7 +266,9 @@
   <button class="on" data-t="d1">Day 1</button>
   <button data-t="d2">Day 2</button>
   <button data-t="d3">Day 3</button>
-  <button data-t="info">예약·정보</button>
+  <button data-t="info">정보</button>
+  <button data-t="pick">추천</button>
+  <button data-t="insta">인스타</button>
 </nav>
 
 <main>
@@ -815,7 +860,7 @@
       <dt>체크인</dt><dd>7/17 (금) 오후 4:00 · 키패드 셀프 체크인</dd>
       <dt>체크아웃</dt><dd>7/19 (일) 오후 12:00</dd>
       <dt>주소</dt><dd>부산 중구 중앙대로180번길 (부산역 1번 출구 도보 3분)</dd>
-      <dt>게스트</dt><dd>2명 · 예약코드는 에어비앤비 앱에서 확인</dd>
+      <dt>예약</dt><dd>게스트 2명 · 예약코드는 에어비앤비 앱에서 확인</dd>
       <dt>호스트</dt><dd>Aria (공동호스트: Marant, Everyday Sweet)</dd>
     </dl>
     <div class="note">
@@ -1009,6 +1054,95 @@
 
 </section>
 
+<!-- ═══════════ 추천 장소 (DM 릴스 분석) ═══════════ -->
+<section class="tab" id="pick">
+
+  <div class="card">
+    <h2><span class="em">💌</span> 희주 픽 · DM 릴스 추천</h2>
+    <div class="cap">한 달간 주고받은 인스타 DM 릴스 127개(희주 102 · 나 25)를 분석해 부산 일정에 맞는 곳만 골랐어요. 전체 목록은 <b>인스타 탭</b>에서!</div>
+    <div class="note"><b>💡 이렇게 골랐어요</b>릴스 속 위치·메뉴 + 우리 대화 반응("이거 꼭 먹자" 등)을 기준으로, 여행 동선(서면·광안리)에 겹치는 곳 위주로 추렸어요.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🌃</span> Day 1 밤 — 서면·전포에서</h2>
+    <div class="cap">온정 저녁 후 2차·산책 사이에 끼우기 좋은 곳</div>
+    <div class="plc"><div class="pi">🍧</div><div class="pb"><b>파커 (전포)</b><p>망고스틴 2망을 통째로 올린 여름 한정 빙수 — 희주가 보낸 릴스, 내 반응 "헐방 맛있겠다" · 전포대로216번길 26 1층</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DaZ9KElTa-_/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/전포 파커" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🥞</div><div class="pb"><b>달조리법 (전포)</b><p>"내맘대로 크레페" 만들어 먹는 크레페 카페 · 서전로58번길 80 2층 — 저녁 영업시간은 방문 전 확인</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DXvbJFUhbvP/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/전포 달조리법" target="_blank">네이버 지도</a></div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🏖️</span> Day 2 낮 — 광안리 간식 로드</h2>
+    <div class="cap">해변 산책 코스에 자연스럽게 얹기</div>
+    <div class="plc"><div class="pi">🥖</div><div class="pb"><b>명란 소금빵</b><p>수제 명란소스+감자 무스를 채운 소금빵 — 희주: "건모가 좋아할 거 같애" → 나: "맛있어보임" · 위치는 릴스 캡션 참고</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DaA68SNT1G1/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/광안리 명란 소금빵" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🥨</div><div class="pb"><b>쫀득네모네 (광안비치파크 3층)</b><p>글루텐프리 쫀득 츄러스 5가지 맛 · 광안해변로 199 · 새벽 2시까지라 밤 산책 때도 OK</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DaSi6xPNst4/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/광안리 쫀득네모네" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🌯</div><div class="pb"><b>쫀득감자 불닭쌈 & 닭강정</b><p>부산 최초 쫀득감자 시리즈 — 희주: "이거 꼭 먹자.." 나: "저장해놀겡" · 정확한 위치는 릴스 고정댓글 확인</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DXsufSbAek5/" target="_blank">📸 불닭쌈 릴스</a><a href="https://www.instagram.com/reel/DXOTMg6E_WE/" target="_blank">📸 닭강정 릴스</a><a href="https://map.naver.com/p/search/광안리 쫀득감자" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🦪</div><div class="pb"><b>oyoyoy 굴 팝업 (밀락더마켓 B-11)</b><p>성수·연남 유명 오이스터바 팝업(~8/23) — 보틀샵 들르러 밀락더마켓 갈 때 굴 한 피스+하이볼 한잔 딱!</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/Dao5bkxSZSv/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/밀락더마켓" target="_blank">네이버 지도</a></div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🌙</span> Day 2 밤 — 드론쇼 이후 (7/18 토)</h2>
+    <div class="cap">20:00 드론쇼 끝나고 이어가는 옵션들</div>
+    <div class="plc"><div class="pi">🎪</div><div class="pb"><b>차없는 문화의 거리 <span class="tag rsv">7/18 당일 진행</span></b><p>토·일 21:00~23:30 광안리 해변 도로 — 해변오락실·분필 그림·보드게임·버스킹 (무료). 내가 보낸 릴스, 희주 "헐방 재밋뎃다"</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DaSpAVXh_S0/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/광안리해수욕장" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🎭</div><div class="pb"><b>킨키 — 뮤지컬펍 (남천동)</b><p>만원대로 즐기는 라이브 뮤지컬 펍, 금·토 공연 (3부 21:40~) — 드론쇼 후 택시 5분 · 남천동로108번길 46 2층</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DaPw9EMJ4x2/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/광안리 킨키 뮤지컬펍" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🏮</div><div class="pb"><b>호이호이 — 심야 이자카야</b><p>오전 6시까지 하는 광안리 골목 이자카야, 사장님이 식당도 운영해서 안주 맛집 — 희주 "사장님 짱귀여우시네" · 광안해변로295번길 39</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DajioWkBtov/" target="_blank">📸 릴스</a><a href="https://map.naver.com/p/search/광안리 호이호이" target="_blank">네이버 지도</a></div>
+    </div></div>
+    <div class="note"><b>⚠ 소담이랑 겹치면?</b>소담(육회)은 일요일 휴무라 <b>토요일 밤이 마지막 기회</b> — 광안리에서 더 놀 거면 소담은 22:40 이후로 미루거나 포장으로!</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🍢</span> 야키토리 먹을 때 팁</h2>
+    <div class="cap">온정(Day1) · 해공(Day2)에서 써먹기</div>
+    <div class="plc"><div class="pi">🏮</div><div class="pb"><b>쵸-칭(ちょうちん) 도전하기</b><p>희주가 보낸 릴스: "야키토리 가면 이거 꼭 먹어야 함" — 노른자 같은 닭 난소+난관 꼬치. 메뉴판에 있으면 주문 ㄱㄱ</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DahAPI9z7KP/" target="_blank">📸 릴스</a></div>
+    </div></div>
+    <div class="plc"><div class="pi">🥩</div><div class="pb"><b>부산 차돌육회 먹는 법</b><p>희주가 보낸 릴스: "부산에서 먹고 제일 충격받은 음식" — 소담 야식 가기 전에 보고 가면 좋음</p>
+      <div class="lnks"><a href="https://www.instagram.com/reel/DZmf-c4S9MX/" target="_blank">📸 릴스</a></div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">😢</span> 아쉽지만 이번엔 패스</h2>
+    <div class="cap">릴스로 봤지만 일정·동선이 안 맞는 곳</div>
+    <div class="plc"><div class="pi">🍙</div><div class="pb"><b>거부기밥 (센텀 신세계 팝업)</b><p>둘 다 "꼭 먹자" 했던 제주 올레시장 주먹밥 — 팝업이 <b>7/16 종료</b>라 하루 차이로 못 감 😭 제주 본점은 다음 기회에</p></div></div>
+    <div class="plc"><div class="pi">🍲</div><div class="pb"><b>샤브원 명지점</b><p>오션뷰 무한리필 뷔페 — "평일 런치는 갈만하겠다"(나) 했지만 명지는 이번 동선 밖이라 패스</p></div></div>
+  </div>
+
+</section>
+
+<!-- ═══════════ 인스타 (DM 릴스 아카이브) ═══════════ -->
+<section class="tab" id="insta">
+
+  <div class="card">
+    <h2><span class="em">📸</span> 우리가 주고받은 릴스</h2>
+    <div class="cap">DM 릴스 127개 중 부산 관련만 정리 — 보낸 사람 → 지역 → 테마 → 장소 순으로 눌러보세요</div>
+    <div class="igseg">
+      <button class="on" data-by="hj"><span class="big">💗 희주가 보낸 릴스</span><span class="sm" id="cnt-hj"></span></button>
+      <button data-by="me"><span class="big">💙 내가 보낸 릴스</span><span class="sm" id="cnt-me"></span></button>
+    </div>
+    <div class="locs" id="ig-locs"></div>
+    <div id="ig-list"></div>
+    <div class="hint">장소를 탭하면 뭐 하는 곳인지 · 뭘 파는지 · 대표 메뉴 · 위치가 펼쳐져요 ▾</div>
+  </div>
+
+</section>
+
 </main>
 
 <footer>부산 여행 플랜 · 2026.07.17–19 · 즐거운 여행 되세요 🧳</footer>
@@ -1175,6 +1309,182 @@ Object.entries(DAYS).forEach(([id,segs])=>{
   legend+='</div>';
   el.innerHTML=svg+legend;
 });
+
+// ── 인스타 탭: DM 릴스 아카이브 (부산 관련) ──
+// by: hj(희주) / me(나) · loc: 지역 · th: eat 맛집 / cafe 카페·디저트 / bar 술집·펍 / play 놀거리·가이드
+const IG_DATA=[
+  // ─ 희주가 보낸 릴스 ─
+  {by:'hj',loc:'광안리',th:'bar',emoji:'🎭',name:'킨키 (KINKY)',date:'7/12',
+   what:'배우들이 라이브 무대를 하는 뮤지컬 펍 — 만원대 입장으로 공연+술 동시에',
+   sell:'맥주·칵테일 등 주류와 안주, 라이브 뮤지컬 공연 (금·토 1부 19:40 / 2부 20:40 / 3부 21:40)',
+   menu:'공연 보며 가볍게 한잔 — 매달 특집 공연이 바뀜',
+   addr:'부산 수영구 남천동로108번길 46 2층 (광안리 남천동)',
+   react:'릴스: "광안리 뮤지컬펍을 단돈 만원으로"',
+   reel:'https://www.instagram.com/reel/DaPw9EMJ4x2/', map:'광안리 킨키 뮤지컬펍'},
+  {by:'hj',loc:'광안리',th:'cafe',emoji:'🥨',name:'쫀득네모네',date:'7/11',
+   what:'밀가루 0% 글루텐프리 쫀득 츄러스 전문점',
+   sell:'겉바속쫀 글루텐프리 츄러스 — 오리지널·우유·황치즈·초코·인절미 5가지 맛',
+   menu:'초딩입맛은 초코·우유·황치즈, 할미입맛은 인절미 추천 (릴스 왈)',
+   addr:'부산 광안해변로 199 광안비치파크 3층 · 12:00~새벽 2:00',
+   react:'',
+   reel:'https://www.instagram.com/reel/DaSi6xPNst4/', map:'광안리 쫀득네모네'},
+  {by:'hj',loc:'광안리',th:'bar',emoji:'🦪',name:'oyoyoy 굴 팝업',date:'7/11',
+   what:'서울 성수·연남·을지로 오이스터바의 밀락더마켓 여름 팝업 (6/26~8/23)',
+   sell:'바위굴·삼배체굴 등 신선한 씨푸드 + 와인·하이볼·맥주',
+   menu:'굴 한 피스 + 올리브오일·후추 조합 (희주가 성수점 후기 릴스도 보냄)',
+   addr:'부산 밀락더마켓 B-11 (수영구 민락동) — 해공 도보 5분',
+   react:'Day2 보틀샵 동선(밀락더마켓)과 딱 겹침!',
+   reel:'https://www.instagram.com/reel/Dao5bkxSZSv/', map:'밀락더마켓'},
+  {by:'hj',loc:'광안리',th:'cafe',emoji:'🥖',name:'명란 소금빵',date:'6/25',
+   what:'"부산에서 명란으로 Top" — 명란 소금빵으로 유명한 광안리 빵집',
+   sell:'수제 명란소스+감자를 넣은 무스 느낌의 촉촉한 소금빵',
+   menu:'명란 소금빵 (모닝빵처럼 촉촉한 스타일)',
+   addr:'광안리 — 정확한 위치는 릴스 캡션 확인',
+   react:'희주: "건모가 좋아할 거 같애" → 나: "명란..쩐다마 / 맛있어보임"',
+   reel:'https://www.instagram.com/reel/DaA68SNT1G1/', map:'광안리 명란 소금빵'},
+  {by:'hj',loc:'광안리',th:'eat',emoji:'🌯',name:'쫀득감자 불닭쌈',date:'7/13',
+   what:'광안리 길거리 간식 — "전세계 최초 쫀득감자 불닭쌈"',
+   sell:'겉바속쫀 감자 피에 치즈·에그마요·불닭을 싸서 주는 이색 간식',
+   menu:'쫀득감자 불닭쌈 (매콤꼬소)',
+   addr:'광안리 — 정확한 위치는 릴스 고정댓글 확인',
+   react:'나: "헐 맛잇겟다 쫀득감자 야끼소바"',
+   reel:'https://www.instagram.com/reel/DXsufSbAek5/', map:'광안리 쫀득감자'},
+  {by:'hj',loc:'부산 기타',th:'eat',emoji:'🍗',name:'쫀득감자 닭강정',date:'7/12',
+   what:'부산 최초 쫀득감자 반죽 닭강정 — 일반 닭강정과 차원이 다른 빠삭함',
+   sell:'쫀득감자 반죽으로 튀긴 닭강정 5가지 맛',
+   menu:'허니콤보·핫치즈·슈프림·후라이드·뿌링클 (간장파는 허니콤보, 빠삭파는 후라이드+불닭마요)',
+   addr:'부산 — 파는 곳은 릴스 고정댓글 확인',
+   react:'나: "헐 둘다 짱맛잇어보여" → 희주: "이거 꼭 먹자.." → 나: "웅 저장해놀겡"',
+   reel:'https://www.instagram.com/reel/DXOTMg6E_WE/', map:'부산 쫀득감자 닭강정'},
+  {by:'hj',loc:'센텀',th:'eat',emoji:'🍙',name:'거부기밥 (팝업 종료 😢)',date:'7/12',
+   what:'제주 올레시장 유명 주먹밥의 백화점 팝업 — 아쉽게 7/16 종료 (여행 전날!)',
+   sell:'연어·전복장 등 주먹밥 (전복장이 달달짭조름 더 맛있다는 후기)',
+   menu:'전복장 주먹밥 · 연어 주먹밥',
+   addr:'신세계백화점 센텀시티점 B1 팝업 (6/19~7/16)',
+   react:'나: "헐 둘다 짱맛잇어보여" / 희주: "이거 꼭 먹자.." — 제주 본점은 다음 기회에',
+   reel:'https://www.instagram.com/reel/DafovCmyCHd/', map:'제주 거부기밥'},
+  {by:'hj',loc:'명지',th:'eat',emoji:'🍲',name:'샤브원 명지점',date:'7/12',
+   what:'오션뷰 무한리필 뷔페 — 훠궈+스시+뿌링클+폭립을 한 번에',
+   sell:'훠궈·샤브 소고기, 생연어 스시&롤, 뿌링클 치킨, 폭립, 디저트까지 무한리필',
+   menu:'평일 런치 25,900 / 디너 29,900 / 주말 31,900원',
+   addr:'부산 강서구 르노삼성대로 681-2 3층 (명지) · 11:00~21:30',
+   react:'희주: "근데 인당 3만원이래.. 창렬.." → 나: "비싸네.. 평일런치는 갈만하겠다 ㅋㅋ"',
+   reel:'https://www.instagram.com/reel/DXx3KuBSJiy/', map:'샤브원 명지점'},
+  {by:'hj',loc:'서면·전포',th:'cafe',emoji:'🥞',name:'달조리법',date:'7/10',
+   what:'"내맘대로 크레페" — 토핑을 골라 만들어 먹는 크레페 카페',
+   sell:'커스텀 크레페와 음료',
+   menu:'내맘대로 크레페',
+   addr:'부산 부산진구 서전로58번길 80 2층 (전포)',
+   react:'나: "맛잇겟더"',
+   reel:'https://www.instagram.com/reel/DXvbJFUhbvP/', map:'전포 달조리법'},
+  {by:'hj',loc:'서면·전포',th:'cafe',emoji:'🍧',name:'파커 (PARKER)',date:'7/5',
+   what:'전포 디저트 카페 — "상하이 갈 필요 없는" 망고스틴 빙수 신상 맛집',
+   sell:'제철 망고스틴 2망을 통째로 올린 여름 한정 빙수와 디저트',
+   menu:'망고스틴 빙수 (지금 아니면 못 먹는 제철 한정)',
+   addr:'부산 전포대로216번길 26 1층 (전포)',
+   react:'나: "헐방 / 맛있겠다"',
+   reel:'https://www.instagram.com/reel/DaZ9KElTa-_/', map:'전포 파커'},
+  {by:'hj',loc:'부산 기타',th:'play',emoji:'🗺️',name:'광안리·서면 총정리 릴스',date:'7/10',
+   what:'부산 러버 뚜벅이 대학생이 정리한 광안리/서면 맛집·카페·놀거리 모음',
+   sell:'우리 동선(서면+광안리)이랑 정확히 겹치는 가이드 — 이동 중에 훑어보기 좋음',
+   menu:'맛집 · 카페 · 놀거리 리스트',
+   addr:'광안리 + 서면 전역',
+   react:'',
+   reel:'https://www.instagram.com/reel/DWtEXx0ke7R/', map:'광안리'},
+  {by:'hj',loc:'부산 기타',th:'eat',emoji:'🥩',name:'부산 차돌육회 먹는 법',date:'6/16',
+   what:'"부산에서 먹고 제일 충격받은 음식" — 차돌육회·차돌사시미 릴스',
+   sell:'부산식 차돌육회 먹는 법 소개 (특정 가게 아님)',
+   menu:'차돌육회 · 차돌사시미',
+   addr:'부산 전역 — Day2 야식 소담(육회·뭉티기) 가기 전에 보면 좋음',
+   react:'나: "배고파..맛잇겟다.."',
+   reel:'https://www.instagram.com/reel/DZmf-c4S9MX/', map:'부산 차돌육회'},
+  {by:'hj',loc:'부산 기타',th:'eat',emoji:'🍢',name:'쵸-칭 (야키토리 팁)',date:'7/11',
+   what:'"야키토리 가면 이거 꼭 먹어야 함" — 야키토리 지식 릴스',
+   sell:'쵸칭(ちょうちん): 노른자 같은 닭 난소+난관 꼬치',
+   menu:'온정(Day1)·해공(Day2) 메뉴판에 있으면 도전!',
+   addr:'특정 가게 아님 — 야키토리집 공통 팁',
+   react:'',
+   reel:'https://www.instagram.com/reel/DahAPI9z7KP/', map:'야키토리'},
+  // ─ 내가 보낸 릴스 ─
+  {by:'me',loc:'광안리',th:'bar',emoji:'🏮',name:'호이호이',date:'7/9',
+   what:'광안리 골목 숨은 심야 이자카야 — 오전 6시까지, 늦을수록 핫해지는 곳',
+   sell:'사장님이 식당도 운영해서 안주 퀄리티가 좋은 이자카야 (사케·하이볼)',
+   menu:'그날그날 안주 — "안주? 그냥 미쳤슴 진심" (릴스 왈)',
+   addr:'부산 수영구 광안해변로295번길 39',
+   react:'희주: "헐 맛잇을 거 같애 / 사장님 짱귀여우시네" → 나: "담에 보이면 먹어보자"',
+   reel:'https://www.instagram.com/reel/DajioWkBtov/', map:'광안리 호이호이'},
+  {by:'me',loc:'광안리',th:'play',emoji:'🎪',name:'차없는 문화의 거리',date:'7/7',
+   what:'여름 주말 밤 광안리 해변 도로가 통째로 놀이터가 되는 무료 행사 (7/4~8/30)',
+   sell:'해변오락실·무료 분필 그림·보드게임·만화책·버스킹·포토존',
+   menu:'매주 토·일 21:00~23:30 — 7/18(토) 여행 당일 진행! 드론쇼 후 바로',
+   addr:'광안리해수욕장 해변 도로 일대',
+   react:'희주: "헐방 재밋뎃다" → 나: "졸은데? 고기구워먹으면?? ㅋㅋ"',
+   reel:'https://www.instagram.com/reel/DaSpAVXh_S0/', map:'광안리해수욕장'}
+];
+const IG_TH={eat:['🍽️','맛집'],cafe:['☕','카페·디저트'],bar:['🍶','술집·펍'],play:['🎪','놀거리·가이드']};
+const IG_LOCS=['광안리','서면·전포','센텀','명지','부산 기타'];
+let igBy='hj', igLoc='광안리';
+
+document.getElementById('cnt-hj').textContent=`부산 관련 ${IG_DATA.filter(d=>d.by==='hj').length}곳 / 전체 102개`;
+document.getElementById('cnt-me').textContent=`부산 관련 ${IG_DATA.filter(d=>d.by==='me').length}곳 / 전체 25개`;
+
+function igRenderLocs(){
+  const mine=IG_DATA.filter(d=>d.by===igBy);
+  const locs=IG_LOCS.filter(l=>mine.some(d=>d.loc===l));
+  if(!locs.includes(igLoc)) igLoc=locs[0];
+  document.getElementById('ig-locs').innerHTML=locs.map(l=>{
+    const n=mine.filter(d=>d.loc===l).length;
+    return `<button data-loc="${l}" class="${l===igLoc?'on':''}">📍 ${l} <span style="opacity:.7">${n}</span></button>`;
+  }).join('');
+}
+function igRenderList(){
+  const items=IG_DATA.filter(d=>d.by===igBy&&d.loc===igLoc);
+  let html='';
+  Object.entries(IG_TH).forEach(([th,[ico,label]])=>{
+    const group=items.filter(d=>d.th===th);
+    if(!group.length) return;
+    html+=`<div class="thh">${ico} ${label}</div>`;
+    group.forEach(d=>{
+      const idx=IG_DATA.indexOf(d);
+      html+=`<div class="pl-item" data-i="${idx}">
+        <div class="ph"><div class="pi2">${d.emoji}</div>
+          <div class="pt"><b>${d.name}</b><p>${d.what.split(' — ')[0]}</p></div>
+          <span class="car">▾</span></div>
+        <div class="pd">
+          <dl class="kv2">
+            <dt>뭐 하는 곳</dt><dd>${d.what}</dd>
+            <dt>뭘 팔아</dt><dd>${d.sell}</dd>
+            <dt>대표 메뉴</dt><dd>${d.menu}</dd>
+            <dt>위치</dt><dd>${d.addr}</dd>
+          </dl>
+          ${d.react?`<div class="rct">💬 ${d.react}</div>`:''}
+          <div class="lnks">
+            <a href="${d.reel}" target="_blank">📸 릴스 다시 보기</a>
+            <a href="https://map.naver.com/p/search/${encodeURIComponent(d.map)}" target="_blank">🗺️ 네이버 지도</a>
+          </div>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById('ig-list').innerHTML=html||'<div class="igempty">이 지역으로 보낸 릴스가 없어요</div>';
+}
+function igRender(){igRenderLocs();igRenderList();}
+
+document.querySelectorAll('.igseg button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.igseg button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on'); igBy=b.dataset.by; igRender();
+  });
+});
+document.getElementById('ig-locs').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  igLoc=b.dataset.loc; igRender();
+});
+document.getElementById('ig-list').addEventListener('click',e=>{
+  if(e.target.closest('a')) return;
+  const it=e.target.closest('.pl-item'); if(it) it.classList.toggle('open');
+});
+igRender();
 </script>
 </body>
 </html>
