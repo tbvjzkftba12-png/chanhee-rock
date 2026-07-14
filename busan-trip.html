@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>부산 여행 플랜 · 2026.07.17 ~ 07.19</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --ink:#1c2333; --sub:#6b7487; --line:#e6eaf2;
+    --navy:#12386b; --blue:#2f6fdd; --sky:#37a6e0; --teal:#12a5a0; --orange:#f2803c;
+    --red:#e05252; --purple:#7b61c9; --gold:#d9a441;
+    --r:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    max-width:520px; margin:0 auto; padding-bottom:90px;
+    word-break:keep-all;
+  }
+  a{color:var(--blue); text-decoration:none;}
+
+  /* ── 헤더 ── */
+  header{
+    background:linear-gradient(140deg,#0e2c55 0%,#1c4d8f 55%,#2f8fc4 100%);
+    color:#fff; padding:34px 22px 26px; border-radius:0 0 26px 26px;
+    position:relative; overflow:hidden;
+  }
+  header::after{
+    content:""; position:absolute; right:-40px; top:-40px; width:180px; height:180px;
+    background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%); border-radius:50%;
+  }
+  header .date{font-size:13px; opacity:.85; letter-spacing:.06em; font-weight:600;}
+  header h1{font-size:26px; margin:6px 0 4px; font-weight:800;}
+  header .route{font-size:13.5px; opacity:.9;}
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;}
+  .chip{
+    background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.28);
+    padding:4px 11px; border-radius:999px; font-size:12px; font-weight:600;
+  }
+
+  /* ── 탭 ── */
+  nav{
+    position:sticky; top:0; z-index:50; display:flex; gap:6px;
+    padding:10px 14px; background:rgba(244,246,251,.92); backdrop-filter:blur(10px);
+  }
+  nav button{
+    flex:1; border:1px solid var(--line); background:var(--card); color:var(--sub);
+    padding:10px 0; border-radius:12px; font-size:13.5px; font-weight:700; cursor:pointer;
+    font-family:inherit; transition:.15s;
+  }
+  nav button.on{background:var(--navy); border-color:var(--navy); color:#fff;}
+
+  main{padding:14px;}
+  section.tab{display:none;}
+  section.tab.on{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+    padding:18px 16px; margin-bottom:14px; box-shadow:0 2px 10px rgba(18,40,80,.05);
+  }
+  .card h2{font-size:17px; font-weight:800; display:flex; align-items:center; gap:8px; margin-bottom:4px;}
+  .card h2 .em{font-size:19px;}
+  .card .cap{font-size:12.5px; color:var(--sub); margin-bottom:12px;}
+
+  /* ── 원형 차트 ── */
+  .donutWrap{display:flex; flex-direction:column; align-items:center; margin:6px 0 4px;}
+  .legend{display:flex; flex-wrap:wrap; gap:6px 12px; justify-content:center; margin-top:10px;}
+  .legend span{font-size:11.5px; color:var(--sub); display:flex; align-items:center; gap:5px; font-weight:600;}
+  .legend i{width:9px; height:9px; border-radius:3px; display:inline-block;}
+
+  /* ── 타임라인 (아코디언) ── */
+  .tl{margin-top:8px;}
+  .tl .row{position:relative; padding-bottom:14px;}
+  .tl .row::before{
+    content:""; position:absolute; left:57px; top:22px; bottom:-2px; width:2px; background:var(--line);
+  }
+  .tl .row:last-child::before{display:none;}
+  .tl .head{display:flex; gap:12px; cursor:pointer; user-select:none;}
+  .tl .time{width:46px; flex:none; font-size:12.5px; font-weight:800; color:var(--navy); padding-top:2px; text-align:right;}
+  .tl .dot{flex:none; width:12px; height:12px; border-radius:50%; margin-top:5px; border:3px solid #fff; box-shadow:0 0 0 2px var(--line); z-index:1;}
+  .tl .bd{flex:1; min-width:0;}
+  .tl .bd b{font-size:14.5px; display:block; padding-right:22px; position:relative;}
+  .tl .bd b::after{
+    content:"▾"; position:absolute; right:2px; top:0; font-size:12px; color:#aab3c5;
+    transition:transform .2s;
+  }
+  .tl .row.open .bd b::after{transform:rotate(180deg); color:var(--blue);}
+  .tl .bd > .head-p{font-size:12.5px; color:var(--sub); margin-top:2px;}
+  .tag{display:inline-block; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:999px; margin:4px 4px 0 0;}
+  .tag.rsv{background:#fdeee2; color:#c25a12;}
+  .tag.train{background:#e4edfc; color:#2058b8;}
+  .tag.warn{background:#fde7e7; color:#c03434;}
+  .tag.free{background:#e2f5f0; color:#0d8a71;}
+
+  /* ── 상세(펼침) 영역 ── */
+  .detail{
+    display:none;
+    margin:10px 0 2px 70px;
+    background:#f7f9fd; border:1px solid var(--line); border-radius:13px;
+    padding:12px 13px; font-size:12.8px; color:#3d4657;
+  }
+  .row.open .detail{display:block; animation:fade .2s ease;}
+  .detail .dt{font-size:12px; font-weight:800; color:var(--navy); margin:10px 0 4px; letter-spacing:.02em;}
+  .detail .dt:first-child{margin-top:0;}
+  .detail ul{margin-left:15px;}
+  .detail li{margin:3px 0;}
+  .detail .warnbox{
+    background:#fdf1f1; border:1px solid #f0cccc; color:#a33;
+    border-radius:10px; padding:8px 10px; margin-top:8px; font-size:12.3px;
+  }
+
+  /* 상세 안 장소 링크 리스트 */
+  .plc{display:flex; gap:9px; align-items:flex-start; padding:9px 0; border-top:1px dashed #dde3ee;}
+  .plc:first-of-type{border-top:none;}
+  .plc .pi{flex:none; width:30px; height:30px; border-radius:9px; background:#eef2fa; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .plc .pb{flex:1; min-width:0;}
+  .plc .pb b{font-size:13px; display:block; padding:0!important;}
+  .plc .pb b::after{display:none!important;}
+  .plc .pb p{font-size:11.8px; color:var(--sub); margin-top:1px;}
+  .plc .lnks{margin-top:4px; display:flex; flex-wrap:wrap; gap:5px;}
+  .plc .lnks a{
+    font-size:11px; font-weight:700; background:#fff; border:1px solid #d8e0ef;
+    border-radius:999px; padding:3px 9px; color:var(--blue);
+  }
+
+  /* ── 정보 리스트 ── */
+  .kv{display:grid; grid-template-columns:88px 1fr; gap:7px 10px; font-size:13.5px; margin-top:10px;}
+  .kv dt{color:var(--sub); font-weight:600;}
+  .kv dd{font-weight:600;}
+  .note{
+    background:#fff8ec; border:1px solid #f3e3bd; border-radius:12px;
+    padding:12px 13px; font-size:12.8px; margin-top:12px; color:#7a5b13;
+  }
+  .note.red{background:#fdf1f1; border-color:#f0cccc; color:#a33;}
+  .note b{display:block; margin-bottom:4px;}
+  .note ul{margin-left:16px;}
+  .note li{margin:3px 0;}
+
+  .btns{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .btn{
+    flex:1 1 40%; text-align:center; padding:11px 8px; border-radius:12px; font-size:13px; font-weight:700;
+    background:#eef2fa; color:var(--navy); border:1px solid #dfe6f3;
+  }
+  .btn.primary{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  .train{
+    background:linear-gradient(135deg,#16407c,#2a6db8); color:#fff; border:none;
+  }
+  .train h2{color:#fff;}
+  .train .cap{color:rgba(255,255,255,.75);}
+  .seat{display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:13px; padding:12px; margin-top:10px;}
+  .seat .t{font-size:20px; font-weight:800;}
+  .seat .arr{opacity:.7;}
+  .seat .info{font-size:12px; opacity:.9;}
+  .seatTag{background:rgba(255,255,255,.2); border-radius:8px; padding:2px 8px; font-size:11.5px; font-weight:700; margin-right:4px; display:inline-block; margin-top:5px;}
+
+  .hint{font-size:11.5px; color:#9aa3b5; margin-top:6px; text-align:center;}
+
+  /* ── 예산 ── */
+  .bgt{margin-top:6px;}
+  .bgt .bi{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line); font-size:13px;}
+  .bgt .bi .nm b{display:block; font-size:13.2px;}
+  .bgt .bi .nm p{font-size:11.5px; color:var(--sub); margin-top:1px;}
+  .bgt .bi .amt{font-weight:800; white-space:nowrap; color:var(--ink); font-size:13.2px; text-align:right;}
+  .bgt .bi .amt em{display:block; font-style:normal; font-size:10.5px; font-weight:600; color:#9aa3b5;}
+  .bgt .tot{display:flex; justify-content:space-between; align-items:center; padding:12px 2px 2px; font-size:15px; font-weight:800; color:var(--navy);}
+  .bgt .tot .amt{font-size:17px;}
+  .bars{margin-top:12px;}
+  .bars .brow{display:flex; align-items:center; gap:8px; margin:7px 0;}
+  .bars .bl{width:52px; flex:none; font-size:11.5px; font-weight:700; color:var(--sub); text-align:right;}
+  .bars .btrack{flex:1; background:#eef1f7; border-radius:99px; height:16px; overflow:hidden;}
+  .bars .bfill{height:100%; border-radius:99px;}
+  .bars .bv{width:58px; flex:none; font-size:11.5px; font-weight:800; color:var(--navy);}
+
+  footer{padding:24px 18px 10px; text-align:center; font-size:11.5px; color:#9aa3b5;}
+
+  /* ── 날씨 배너 ── */
+  .wx{display:flex; align-items:center; gap:14px; padding:14px 16px;}
+  .wx .wico{font-size:38px; line-height:1; flex:none;}
+  .wx .wmain{flex:1; min-width:0;}
+  .wx .wmain b{font-size:15px; display:block;}
+  .wx .wmain p{font-size:12px; color:var(--sub); margin-top:1px;}
+  .wx .wtemp{flex:none; text-align:right;}
+  .wx .wtemp .hi{font-size:21px; font-weight:800;}
+  .wx .wtemp .lo{font-size:12.5px; color:var(--sub); font-weight:700;}
+  .wx .wtemp .pop{font-size:11px; color:var(--blue); font-weight:700; margin-top:2px;}
+  .wx.wxfail{font-size:12.5px; color:var(--sub);}
+
+  /* ── 날씨 테마 (배경) ── */
+  body{transition:background .5s ease;}
+  header{transition:background .5s ease;}
+  body.th-clear{background:#eef6ff;}
+  body.th-clear header{background:linear-gradient(140deg,#1668c9 0%,#2f9be0 50%,#ffc46b 115%);}
+  body.th-partly{background:#eff4fb;}
+  body.th-partly header{background:linear-gradient(140deg,#2a6db8 0%,#5b9bd5 55%,#b8d4ea 115%);}
+  body.th-cloud{background:#f0f2f5;}
+  body.th-cloud header{background:linear-gradient(140deg,#4a5a70 0%,#74879e 55%,#a9b8c9 115%);}
+  body.th-rain{background:#eceff4;}
+  body.th-rain header{background:linear-gradient(140deg,#243b55 0%,#3a5a80 55%,#6a8cae 115%);}
+  body.th-storm{background:#ebecf2;}
+  body.th-storm header{background:linear-gradient(140deg,#1f2438 0%,#3d3a63 55%,#6b5a8e 115%);}
+  body.th-fog{background:#f1f2f4;}
+  body.th-fog header{background:linear-gradient(140deg,#6d7787 0%,#98a2b0 55%,#c3cad4 115%);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="date">2026. 07. 17 (금) — 07. 19 (일) · 2박 3일</div>
+  <h1>부산 여행 플랜 🌊</h1>
+  <div class="route">오산 → 천안아산 → 부산역 → 서면 → 광안리</div>
+  <div class="chips">
+    <span class="chip">👤 나</span><span class="chip">👤 희주</span>
+    <span class="chip">🍢 Day1 합류: 윤다훈 & 여친</span>
+    <span class="chip">🏠 부산역 도보 3분 숙소</span>
+  </div>
+</header>
+
+<nav>
+  <button class="on" data-t="d1">Day 1</button>
+  <button data-t="d2">Day 2</button>
+  <button data-t="d3">Day 3</button>
+  <button data-t="info">예약·정보</button>
+</nav>
+
+<main>
+
+<!-- ═══════════ DAY 1 ═══════════ -->
+<section class="tab on" id="d1">
+
+  <div class="card wx" id="wx-d1"><div class="wico">⏳</div><div class="wmain"><b>부산 날씨 불러오는 중…</b><p>7/17 (금) 예보</p></div></div>
+
+  <div class="card">
+    <h2><span class="em">🕐</span> Day 1 타임 서클 · 7/17 (금)</h2>
+    <div class="cap">이동 & 서면의 밤 — 하루 흐름 한눈에</div>
+    <div class="donutWrap" id="chart-d1"></div>
+  </div>
+
+  <div class="card train">
+    <h2><span class="em">🚄</span> 가는 기차 — KTX 035</h2>
+    <div class="cap">2026.07.17 (금)</div>
+    <div class="seat">
+      <div><div class="t">14:35</div><div class="info">천안아산 출발</div></div>
+      <div class="arr">→</div>
+      <div><div class="t">16:35</div><div class="info">부산 도착</div></div>
+    </div>
+    <div style="margin-top:8px">
+      <span class="seatTag">🎫 18호차 10B</span>
+      <span class="seatTag">🎫 18호차 6C</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">📋</span> 일정 타임라인</h2>
+    <div class="hint">항목을 탭하면 상세 정보가 펼쳐져요 ▾</div>
+    <div class="tl">
+
+      <div class="row">
+        <div class="head"><div class="time">~12:00</div><div class="dot" style="background:#b9c3d6"></div>
+          <div class="bd"><b>오산 출발 → 목천으로</b><div class="head-p">희주네(목천)까지 차로 이동</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🚗 이동 정보</div>
+          <ul>
+            <li>오산 → 목천: 경부고속도로 경유 약 50분~1시간</li>
+            <li>금요일 낮 시간대라 안성·천안 구간 정체 가능 — 30분 여유 두고 출발</li>
+          </ul>
+          <div class="plc"><div class="pi">🗺️</div><div class="pb"><b>실시간 경로 확인</b><p>출발 직전 소요시간 체크</p>
+            <div class="lnks"><a href="https://map.naver.com/p/directions" target="_blank">네이버 길찾기</a><a href="https://map.kakao.com/" target="_blank">카카오맵</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">13:00</div><div class="dot" style="background:var(--purple)"></div>
+          <div class="bd"><b>목천에서 희주 픽업</b><div class="head-p">픽업 후 천안아산역으로 (약 30분)</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>목천 → 천안아산역: 약 30분 (천안 시내 통과, 여유 있게)</li>
+            <li>희주한테 출발 전에 미리 연락해서 대기시간 줄이기</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">13:50</div><div class="dot" style="background:var(--purple)"></div>
+          <div class="bd"><b>천안아산역 도착 & 주차</b><div class="head-p">주차 후 여유 있게 탑승 대기 <span class="tag warn">⚠ 주차 위치 사진</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🅿️ 주차 정보</div>
+          <ul>
+            <li>천안아산역 주차장: 1~5주차장 + 환승주차장, 2박 3일 장기주차 가능</li>
+            <li>주말 끼면 역 가까운 주차장은 빨리 참 — 13:50 도착이면 무난</li>
+            <li>주차 위치(층·구역 번호) 사진 필수! 일요일에 헤매지 않기</li>
+          </ul>
+          <div class="plc"><div class="pi">🅿️</div><div class="pb"><b>천안아산역 주차장 현황</b><p>요금·만차 여부 미리 확인</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/천안아산역 주차장" target="_blank">네이버 지도</a><a href="https://www.letskorail.com" target="_blank">코레일</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">14:35</div><div class="dot" style="background:var(--blue)"></div>
+          <div class="bd"><b>KTX 035 탑승</b><div class="head-p">천안아산 14:35 → 부산 16:35 <span class="tag train">18호차 10B · 6C</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🎫 티켓 정보</div>
+          <ul>
+            <li>KTX 035 · 2026.07.17(금) · 천안아산(14:35) → 부산(16:35) · 2시간</li>
+            <li>좌석: 18호차 10B / 18호차 6C — 좌석이 떨어져 있음, 승차 후 옆자리 비면 이동</li>
+            <li>18호차는 열차 뒤쪽 — 천안아산역 타는곳에서 미리 18호차 위치로 이동</li>
+          </ul>
+          <div class="plc"><div class="pi">📱</div><div class="pb"><b>코레일톡</b><p>승차권 확인 · 좌석 변경 시도</p>
+            <div class="lnks"><a href="https://www.letskorail.com" target="_blank">letskorail.com</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">16:35</div><div class="dot" style="background:var(--blue)"></div>
+          <div class="bd"><b>부산역 도착 → 숙소 체크인</b><div class="head-p">1번 출구 도보 3분 · Marant #1-92 · 짐 풀고 출발</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🏠 숙소 체크인</div>
+          <ul>
+            <li>부산역 <b>1번 출구</b> → 도보 3분 · 중앙대로180번길</li>
+            <li>체크인 16:00부터 · <b>키패드 셀프 체크인</b> (비밀번호는 에어비앤비 앱 메시지 확인)</li>
+            <li>게스트 2명 · 예약코드는 에어비앤비 앱에서 확인</li>
+            <li>출입 안내·와이파이는 체크인 48시간 전(7/15 16시~)부터 앱에서 확인 가능 — 미리 캡처</li>
+            <li>🎪 <b>부산역 광장에 포켓몬 포토존</b> (메가페스타 개막일이 딱 7/17!) — 도착 기념 사진 찍고 가기</li>
+          </ul>
+          <div class="plc"><div class="pi">🏠</div><div class="pb"><b>Marant #1-92</b><p>부산역 KTX 도보3분 1.5룸 디럭스 · 호스트 Aria</p>
+            <div class="lnks"><a href="https://www.airbnb.co.kr/trips" target="_blank">에어비앤비 내 여행</a><a href="https://map.naver.com/p/search/부산 중앙대로180번길" target="_blank">네이버 지도</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">17:30</div><div class="dot" style="background:var(--sky)"></div>
+          <div class="bd"><b>서면으로 이동</b><div class="head-p">지하철 1호선 약 15분 · 온정은 서면역 347m</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🚇 이동 옵션</div>
+          <ul>
+            <li><b>지하철(추천)</b>: 1호선 부산역 → 서면역, 약 15분 · 서면역에서 온정까지 347m</li>
+            <li><b>택시</b>: 15~20분, 금요일 저녁 정체 가능성 있어 지하철이 안전</li>
+            <li>온정은 부전역(1호선·동해선)에서도 425m — 어느 역이든 OK</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">18:00</div><div class="dot" style="background:var(--orange)"></div>
+          <div class="bd"><b>🍢 야키토리 온정 — 저녁 & 술</b><div class="head-p">윤다훈 커플 합류, 4명 테이블 <span class="tag rsv">예약완료 · 18:00</span><span class="tag free">예약금 0원</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">📌 예약 정보</div>
+          <ul>
+            <li>2026.07.17(금) 오후 6:00 · 4명 · 테이블 (나, 희주, 윤다훈, 윤다훈 여친)</li>
+            <li>주소: 부산진구 동천로108번길 9-7 1층</li>
+            <li>결제: 캐치페이 · 예약금 0원</li>
+            <li>미쉐린 빕 구르망 선정 야키토리 — 부부가 운영하는 숯불 야키토리</li>
+          </ul>
+          <div class="warnbox">⚠ 무료 취소·변경은 7/14까지. 인기 매장이라 예약 시간 엄수 (영업 17:00~24:00)</div>
+          <div class="plc"><div class="pi">🍢</div><div class="pb"><b>야키토리 온정</b><p>야키토리 · 서면 · 미쉐린 빕 구르망</p>
+            <div class="lnks"><a href="https://www.instagram.com/yakitori_onjeong/" target="_blank">📸 인스타그램</a><a href="https://guide.michelin.com/us/en/busan-region/busan_1025838/restaurant/yakitori-onjung" target="_blank">⭐ 미쉐린</a><a href="https://map.naver.com/p/search/야키토리 온정" target="_blank">네이버 지도</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">20:30</div><div class="dot" style="background:var(--teal)"></div>
+          <div class="bd"><b>서면 · 전포에서 놀기</b><div class="head-p">2차 · 카페거리 산책 · 소품샵 — 탭해서 추천 보기</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">✨ 온정에서 이어가기 좋은 동선 (도보권)</div>
+          <div class="plc"><div class="pi">☕</div><div class="pb"><b>전포카페거리</b><p>온정에서 도보 10분. 밤에도 여는 감성 카페·바 밀집 — 배부를 때 산책 겸</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/전포카페거리" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🍸</div><div class="pb"><b>서면 바 골목 (동천로 일대)</b><p>온정 바로 주변이 요즘 뜨는 술집 골목 — 하이볼바·이자카야 2차</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/서면 하이볼바" target="_blank">하이볼바 검색</a><a href="https://map.naver.com/p/search/전포 이자카야" target="_blank">이자카야 검색</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🕯️</div><div class="pb"><b>전포 소품샵</b><p>러브이즈기빙 · SCENTICA 전포점 등 — 저녁에도 여는 곳 있음</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/전포 소품샵" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🎪</div><div class="pb"><b>포켓몬 메가페스타 팝업스토어</b><p>롯데백화점 부산본점 B1 (서면역 바로) · 금요일 ~20:30 — 저녁 후엔 마감이라 온정 가기 전 잠깐 or 전포역·범내골역 스탬프랠리는 늦게도 OK</p>
+            <div class="lnks"><a href="https://pokemonkorea.co.kr" target="_blank">포켓몬코리아</a><a href="https://map.naver.com/p/search/롯데백화점 부산본점" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">📍</div><div class="pb"><b>내 네이버 저장 목록</b><p>서면 근처에 저장해둔 곳 실시간 확인</p>
+            <div class="lnks"><a href="https://naver.me/GjyxwhTR" target="_blank">저장 목록 열기</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">23:00</div><div class="dot" style="background:var(--navy)"></div>
+          <div class="bd"><b>숙소 복귀</b><div class="head-p">택시 or 지하철 1호선 — 부산역 숙소에서 취침 💤</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li><b>택시</b>: 서면 → 부산역 약 10~15분 (심야 할증 전 출발 추천)</li>
+            <li><b>지하철</b>: 1호선 서면 → 부산역, 막차 시간 미리 확인 (보통 23시대 중반)</li>
+            <li>내일 광안리 일정 여유 있으니 무리하지 말기</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">💰</span> Day 1 예상 지출</h2>
+    <div class="cap">2인(나+희주) 기준 · 온정은 4명 더치로 2인분만 계산 · 숙소·기차 제외</div>
+    <div class="bgt">
+      <div class="bi"><div class="nm"><b>지하철 부산역 → 서면</b><p>1호선 편도 2인</p></div><div class="amt">3,500원</div></div>
+      <div class="bi"><div class="nm"><b>야키토리 온정 저녁 + 술</b><p>꼬치 + 사케·하이볼 넉넉히</p></div><div class="amt">120,000원<em>1인 6만 안팎</em></div></div>
+      <div class="bi"><div class="nm"><b>2차 (하이볼바·포차)</b><p>서면·전포 골목</p></div><div class="amt">50,000원</div></div>
+      <div class="bi"><div class="nm"><b>카페 · 간식</b><p>기차에서 먹을 것 + 전포 카페</p></div><div class="amt">15,000원</div></div>
+      <div class="bi"><div class="nm"><b>택시 서면 → 부산역</b><p>심야 복귀</p></div><div class="amt">10,000원</div></div>
+      <div class="tot"><span>Day 1 합계</span><span class="amt">약 199,000원</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════ DAY 2 ═══════════ -->
+<section class="tab" id="d2">
+
+  <div class="card wx" id="wx-d2"><div class="wico">⏳</div><div class="wmain"><b>부산 날씨 불러오는 중…</b><p>7/18 (토) 예보</p></div></div>
+
+  <div class="card">
+    <h2><span class="em">🕐</span> Day 2 타임 서클 · 7/18 (토)</h2>
+    <div class="cap">광안리 하루 — 카페 · 바다 · 해공의 밤</div>
+    <div class="donutWrap" id="chart-d2"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">📋</span> 일정 타임라인</h2>
+    <div class="hint">항목을 탭하면 상세 정보가 펼쳐져요 ▾</div>
+    <div class="tl">
+
+      <div class="row">
+        <div class="head"><div class="time">~10:00</div><div class="dot" style="background:#b9c3d6"></div>
+          <div class="bd"><b>기상 & 준비</b><div class="head-p">느긋하게 일어나서 출발 준비</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>오늘 해공 17:00 예약 외엔 자유 일정 — 서두를 필요 없음</li>
+            <li>콜키지용 술 살 거라 가방 하나 챙기면 좋음</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">11:00</div><div class="dot" style="background:var(--orange)"></div>
+          <div class="bd"><b>아점 먹기</b><div class="head-p">부산역 근처 or 광안리 가서 — 탭해서 옵션 보기</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🅰️ 부산역 근처에서 먹고 이동</div>
+          <div class="plc"><div class="pi">🍲</div><div class="pb"><b>본전돼지국밥</b><p>숙소 코앞, 부산 3대 국밥 — 낮에는 웨이팅 짧은 편</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/본전돼지국밥" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🧺</div><div class="pb"><b>초량전통시장</b><p>시장 구경 겸 가벼운 아점</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/초량전통시장" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="dt">🅱️ 광안리 가서 브런치</div>
+          <div class="plc"><div class="pi">🥐</div><div class="pb"><b>포레포레</b><p>소금빵 + 드립커피 — 광안리 산책 시작점으로 좋음</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 포레포레" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🍳</div><div class="pb"><b>광안리 브런치 카페 검색</b><p>해변가 브런치집 실시간 확인</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 브런치" target="_blank">네이버 지도</a><a href="https://naver.me/GjyxwhTR" target="_blank">내 저장 목록</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">12:30</div><div class="dot" style="background:var(--sky)"></div>
+          <div class="bd"><b>광안리로 이동</b><div class="head-p">택시 20~25분 / 지하철 약 40분</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🚕 이동 옵션</div>
+          <ul>
+            <li><b>택시(추천)</b>: 부산역 → 광안리 약 20~25분, 둘이면 지하철 대비 가성비 OK</li>
+            <li><b>지하철</b>: 1호선 부산역 → 서면 환승 → 2호선 광안역, 약 40분 + 광안역에서 해변까지 도보 10분</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">13:00</div><div class="dot" style="background:var(--teal)"></div>
+          <div class="bd"><b>광안리 카페 & 놀거리</b><div class="head-p">해변 산책 · 카페 · 소품샵 — 탭해서 추천 보기</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">✨ 광안리 낮 코스 추천</div>
+          <div class="plc"><div class="pi">🌊</div><div class="pb"><b>광안리 해변 산책</b><p>광안대교 뷰 — 사진은 낮에 미리 찍어두기</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리해수욕장" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">☕</div><div class="pb"><b>나이브 브류어스</b><p>시즌 원두 브루잉 전문 — 커피에 진심인 집</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 나이브 브류어스" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🕹️</div><div class="pb"><b>젊은이의양지 (24시 카페)</b><p>만화책·오락기·보드게임 — 더위 피하기 & 쉬어가기</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 젊은이의양지" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🕯️</div><div class="pb"><b>SCENTICA 광안점 · Panier · 러브이즈기빙</b><p>프래그런스샵 + 소품샵 라인업 — 기념품 겸 구경</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 SCENTICA" target="_blank">SCENTICA</a><a href="https://map.naver.com/p/search/광안리 소품샵" target="_blank">소품샵 검색</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">📍</div><div class="pb"><b>내 네이버 저장 목록</b><p>광안리 근처 저장해둔 곳 체크</p>
+            <div class="lnks"><a href="https://naver.me/GjyxwhTR" target="_blank">저장 목록 열기</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">15:30</div><div class="dot" style="background:var(--gold)"></div>
+          <div class="bd"><b>🍾 보틀샵에서 콜키지 술 1병 고르기</b><div class="head-p">해공 콜키지 1병 프리 — 탭해서 보틀샵 리스트 보기 <span class="tag warn">⚠ 콜키지 전화 확인</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🍾 동선 안 보틀샵 (광안리 → 해공 가는 길)</div>
+          <div class="plc"><div class="pi">🍷</div><div class="pb"><b>해피보틀</b><p>광안리 대표 보틀샵 — 와인·샴페인·위스키·사케에 산미/도수 추천 코멘트까지 붙어 있어 고르기 쉬움</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 해피보틀" target="_blank">네이버 지도</a><a href="https://www.instagram.com/explore/search/keyword/?q=해피보틀 광안리" target="_blank">📸 인스타 검색</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🏬</div><div class="pb"><b>밀락더마켓</b><p>해공 도보 5분(민락동)! 복합문화공간 안에 주류·그로서리 매장 있음 — 술 사고 바로 해공 가는 최단 동선</p>
+            <div class="lnks"><a href="https://www.instagram.com/millac_the_market_official/" target="_blank">📸 인스타그램</a><a href="https://map.naver.com/p/search/밀락더마켓" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🔍</div><div class="pb"><b>광안리 보틀샵 실시간 검색</b><p>당일 영업 여부·위치 지도에서 한 번에 비교</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 보틀샵" target="_blank">보틀샵 검색</a><a href="https://map.naver.com/p/search/수영구 와인샵" target="_blank">와인샵 검색</a><a href="https://map.naver.com/p/search/광안리 사케샵" target="_blank">사케샵 검색</a></div>
+          </div></div>
+          <div class="dt">💡 고르기 팁</div>
+          <ul>
+            <li>야키토리(숯불 닭꼬치)엔 <b>준마이 사케</b>나 산미 있는 <b>스파클링/화이트 와인</b>이 잘 어울림</li>
+            <li>해공은 주류 주문 필수 매장 — 콜키지 1병 + 매장 술 조합이 자연스러움</li>
+          </ul>
+          <div class="warnbox">⚠ 콜키지 1병 프리는 "알고 있는" 정보 — 방문 전 해공에 전화 확인 필수! (캐치테이블 예약 페이지에 전화 버튼 있음)</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">17:00</div><div class="dot" style="background:var(--orange)"></div>
+          <div class="bd"><b>🍢 야키토리 해공 — 저녁</b><div class="head-p">2명 바 자리 · 토종닭 코스 ×2 <span class="tag rsv">예약완료 · 17:00</span><span class="tag warn">예약금 6만원</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">📌 예약 정보</div>
+          <ul>
+            <li>2026.07.18(토) 오후 5:00 · 2명 · <b>바 자리</b> (나, 희주)</li>
+            <li>메뉴: 미슐랭 선정 기념 토종닭 야키토리 코스 ×2 (예약금 60,000원 선결제)</li>
+            <li>주소: 수영구 민락본동로19번길 30-5 1층</li>
+            <li>미쉐린 가이드 선정 · 블루리본 — 토종닭 부위별 야키토리</li>
+          </ul>
+          <div class="warnbox">⚠ 환불: 2일 전(7/16)까지 100% / 1일 전·당일·노쇼 환불 불가<br>⚠ 주류 주문 필수 · 주차 불가 (도보/택시)</div>
+          <div class="plc"><div class="pi">🍢</div><div class="pb"><b>야키토리 해공</b><p>야키토리 · 광안리 민락동 · 미쉐린 가이드</p>
+            <div class="lnks"><a href="https://www.instagram.com/haegong_soseoldam_official/" target="_blank">📸 인스타그램</a><a href="https://app.catchtable.co.kr/ct/shop/haegong" target="_blank">🍽️ 캐치테이블</a><a href="https://guide.michelin.com/us/en/busan-region/busan_1025838/restaurant/yakitori-haegong" target="_blank">⭐ 미쉐린</a><a href="https://map.naver.com/p/search/야키토리 해공" target="_blank">네이버 지도</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">19:30</div><div class="dot" style="background:var(--teal)"></div>
+          <div class="bd"><b>광안리 밤바다 & 🚁 드론라이트쇼</b><div class="head-p">20:00 드론쇼 "한국의 멋" · 광안대교 야경 <span class="tag rsv">7/18 당일 행사</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🚁 광안리 M 드론라이트쇼 — 딱 우리 날짜!</div>
+          <ul>
+            <li><b>7/18(토) 테마: "한국의 멋"</b> · 광안리해변 · <b>20:00, 22:00</b> 2회 공연 (무료)</li>
+            <li>해공 저녁이 19:30쯤 끝나니 <b>20:00 회차가 베스트</b> — 해변까지 도보 5분, 끝나자마자 명당 잡기</li>
+            <li>20시 회차 놓치면 22:00 회차도 있음 (그럼 소담은 22:40쯤으로 밀기 — 새벽 2시까지라 여유)</li>
+          </ul>
+          <div class="warnbox">⚠ 우천·강풍·태풍 등 기상 상황에 따라 하루 전 또는 당일에도 취소·지연될 수 있음 — 당일 수영구 공지 확인!</div>
+          <div class="plc"><div class="pi">🚁</div><div class="pb"><b>드론쇼 당일 일정 확인</b><p>취소 여부·시간 변경 체크</p>
+            <div class="lnks"><a href="https://www.suyeong.go.kr" target="_blank">수영구청</a><a href="https://www.visitbusan.net" target="_blank">비짓부산</a><a href="https://map.naver.com/p/search/광안리 드론라이트쇼" target="_blank">네이버 검색</a></div>
+          </div></div>
+          <div class="dt">🌉 밤 코스 추천 (해공에서 도보권)</div>
+          <div class="plc"><div class="pi">🌉</div><div class="pb"><b>광안대교 야경</b><p>드론쇼 전후로 해변 산책 — 밤 광안대교가 진짜</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리해수욕장" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🏬</div><div class="pb"><b>밀락더마켓 버스킹 스퀘어</b><p>항구뷰 보며 맥주 한 잔 — 저녁 이후 분위기 최고</p>
+            <div class="lnks"><a href="https://www.instagram.com/millac_the_market_official/" target="_blank">📸 인스타그램</a><a href="https://map.naver.com/p/search/밀락더마켓" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🥃</div><div class="pb"><b>위스키바 장(欌)</b><p>민락로14번길 · 20:00~02:00 — 독특한 인테리어 위스키바, 한 잔 더 하고 싶을 때</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/광안리 위스키바 장" target="_blank">네이버 지도</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">21:30</div><div class="dot" style="background:var(--navy)"></div>
+          <div class="bd"><b>부산역 방면 복귀</b><div class="head-p">택시 약 20분 추천</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>택시 약 20분 — 토요일 밤이라 콜 잡기 어려울 수 있으니 카카오T 미리 호출</li>
+            <li>소담 들를 거면 "부산역" 말고 <b>"중앙대로180번길"</b>로 바로 찍기 (숙소랑 같은 골목)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">22:00</div><div class="dot" style="background:var(--red)"></div>
+          <div class="bd"><b>🥩 소담 — 육회 마무리</b><div class="head-p">숙소 같은 골목! 먹고 가거나 포장 → 숙소에서 한 잔 더</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">📌 소담 부산역점</div>
+          <ul>
+            <li>주소: 동구 중앙대로180번길 9 1층 — <b>숙소 바로 그 골목</b></li>
+            <li>영업: 월~토 17:00~02:00 (일요일 휴무 → <b>토요일 밤이 마지막 기회!</b>)</li>
+            <li>육회·뭉티기 생고기 전문 — 웨이팅 30분+ 인기집이지만 늦은 밤은 비교적 여유</li>
+            <li>플랜: 매장에서 먹기 or 포장해서 숙소에서 콜키지 남은 술과 함께</li>
+          </ul>
+          <div class="plc"><div class="pi">🥩</div><div class="pb"><b>소담 부산역점</b><p>생고기 · 육회 · 대창전골</p>
+            <div class="lnks"><a href="https://www.instagram.com/sodam_bs/" target="_blank">📸 인스타그램</a><a href="https://www.diningcode.com/profile.php?rid=qA9V9iNlRg2m" target="_blank">🍽️ 다이닝코드</a><a href="https://map.naver.com/p/search/소담 부산역" target="_blank">네이버 지도</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">24:00</div><div class="dot" style="background:#b9c3d6"></div>
+          <div class="bd"><b>취침</b><div class="head-p">내일 기차 12:34 — 늦잠 금지 💤</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>자기 전에 코레일톡에서 내일 동대구→천안아산 <b>취소표 한 번 더 확인</b></li>
+            <li>짐 80%는 미리 싸두면 아침이 편함</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">💰</span> Day 2 예상 지출</h2>
+    <div class="cap">2인 기준 · 해공 코스 예약금 6만원은 기결제라 제외 · 숙소·기차 제외</div>
+    <div class="bgt">
+      <div class="bi"><div class="nm"><b>아점</b><p>국밥 or 광안리 브런치</p></div><div class="amt">25,000원</div></div>
+      <div class="bi"><div class="nm"><b>택시 부산역 → 광안리</b><p>약 20~25분</p></div><div class="amt">15,000원</div></div>
+      <div class="bi"><div class="nm"><b>광안리 카페</b><p>음료 + 디저트</p></div><div class="amt">15,000원</div></div>
+      <div class="bi"><div class="nm"><b>소품샵 · 기념품</b><p>SCENTICA·소품샵 — 변동 큼</p></div><div class="amt">30,000원<em>0~5만 변동</em></div></div>
+      <div class="bi"><div class="nm"><b>🍾 보틀샵 콜키지 술 1병</b><p>준마이 사케 or 와인</p></div><div class="amt">50,000원<em>3~7만 범위</em></div></div>
+      <div class="bi"><div class="nm"><b>해공 추가 주문</b><p>주류 필수 + 추가 꼬치 (코스 6만 기결제 별도)</p></div><div class="amt">70,000원</div></div>
+      <div class="bi"><div class="nm"><b>드론라이트쇼</b><p>7/18 (토) 20:00 · 한국의 멋</p></div><div class="amt" style="color:#0d8a71">무료 🎉</div></div>
+      <div class="bi"><div class="nm"><b>밀락더마켓 · 맥주 한 잔</b><p>드론쇼 전후</p></div><div class="amt">20,000원</div></div>
+      <div class="bi"><div class="nm"><b>택시 광안리 → 부산역</b><p>토요일 밤 — 여유 있게</p></div><div class="amt">20,000원</div></div>
+      <div class="bi"><div class="nm"><b>🥩 소담 야식</b><p>육회 + 술 or 포장</p></div><div class="amt">60,000원</div></div>
+      <div class="tot"><span>Day 2 합계</span><span class="amt">약 305,000원</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════ DAY 3 ═══════════ -->
+<section class="tab" id="d3">
+
+  <div class="card wx" id="wx-d3"><div class="wico">⏳</div><div class="wmain"><b>부산 날씨 불러오는 중…</b><p>7/19 (일) 예보</p></div></div>
+
+  <div class="card">
+    <h2><span class="em">🕐</span> Day 3 타임 서클 · 7/19 (일)</h2>
+    <div class="cap">해장 → 귀가 — 시간 빡빡, 체크아웃 주의</div>
+    <div class="donutWrap" id="chart-d3"></div>
+  </div>
+
+  <div class="card train">
+    <h2><span class="em">🚄</span> 오는 기차 — KTX-청룡 032</h2>
+    <div class="cap">2026.07.19 (일) · 같은 열차, 동대구부터 좌석→입석 전환</div>
+    <div class="seat">
+      <div><div class="t">12:34</div><div class="info">부산 출발</div></div>
+      <div class="arr">→</div>
+      <div><div class="t">13:13</div><div class="info">동대구 도착</div></div>
+    </div>
+    <div style="margin-top:6px">
+      <span class="seatTag">🎫 7호차 19A</span>
+      <span class="seatTag">🎫 7호차 19B</span>
+    </div>
+    <div class="seat">
+      <div><div class="t">13:15</div><div class="info">동대구 출발</div></div>
+      <div class="arr">→</div>
+      <div><div class="t">14:20</div><div class="info">천안아산 도착</div></div>
+    </div>
+    <div style="margin-top:6px">
+      <span class="seatTag" style="background:rgba(255,120,120,.35)">⚠ 입석 구간</span>
+    </div>
+    <div class="note red" style="background:rgba(255,255,255,.13); border-color:rgba(255,255,255,.25); color:#fff;">
+      <b>⚠ 동대구 → 천안아산 입석!</b>
+      출발 전까지 코레일톡에서 해당 구간 <u>취소표(좌석) 계속 확인</u>하기. 일요일 오후 상행이라 취소표 경쟁 있음 — 알림 걸어두는 것 추천.
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">📋</span> 일정 타임라인</h2>
+    <div class="hint">항목을 탭하면 상세 정보가 펼쳐져요 ▾</div>
+    <div class="tl">
+
+      <div class="row">
+        <div class="head"><div class="time">09:00</div><div class="dot" style="background:#b9c3d6"></div>
+          <div class="bd"><b>기상 & 짐 정리</b><div class="head-p">기차 12:34 — 여유 없음, 미리 싸두기</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>체크아웃은 12:00까지지만 기차가 12:34 — 사실상 11:40엔 나가야 함</li>
+            <li>어젯밤 싸둔 짐 마무리 + 두고 가는 물건 체크 (충전기!)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">10:00</div><div class="dot" style="background:var(--orange)"></div>
+          <div class="bd"><b>아침 & 해장 식사</b><div class="head-p">부산역·초량 도보권 — 탭해서 추천 보기</div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🍲 숙소에서 전부 도보권</div>
+          <div class="plc"><div class="pi">🍲</div><div class="pb"><b>본전돼지국밥</b><p>부산역 바로 앞, 부산 3대 국밥 — 깔끔한 국물 해장 최적. 웨이팅 있으니 오픈 직후 추천</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/본전돼지국밥" target="_blank">네이버 지도</a><a href="https://www.diningcode.com/list.dc?query=부산역 국밥" target="_blank">다이닝코드</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🥣</div><div class="pb"><b>안목 · 대건명가 돼지국밥</b><p>본전 웨이팅 길면 근처 대안 (평점 4.5 / 4.2)</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/부산역 안목 돼지국밥" target="_blank">안목</a><a href="https://map.naver.com/p/search/대건명가 돼지국밥" target="_blank">대건명가</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🧺</div><div class="pb"><b>초량전통시장</b><p>시간 남으면 아침 시장 한 바퀴 + 주전부리</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/초량전통시장" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🌊</div><div class="pb"><b>북항친수공원</b><p>진짜 여유 있으면 마지막 바다 산책 (도보 10분) — 무리는 금물</p>
+            <div class="lnks"><a href="https://map.naver.com/p/search/북항친수공원" target="_blank">네이버 지도</a></div>
+          </div></div>
+          <div class="plc"><div class="pi">🎪</div><div class="pb"><b>부산역 광장 포켓몬 포토존</b><p>Day 1에 못 찍었으면 기차 타기 전 마지막 기회 — 역 광장이라 0분 코스</p>
+            <div class="lnks"><a href="https://pokemonkorea.co.kr" target="_blank">포켓몬코리아</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">11:40</div><div class="dot" style="background:var(--purple)"></div>
+          <div class="bd"><b>체크아웃 & 부산역 이동</b><div class="head-p">도보 3분 — 12:10까지 역 도착 목표</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>체크아웃: 정리하고 나가면 끝 (셀프 체크아웃) — 호스트 메시지 규칙 확인</li>
+            <li>부산역 도보 3분이지만 일요일 역사 혼잡 — 12:10 도착 목표</li>
+            <li>타는곳 확인하고 7호차 위치로 미리 이동</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">12:34</div><div class="dot" style="background:var(--blue)"></div>
+          <div class="bd"><b>KTX-청룡 032 출발</b><div class="head-p">부산→동대구 좌석, 동대구→천안아산 입석 <span class="tag warn">⚠ 취소표 확인</span></div></div>
+        </div>
+        <div class="detail">
+          <div class="dt">🎫 티켓 정보</div>
+          <ul>
+            <li>부산(12:34) → 동대구(13:13) : <b>7호차 19A · 19B</b> 좌석</li>
+            <li>동대구(13:15) → 천안아산(14:20) : <b>입석</b> — 같은 열차, 갈아타는 것 아님</li>
+            <li>입석 구간엔 7호차 근처 입석 공간/카페칸 자리 선점</li>
+          </ul>
+          <div class="warnbox">⚠ 출발 직전까지 코레일톡에서 동대구→천안아산 좌석 취소표 확인 — 일요일 상행이라 취소표 종종 나옴</div>
+          <div class="plc"><div class="pi">📱</div><div class="pb"><b>코레일톡</b><p>취소표 알림 · 좌석 업그레이드</p>
+            <div class="lnks"><a href="https://www.letskorail.com" target="_blank">letskorail.com</a></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">14:20</div><div class="dot" style="background:var(--purple)"></div>
+          <div class="bd"><b>천안아산역 도착 → 주차장</b><div class="head-p">금요일에 찍어둔 주차 위치 사진 확인</div></div>
+        </div>
+        <div class="detail">
+          <ul>
+            <li>주차 요금 정산 (2박 3일 장기 요금)</li>
+            <li>Day 1에 찍어둔 주차 위치 사진으로 바로 찾기</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">15:00</div><div class="dot" style="background:var(--purple)"></div>
+          <div class="bd"><b>목천 — 희주 데려다주기</b><div class="head-p">희주 집 앞까지 안전하게</div></div>
+        </div>
+        <div class="detail">
+          <ul><li>천안아산역 → 목천 약 30분</li></ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="head"><div class="time">16:00</div><div class="dot" style="background:var(--navy)"></div>
+          <div class="bd"><b>오산 복귀 🏁</b><div class="head-p">여행 끝! 수고했어요</div></div>
+        </div>
+        <div class="detail">
+          <ul><li>목천 → 오산 약 50분 — 일요일 오후 상행 정체 감안</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">💰</span> Day 3 예상 지출</h2>
+    <div class="cap">2인 기준 · 자차 유류·주차비는 예약·정보 탭 총정리에 별도 · 숙소·기차 제외</div>
+    <div class="bgt">
+      <div class="bi"><div class="nm"><b>아침 & 해장 (돼지국밥)</b><p>본전 or 안목 · 2인</p></div><div class="amt">24,000원</div></div>
+      <div class="bi"><div class="nm"><b>커피</b><p>기차 타기 전 테이크아웃</p></div><div class="amt">10,000원</div></div>
+      <div class="bi"><div class="nm"><b>초량시장 주전부리</b><p>시간 남으면 — 변동</p></div><div class="amt">10,000원<em>0~2만 변동</em></div></div>
+      <div class="tot"><span>Day 3 합계</span><span class="amt">약 44,000원</span></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════ 예약·정보 ═══════════ -->
+<section class="tab" id="info">
+
+  <div class="card">
+    <h2><span class="em">🏠</span> 숙소 — Marant #1-92 (에어비앤비)</h2>
+    <div class="cap">[빠른답변 짐보관] 부산역 KTX 도보3분 가성비 1.5룸 디럭스</div>
+    <dl class="kv">
+      <dt>체크인</dt><dd>7/17 (금) 오후 4:00 · 키패드 셀프 체크인</dd>
+      <dt>체크아웃</dt><dd>7/19 (일) 오후 12:00</dd>
+      <dt>주소</dt><dd>부산 중구 중앙대로180번길 (부산역 1번 출구 도보 3분)</dd>
+      <dt>게스트</dt><dd>2명 · 예약코드는 에어비앤비 앱에서 확인</dd>
+      <dt>호스트</dt><dd>Aria (공동호스트: Marant, Everyday Sweet)</dd>
+    </dl>
+    <div class="note">
+      <b>📌 숙소 주의사항 & 정보</b>
+      <ul>
+        <li>체크인 <u>48시간 전(7/15 16:00~)</u>부터 에어비앤비 앱에서 출입 안내 · 와이파이 정보 확인 가능 — 미리 확인해두기</li>
+        <li>게스트 정원 4명 · 반려동물 동반 불가</li>
+        <li>TV는 유튜브 · 넷플릭스(개인계정) · 일반TV만 가능. 안 되면 TV 밑 코드 2개 뽑았다 다시 연결하면 초기화됨</li>
+        <li>환불: 체크인(7/17 16:00) 전 취소 시 부분 환불, 이후 환불 불가</li>
+        <li>짐보관 가능 숙소 — Day 3 체크아웃 전후 활용</li>
+      </ul>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.airbnb.co.kr/trips" target="_blank">🧳 에어비앤비 내 여행</a>
+      <a class="btn" href="https://map.naver.com/p/search/부산 중앙대로180번길" target="_blank">🗺️ 네이버 지도</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🍢</span> 야키토리 온정 — Day 1 저녁</h2>
+    <div class="cap">야키토리 · 부산 서면 · 미쉐린 빕 구르망</div>
+    <dl class="kv">
+      <dt>일시</dt><dd>2026.07.17 (금) 오후 6:00</dd>
+      <dt>인원</dt><dd>4명 · 테이블 (나, 희주, 윤다훈, 윤다훈 여친)</dd>
+      <dt>주소</dt><dd>부산진구 동천로108번길 9-7 1층</dd>
+      <dt>가는법</dt><dd>서면역 347m · 부전역 425m</dd>
+      <dt>결제</dt><dd>캐치페이 · 예약금 0원</dd>
+    </dl>
+    <div class="note">
+      <b>📌 주의사항</b>
+      <ul>
+        <li>무료 취소·변경은 <u>7/14까지</u> (예약 3일 전) — 이후 변경 시 정책 확인</li>
+        <li>영업 17:00~24:00, 인기 많아 피크타임 웨이팅 있음 — 예약 시간 엄수</li>
+      </ul>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.instagram.com/yakitori_onjeong/" target="_blank">📸 인스타그램</a>
+      <a class="btn" href="https://guide.michelin.com/us/en/busan-region/busan_1025838/restaurant/yakitori-onjung" target="_blank">⭐ 미쉐린 가이드</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🍢</span> 야키토리 해공 — Day 2 저녁</h2>
+    <div class="cap">야키토리 · 부산 광안리 · 미쉐린 가이드 선정</div>
+    <dl class="kv">
+      <dt>일시</dt><dd>2026.07.18 (토) 오후 5:00</dd>
+      <dt>인원</dt><dd>2명 · 바 자리 (나, 희주)</dd>
+      <dt>메뉴</dt><dd>미슐랭 선정 기념 토종닭 야키토리 코스 ×2</dd>
+      <dt>예약금</dt><dd>60,000원 (코스 선결제, 캐치테이블)</dd>
+      <dt>주소</dt><dd>수영구 민락본동로19번길 30-5 1층</dd>
+    </dl>
+    <div class="note red">
+      <b>📌 주의사항 (환불 정책 빡셈!)</b>
+      <ul>
+        <li>환불: 2일 전(<u>7/16까지</u>) 100% / 1일 전·당일·노쇼 <u>환불 불가</u></li>
+        <li>콜키지 1병 프리로 알고 있음 — <u>방문 전 전화로 확인</u> 추천</li>
+        <li>주류 주문 필수 매장 · 주차 불가 (대중교통/택시)</li>
+        <li>일요일 정기휴무 매장 (토요일 예약이라 무관)</li>
+      </ul>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.instagram.com/haegong_soseoldam_official/" target="_blank">📸 인스타그램</a>
+      <a class="btn" href="https://app.catchtable.co.kr/ct/shop/haegong" target="_blank">🍽️ 캐치테이블</a>
+      <a class="btn" href="https://guide.michelin.com/us/en/busan-region/busan_1025838/restaurant/yakitori-haegong" target="_blank">⭐ 미쉐린 가이드</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🥩</span> 소담 부산역점 — Day 2 야식 (예약 X)</h2>
+    <div class="cap">육회 · 뭉티기 생고기 — 숙소랑 같은 골목!</div>
+    <dl class="kv">
+      <dt>주소</dt><dd>동구 중앙대로180번길 9 1층 (숙소 코앞)</dd>
+      <dt>영업</dt><dd>월~토 17:00 ~ 02:00</dd>
+      <dt>플랜</dt><dd>해공 다녀와서 들러 먹거나 포장 → 숙소에서 한 잔 더</dd>
+    </dl>
+    <div class="note">
+      <b>📌 참고</b>
+      <ul><li>웨이팅 30분+ 도 있는 인기집 — 늦은 밤이면 비교적 여유. 일요일은 휴무라 <u>토요일 밤이 마지막 기회</u></li></ul>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.instagram.com/sodam_bs/" target="_blank">📸 인스타그램</a>
+      <a class="btn" href="https://www.diningcode.com/profile.php?rid=qA9V9iNlRg2m" target="_blank">🍽️ 다이닝코드</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🚄</span> 기차 요약 & 주의</h2>
+    <dl class="kv">
+      <dt>가는날</dt><dd>7/17 KTX 035 · 천안아산 14:35 → 부산 16:35 · 18호차 10B, 6C</dd>
+      <dt>오는날</dt><dd>7/19 KTX-청룡 032 · 부산 12:34 → 동대구 13:13 (7호차 19A, 19B) → 동대구 13:15 → 천안아산 14:20 <b style="color:var(--red)">입석</b></dd>
+    </dl>
+    <div class="note red">
+      <b>⚠ 꼭 하기</b>
+      <ul>
+        <li>동대구→천안아산 구간 입석 — 출발 전까지 코레일톡에서 <u>취소표/매진표 계속 확인</u></li>
+        <li>천안아산역 주차 위치 사진 찍어두기</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🎪</span> 여행 기간 축제 · 행사</h2>
+    <div class="cap">7/17~19 일정·동선과 겹치는 것만 추림</div>
+
+    <dl class="kv">
+      <dt>🚁 드론쇼</dt><dd>광안리 M 드론라이트쇼 — <b>7/18(토) "한국의 멋"</b> · 광안리해변 · 20:00, 22:00 · 무료</dd>
+      <dt>동선</dt><dd>Day 2 해공(19:30 종료) → 도보 5분 → 20:00 회차 관람이 베스트</dd>
+    </dl>
+    <div class="note red">
+      <b>⚠ 드론쇼 주의</b>
+      <ul><li>우천·강풍 등 기상 상황에 따라 하루 전/당일 취소·지연 가능 — 당일 수영구 공지 확인</li></ul>
+    </div>
+
+    <dl class="kv" style="margin-top:16px">
+      <dt>🎮 포켓몬</dt><dd>포켓몬 메가페스타 2026 in 부산 — <b>7/17(금) 개막</b> (~8/9)</dd>
+      <dt>팝업</dt><dd>롯데백화점 부산본점 B1 (서면역) · 금~일 10:30~20:30 — Day 1 온정 가기 전 잠깐 가능</dd>
+      <dt>포토존</dt><dd>부산역 광장 — 숙소 코앞, Day 1 도착 or Day 3 아침에</dd>
+      <dt>스탬프</dt><dd>지하철 5개역 스탬프랠리 중 <b>부산역·전포역·광안역 3곳이 우리 동선</b> (+범내골·센텀시티)</dd>
+    </dl>
+    <div class="btns">
+      <a class="btn primary" href="https://map.naver.com/p/search/광안리 드론라이트쇼" target="_blank">🚁 드론쇼 일정 확인</a>
+      <a class="btn" href="https://pokemonkorea.co.kr" target="_blank">🎮 포켓몬코리아</a>
+      <a class="btn" href="https://www.visitbusan.net" target="_blank">🗓️ 비짓부산 행사 캘린더</a>
+      <a class="btn" href="https://festivalbusan.com/" target="_blank">🎪 페스티벌 부산</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">💰</span> 전체 예산 총정리</h2>
+    <div class="cap">2인 기준 · 숙소·기차 제외 · 각 Day 탭 하단에 상세 내역</div>
+    <div class="bars">
+      <div class="brow"><div class="bl">Day 1</div><div class="btrack"><div class="bfill" style="width:65%; background:var(--sky)"></div></div><div class="bv">19.9만</div></div>
+      <div class="brow"><div class="bl">Day 2</div><div class="btrack"><div class="bfill" style="width:100%; background:var(--orange)"></div></div><div class="bv">30.5만</div></div>
+      <div class="brow"><div class="bl">Day 3</div><div class="btrack"><div class="bfill" style="width:15%; background:var(--teal)"></div></div><div class="bv">4.4만</div></div>
+      <div class="brow"><div class="bl">자차</div><div class="btrack"><div class="bfill" style="width:19%; background:var(--purple)"></div></div><div class="bv">5.9만</div></div>
+    </div>
+    <div class="bgt">
+      <div class="bi"><div class="nm"><b>🚗 자차 공통비</b><p>유류·톨비 왕복 약 3.5만 + 천안아산역 주차 2박3일 약 2.4만</p></div><div class="amt">59,000원</div></div>
+      <div class="tot"><span>총 예상 (2인)</span><span class="amt">약 607,000원</span></div>
+      <div class="tot" style="padding-top:2px"><span style="font-size:12.5px; color:var(--sub)">1인 기준</span><span class="amt" style="font-size:14px">약 304,000원</span></div>
+    </div>
+    <div class="note">
+      <b>💡 예산 팁</b>
+      <ul>
+        <li>술·기념품이 변동 큼 — <u>여유 10~15% 얹어서 1인 35만</u> 잡으면 안심</li>
+        <li>이미 결제된 돈: 해공 코스 예약금 60,000원 (위 합계 미포함)</li>
+        <li>온정(4명)은 더치 기준 2인분만 반영 — 통으로 계산하면 Day 1에 +12만</li>
+        <li>택시 대신 지하철 위주로 다니면 약 5~6만 절약 가능</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">🔗</span> 내 네이버 저장 목록 (실시간 업데이트)</h2>
+    <div class="cap">여행 중 여기 먼저 확인 — 계속 업데이트 중인 리스트</div>
+    <div class="btns">
+      <a class="btn primary" href="https://naver.me/GjyxwhTR" target="_blank">📍 네이버 저장 목록 (단축링크)</a>
+      <a class="btn" href="https://map.naver.com/p/favorite/sharedPlace/folder/8ede5263325a4ec2b07b8eb28b404fd1" target="_blank">🗺️ 네이버 지도 공유 폴더</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="em">✅</span> 출발 전 체크리스트</h2>
+    <div class="tl" style="margin-top:4px">
+      <div class="row">
+        <div class="head"><div class="time">7/14~</div><div class="dot" style="background:var(--gold)"></div>
+          <div class="bd"><b>온정 인원/시간 변경 필요하면 오늘까지</b><div class="head-p">무료 취소·변경 기한</div></div>
+        </div>
+        <div class="detail"><ul><li>캐치테이블 앱 → 방문예정 → 야키토리 온정 → 변경</li></ul></div>
+      </div>
+      <div class="row">
+        <div class="head"><div class="time">7/15</div><div class="dot" style="background:var(--gold)"></div>
+          <div class="bd"><b>16:00부터 숙소 출입안내·와이파이 확인 가능</b><div class="head-p">에어비앤비 앱에서 미리 캡처해두기</div></div>
+        </div>
+        <div class="detail"><ul><li>에어비앤비 앱 → 여행 → 체크인 가이드 · 와이파이 → 스크린샷 저장 (지하·터널에서 안 열릴 때 대비)</li></ul></div>
+      </div>
+      <div class="row">
+        <div class="head"><div class="time">7/16</div><div class="dot" style="background:var(--red)"></div>
+          <div class="bd"><b>해공 100% 환불 마지노선</b><div class="head-p">이후 취소하면 예약금 6만원 날아감</div></div>
+        </div>
+        <div class="detail"><ul><li>일정 틀어질 것 같으면 이날까지 결정 — 이후엔 1일 전·당일·노쇼 전부 환불 불가</li><li>콜키지 확인 전화도 이날 같이 해두면 좋음</li></ul></div>
+      </div>
+      <div class="row">
+        <div class="head"><div class="time">매일</div><div class="dot" style="background:var(--blue)"></div>
+          <div class="bd"><b>코레일톡 취소표 확인 (귀가편 좌석)</b><div class="head-p">동대구→천안아산 입석 탈출 미션</div></div>
+        </div>
+        <div class="detail"><ul><li>코레일톡 → 승차권 조회 → 7/19 동대구→천안아산 좌석 검색 — 하루 2~3번 체크</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<footer>부산 여행 플랜 · 2026.07.17–19 · 즐거운 여행 되세요 🧳</footer>
+
+<script>
+// ── 탭 전환 ──
+document.querySelectorAll('nav button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('section.tab').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById(b.dataset.t).classList.add('on');
+    window.scrollTo({top:0});
+    applyWxTheme(b.dataset.t);
+  });
+});
+
+// ── 부산 날씨 (Open-Meteo 실시간 예보) ──
+const WX_DAYS = {
+  d1:{date:'2026-07-17', label:'7/17 (금)'},
+  d2:{date:'2026-07-18', label:'7/18 (토)'},
+  d3:{date:'2026-07-19', label:'7/19 (일)'}
+};
+const wxKindByDay = {};   // d1 → 'clear' | 'partly' | ...
+
+function wxKind(code){
+  if(code===0) return 'clear';
+  if(code<=2)  return 'partly';
+  if(code===3) return 'cloud';
+  if(code===45||code===48) return 'fog';
+  if(code>=95) return 'storm';
+  if((code>=51&&code<=67)||(code>=80&&code<=82)) return 'rain';
+  if(code>=71&&code<=86) return 'rain';
+  return 'cloud';
+}
+const WX_META = {
+  clear :{ico:'☀️', name:'맑음'},
+  partly:{ico:'🌤️', name:'구름 조금'},
+  cloud :{ico:'☁️', name:'흐림'},
+  fog   :{ico:'🌫️', name:'안개'},
+  rain  :{ico:'🌧️', name:'비'},
+  storm :{ico:'⛈️', name:'뇌우'}
+};
+const WX_TIP = {
+  clear :'자외선 강함 — 선크림 필수, 광안리 산책 최고의 날',
+  partly:'야외 일정 딱 좋은 날씨',
+  cloud :'더위는 덜하지만 습할 수 있음',
+  fog   :'광안대교 뷰가 안 보일 수 있음 — 일정 유연하게',
+  rain  :'우산 필수! 드론쇼 등 야외 행사 취소 여부 확인',
+  storm :'야외 일정 실내로 전환 고려 — 드론쇼 취소 가능성 높음'
+};
+
+function applyWxTheme(tabId){
+  const kind = wxKindByDay[tabId];
+  document.body.className = kind ? 'th-'+kind : '';
+}
+
+function renderWx(dayId, d){
+  const el = document.getElementById('wx-'+dayId); if(!el) return;
+  const m = WX_META[d.kind];
+  el.innerHTML =
+    `<div class="wico">${m.ico}</div>
+     <div class="wmain"><b>${WX_DAYS[dayId].label} 부산 · ${m.name}</b><p>${WX_TIP[d.kind]}</p></div>
+     <div class="wtemp"><span class="hi">${Math.round(d.hi)}°</span> <span class="lo">/ ${Math.round(d.lo)}°</span><div class="pop">💧 강수확률 ${d.pop}%</div></div>`;
+}
+
+function renderWxFail(){
+  Object.keys(WX_DAYS).forEach(id=>{
+    const el = document.getElementById('wx-'+id); if(!el) return;
+    el.classList.add('wxfail');
+    el.innerHTML = `<div class="wico">📡</div>
+      <div class="wmain"><b>날씨를 불러오지 못했어요</b>
+      <p>인터넷 연결 확인 후 새로고침 · <a href="https://weather.naver.com/today/26440104" target="_blank">네이버 부산 날씨 열기</a></p></div>`;
+  });
+}
+
+(function loadWx(){
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756'
+    + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+    + '&timezone=Asia%2FSeoul&start_date=2026-07-17&end_date=2026-07-19';
+  fetch(url).then(r=>{ if(!r.ok) throw 0; return r.json(); }).then(j=>{
+    const t=j.daily;
+    Object.entries(WX_DAYS).forEach(([id,info])=>{
+      const i = t.time.indexOf(info.date); if(i<0) return;
+      const kind = wxKind(t.weather_code[i]);
+      wxKindByDay[id] = kind;
+      renderWx(id, {kind, hi:t.temperature_2m_max[i], lo:t.temperature_2m_min[i], pop:t.precipitation_probability_max[i] ?? 0});
+    });
+    const cur = document.querySelector('nav button.on');
+    if(cur) applyWxTheme(cur.dataset.t);
+  }).catch(renderWxFail);
+})();
+
+// ── 타임라인 아코디언 (헤더 탭 → 상세 펼침) ──
+document.querySelectorAll('.tl .head').forEach(h=>{
+  h.addEventListener('click',e=>{
+    if(e.target.closest('a')) return;           // 링크 클릭은 그대로 통과
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+// ── 24시간 원형(도넛) 타임차트 ──
+const DAYS = {
+  'chart-d1': [
+    {s:12,   e:14.58, label:'이동·픽업·주차', c:'#7b61c9'},
+    {s:14.58,e:16.58, label:'KTX 035',        c:'#2f6fdd'},
+    {s:16.58,e:17.5,  label:'체크인·짐풀기',  c:'#37a6e0'},
+    {s:17.5, e:18,    label:'서면 이동',      c:'#8fb7ea'},
+    {s:18,   e:20.5,  label:'야키토리 온정',  c:'#f2803c'},
+    {s:20.5, e:23,    label:'서면·전포 놀기', c:'#12a5a0'},
+    {s:23,   e:24,    label:'숙소 복귀',      c:'#12386b'}
+  ],
+  'chart-d2': [
+    {s:10,  e:11,   label:'기상·준비',     c:'#b9c3d6'},
+    {s:11,  e:12.5, label:'아점',          c:'#f2b03c'},
+    {s:12.5,e:15.5, label:'광안리 카페·산책', c:'#12a5a0'},
+    {s:15.5,e:17,   label:'보틀샵·술 고르기', c:'#d9a441'},
+    {s:17,  e:19.5, label:'야키토리 해공', c:'#f2803c'},
+    {s:19.5,e:21.5, label:'드론쇼 20:00·밤바다', c:'#37a6e0'},
+    {s:21.5,e:22,   label:'복귀 이동',     c:'#8fb7ea'},
+    {s:22,  e:24,   label:'소담 육회 🥩',  c:'#e05252'}
+  ],
+  'chart-d3': [
+    {s:9,    e:10,   label:'기상·짐정리',   c:'#b9c3d6'},
+    {s:10,   e:11.66,label:'아침·해장',     c:'#f2803c'},
+    {s:11.66,e:12.56,label:'체크아웃·부산역', c:'#7b61c9'},
+    {s:12.56,e:14.33,label:'KTX-청룡 032 (입석주의)', c:'#2f6fdd'},
+    {s:14.33,e:16,   label:'픽업 반납·귀가', c:'#12386b'}
+  ]
+};
+
+function polar(cx,cy,r,hour){
+  const a=(hour/24)*2*Math.PI - Math.PI/2;
+  return [cx+r*Math.cos(a), cy+r*Math.sin(a)];
+}
+function arc(cx,cy,r,h0,h1){
+  const [x0,y0]=polar(cx,cy,r,h0),[x1,y1]=polar(cx,cy,r,h1);
+  const large=(h1-h0)>12?1:0;
+  return `M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1}`;
+}
+function fmt(h){
+  const hh=Math.floor(h), mm=Math.round((h-hh)*60);
+  return hh+':' + String(mm).padStart(2,'0');
+}
+
+Object.entries(DAYS).forEach(([id,segs])=>{
+  const el=document.getElementById(id); if(!el)return;
+  const S=280,cx=S/2,cy=S/2,r=105,w=26;
+  let svg=`<svg width="${S}" height="${S}" viewBox="0 0 ${S} ${S}">`;
+  svg+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#edf0f6" stroke-width="${w}"/>`;
+  segs.forEach(seg=>{
+    svg+=`<path d="${arc(cx,cy,r,seg.s,seg.e)}" fill="none" stroke="${seg.c}" stroke-width="${w}" stroke-linecap="butt"/>`;
+  });
+  [0,6,12,18].forEach(h=>{
+    const [tx,ty]=polar(cx,cy,r+w/2+13,h);
+    svg+=`<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="700" fill="#9aa3b5">${h}시</text>`;
+  });
+  const first=segs[0], last=segs[segs.length-1];
+  svg+=`<text x="${cx}" y="${cy-10}" text-anchor="middle" font-size="13" font-weight="800" fill="#1c2333">${fmt(first.s)} ~ ${fmt(last.e)}</text>`;
+  svg+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" font-size="11.5" fill="#6b7487">활동 ${(last.e-first.s).toFixed(0)}시간 · 24h 기준</text>`;
+  svg+=`</svg>`;
+  let legend='<div class="legend">';
+  segs.forEach(seg=>{ legend+=`<span><i style="background:${seg.c}"></i>${fmt(seg.s)} ${seg.label}</span>`; });
+  legend+='</div>';
+  el.innerHTML=svg+legend;
+});
+</script>
+</body>
+</html>
