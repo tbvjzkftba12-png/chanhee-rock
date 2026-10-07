@@ -72,12 +72,11 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outli
 .count{font-family:var(--f-mono);color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
 .rule{margin:10px 0 0;font-size:13px;color:var(--muted)}
 .rule b{color:var(--t-ssr)}
-.locked-note{margin:10px 0 0;font-weight:700;color:var(--t-ssr)}
 
 .card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:18px;transition:opacity .25s,filter .25s,box-shadow .4s}
 .card.rolling{opacity:.35;filter:blur(2px)}
-.card.final-SSR{box-shadow:0 0 0 2px var(--t-ssr),0 0 34px color-mix(in srgb,var(--t-ssr) 35%,transparent)}
-.card.final-UR{box-shadow:0 0 0 2px var(--t-ur),0 0 34px color-mix(in srgb,var(--t-ur) 35%,transparent)}
+.card.hit-SSR{box-shadow:0 0 0 2px var(--t-ssr),0 0 34px color-mix(in srgb,var(--t-ssr) 35%,transparent)}
+.card.hit-UR{box-shadow:0 0 0 2px var(--t-ur),0 0 34px color-mix(in srgb,var(--t-ur) 35%,transparent)}
 .card-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
 .doc-title{font-family:var(--f-display);font-size:18px;letter-spacing:.04em}
 .doc-no{font-family:var(--f-mono);font-size:12px;color:var(--muted);align-self:end}
@@ -171,6 +170,7 @@ button.dex-tile:hover{border-color:var(--muted)}
 .fx-msg{margin:0;font-size:15px;line-height:1.6;animation:fxrise .6s .75s both}
 .fx-odds{font-family:var(--f-mono);font-size:13px;opacity:.8;animation:fxrise .6s .85s both}
 #fxok{margin-top:8px;font-family:var(--f-display);font-size:18px;padding:11px 24px;border-radius:999px;border:0;background:var(--fx-c);color:#1a1408;cursor:pointer;animation:fxrise .6s 1s both}
+#fxok:disabled{background:rgba(255,255,255,.22);color:var(--fx-ink);cursor:wait}
 @keyframes fxspin{to{transform:rotate(360deg)}}
 @keyframes fxflash{0%{opacity:.95}100%{opacity:0}}
 @keyframes fxslam{0%{transform:scale(3.2);opacity:0}55%{opacity:1}100%{transform:scale(1)}}
@@ -194,7 +194,6 @@ button.dex-tile:hover{border-color:var(--muted)}
       <span class="count" id="count">환생 0회</span>
     </div>
     <p class="rule" id="rule"></p>
-    <p class="locked-note" id="lockednote" hidden></p>
   </header>
 
   <section class="card" id="card" aria-live="polite">
@@ -268,11 +267,11 @@ button.dex-tile:hover{border-color:var(--muted)}
   <div class="fx-flash"></div>
   <div class="fx-box">
     <div class="fx-tier" id="fxtier">SSR</div>
-    <div class="fx-kicker">이번 생 확정</div>
+    <div class="fx-kicker">당첨</div>
     <div class="fx-name" id="fxname">—</div>
     <p class="fx-msg" id="fxmsg"></p>
     <div class="fx-odds" id="fxodds"></div>
-    <button id="fxok" type="button">찬희적등본 보기</button>
+    <button id="fxok" type="button">계속 환생하기</button>
   </div>
 </div>
 
@@ -561,7 +560,7 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
   // ---------- 저장 (이 브라우저에만) ----------
   var KEY = 'random-chanhee-reborn-v2';
-  var state = {count:0, dex:{}, hist:[], final:null};
+  var state = {count:0, dex:{}, hist:[]};
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
     if (saved && typeof saved.count === 'number') state = {count:saved.count, dex:saved.dex||{}, hist:saved.hist||[], final:saved.final||null};
@@ -818,21 +817,35 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
   // ---------- SSR 이상 연출 ----------
   var REDUCE = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var fxRun = null;
+  var fxRun = null, fxTimer = null, FX_HOLD = 3;
   function showFx(r){
     var it = r.item, fx = $('fx');
     fx.className = 'fx ' + it.tier;
     $('fxtier').textContent = it.tier;
     $('fxname').textContent = it.ch;
-    $('fxmsg').textContent = '이번 생은 ' + it.ch + '(으)로 확정됐습니다. 이 기기에서는 더 이상 환생할 수 없습니다.';
+    $('fxmsg').textContent = it.ch + '(으)로 태어났습니다. 연타로 넘어가지 않게 잠깐 멈춥니다.';
     $('fxodds').textContent = '이 찬희가 나올 확률 ' + odds(it.p);
     fx.hidden = false;
     document.body.style.overflow = 'hidden';
     fx.scrollTop = 0;
-    setTimeout(function(){ try { $('fxok').focus({preventScroll:true}); } catch(e) {} fx.scrollTop = 0; }, 50);
+    // 연타 방지: 잠깐 동안 닫기 버튼을 막아 둔다
+    var ok = $('fxok'), left = FX_HOLD;
+    ok.disabled = true;
+    ok.textContent = left + '초 뒤 계속';
+    clearInterval(fxTimer);
+    fxTimer = setInterval(function(){
+      left--;
+      if (left > 0){ ok.textContent = left + '초 뒤 계속'; return; }
+      clearInterval(fxTimer);
+      ok.disabled = false;
+      ok.textContent = '계속 환생하기';
+      try { ok.focus({preventScroll:true}); } catch(e) {}
+      fx.scrollTop = 0;
+    }, 1000);
     if (!REDUCE) burst(it.tier);
   }
   function hideFx(){
+    if ($('fxok').disabled) return;
     $('fx').hidden = true;
     document.body.style.overflow = '';
     if (fxRun) cancelAnimationFrame(fxRun);
@@ -921,22 +934,17 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     renderBars();
   }
 
-  function renderLock(){
-    var f = state.final, card = $('card'), stamp = $('stamp');
-    card.classList.remove('final-SSR','final-UR');
-    if (!f){ stamp.hidden = true; $('lockednote').hidden = true; return; }
-    var it = ITEMS[f.iid];
-    var tier = it ? it.tier : 'SSR';
-    card.classList.add('final-' + tier);
-    stamp.className = 'stamp t-' + tier;
-    stamp.textContent = tier + ' 확정 · 이번 생 종료';
-    stamp.hidden = false;
-    var btn = $('roll');
-    btn.disabled = true;
-    btn.textContent = '환생 끝 · ' + tier + ' 확정';
-    $('lockednote').textContent = '#' + f.n + ' 환생에서 ' + (it ? it.ch : '?') + '(' + tier + ')이(가) 나와 이번 생으로 확정됐습니다. 이 기기에서는 더 환생할 수 없습니다.';
-    $('lockednote').hidden = false;
+  function markCard(it){
+    var card = $('card'), stamp = $('stamp');
+    var top = it.tier === 'SSR' || it.tier === 'UR';
+    card.classList.remove('hit-SSR','hit-UR');
+    stamp.hidden = !top;
+    if (!top) return;
+    card.classList.add('hit-' + it.tier);
+    stamp.className = 'stamp t-' + it.tier;
+    stamp.textContent = it.tier + ' 당첨';
   }
+
 
   function renderDex(){
     var box = $('dexcats'); box.innerHTML = '';
@@ -1037,14 +1045,8 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
   function renderCount(){ $('count').textContent = '환생 ' + state.count.toLocaleString('ko-KR') + '회'; }
 
-  function serialize(r){
-    var o = {};
-    for (var k in r) if (k !== 'item') o[k] = r[k];
-    return o;
-  }
-
   $('roll').addEventListener('click', function(){
-    if (state.final) return;
+    if (!$('fx').hidden) return;
     var btn = this, card = $('card');
     btn.disabled = true;
     card.classList.add('rolling');
@@ -1057,36 +1059,34 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
       state.hist.unshift({n:state.count, t:it.tier, k:it.ch, p:r.place, d:r.d === 0 ? '지표 위' : fmtDepth(r.d)});
       state.hist = state.hist.slice(0,30);
       var top = it.tier === 'SSR' || it.tier === 'UR';
-      if (top){ var f = serialize(r); f.n = state.count; state.final = f; }
       save();
       $('exnote').hidden = true;
       $('docno').textContent = '발급번호 ' + String(state.count).padStart(6,'0') + ' / 9.4×10²¹';
       card.classList.remove('rolling');
       render(r, true);
+      markCard(it);
       renderDex(); renderHistory(); renderCount();
-      if (top){ renderLock(); showFx(r); }
-      else { btn.disabled = false; btn.textContent = '한 번 더 태어나기'; }
+      btn.textContent = '한 번 더 태어나기';
+      if (top) showFx(r);
+      else btn.disabled = false;
     }, 380);
   });
-  $('fxok').addEventListener('click', hideFx);
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('fx').hidden) hideFx(); });
+  $('fxok').addEventListener('click', function(){
+    if (this.disabled) return;
+    hideFx();
+    // 창이 닫힌 뒤에도 잠깐 쉬었다가 다시 누를 수 있게
+    setTimeout(function(){ $('roll').disabled = false; }, 600);
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('fx').hidden && !$('fxok').disabled) $('fxok').click(); });
 
   // ---------- 시작 ----------
   $('dextotal').textContent = ITEM_LIST.length;
-  $('rule').innerHTML = '<b>SSR 이상</b>이 나오면 그 생으로 확정되어 다시 환생할 수 없습니다. 한 번 환생할 때 SSR 이상이 나올 확률은 ' + odds(P_TOP) + '입니다.';
+  $('rule').innerHTML = '<b>SSR 이상</b>이 나오면 연출과 함께 3초 동안 멈춥니다. 한 번 환생할 때 SSR 이상이 나올 확률은 ' + odds(P_TOP) + '입니다.';
   renderClassRow();
-  if (state.final && ITEMS[state.final.iid]){
-    var fr = {}; for (var k in state.final) fr[k] = state.final[k];
-    fr.item = ITEMS[fr.iid];
-    $('exnote').hidden = true;
-    $('docno').textContent = '발급번호 ' + String(fr.n).padStart(6,'0') + ' / 9.4×10²¹';
-    render(fr, false);
-  } else {
-    state.final = null;
-    render(roll(), false);   // 기록에 남기지 않는 예시
-    if (state.count) $('roll').textContent = '한 번 더 태어나기';
-  }
-  renderDex(); renderHistory(); renderCount(); renderLock();
+  if (state.final){ delete state.final; save(); }   // 예전 잠금 기록은 풀어 준다
+  render(roll(), false);   // 기록에 남기지 않는 예시
+  if (state.count) $('roll').textContent = '한 번 더 태어나기';
+  renderDex(); renderHistory(); renderCount();
 })();
 </script>
 
