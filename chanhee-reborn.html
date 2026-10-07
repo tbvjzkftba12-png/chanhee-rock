@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="지구 속 찬희 94해 개 중 하나로 무작위 환생. 실제 암찬희·광물·원소 데이터로 뽑는 도감 128종.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="랜덤찬희 다시태어나기">
+<meta property="og:title" content="랜덤찬희 다시태어나기">
+<meta property="og:description" content="지구 속 찬희 94해 개 중 하나로 환생합니다. SSR 이상이 나오면 그 생으로 끝.">
+<meta property="og:url" content="https://tbvjzkftba12-png.github.io/chanhee-rock/chanhee-reborn.html">
+<meta property="og:image" content="https://tbvjzkftba12-png.github.io/chanhee-rock/chanhee-reborn-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <title>랜덤찬희 다시태어나기</title>
 <style>
 html{-webkit-text-size-adjust:100%}
@@ -14,13 +24,14 @@ img{max-width:100%}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: 한 줄 세로 흐름 — 환생 버튼 → 돌적등본(지각 단면도 + 기록) → 도감 → 실제 구성비 → 출처 */
+/* Layout: 한 줄 세로 흐름 — 환생 버튼 → 찬희적등본(지구본 + 지각 단면도) → 도감 → 기록 → 실제 구성비 → 출처 */
 :root{
   --bg:#e7e9e3; --paper:#f7f7f3; --ink:#1e2227; --muted:#5b6169; --line:#c8cbc2;
   --accent:#2c5a98;
   --t-n:#6a7078; --t-r:#2a6cad; --t-sr:#7a49ad; --t-ssr:#a8740f; --t-ur:#b0372a;
   --sky:#dde7ec; --water:#8db2d0; --sed:#d8c38e; --upper:#c8b1a4; --lower:#76706f; --mantle:#7c8a55;
   --g-sea:#cddbe5; --g-land:#bcb7aa; --g-edge:#f7f7f3; --g-grid:#b3c5d2; --hl:#c4471d;
+  --fx-bg:rgba(12,10,8,.94); --fx-ink:#fffaf0; --fx-ssr:#ffd36a; --fx-ur:#ff8f7e;
   --f-display:'Black Han Sans','IBM Plex Sans KR','Malgun Gothic',sans-serif;
   --f-body:'IBM Plex Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif;
   --f-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
@@ -49,26 +60,32 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
 h1{font-family:var(--f-display);font-weight:400;font-size:clamp(36px,9vw,60px);line-height:1.05;margin:6px 0 0;text-wrap:balance}
 h2{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0 0 12px;text-wrap:balance}
+h3{font-size:14px;margin:18px 0 8px}
 .sub{color:var(--muted);margin:12px 0 0;max-width:62ch}
 .sub b{color:var(--ink);font-family:var(--f-mono);font-weight:600}
 .roll-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:22px}
 #roll{font-family:var(--f-display);font-size:22px;padding:14px 28px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);cursor:pointer;transition:transform .12s}
-#roll:hover{transform:translateY(-2px)}
-#roll:active{transform:translateY(1px)}
-#roll:disabled{opacity:.6;cursor:wait}
-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#roll:hover:not(:disabled){transform:translateY(-2px)}
+#roll:active:not(:disabled){transform:translateY(1px)}
+#roll:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .count{font-family:var(--f-mono);color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
-.ghost{background:none;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:12px;padding:4px 10px;border-radius:999px;cursor:pointer}
+.rule{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.rule b{color:var(--t-ssr)}
+.locked-note{margin:10px 0 0;font-weight:700;color:var(--t-ssr)}
 
-.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:18px;transition:opacity .25s,filter .25s}
+.card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:18px;transition:opacity .25s,filter .25s,box-shadow .4s}
 .card.rolling{opacity:.35;filter:blur(2px)}
+.card.final-SSR{box-shadow:0 0 0 2px var(--t-ssr),0 0 34px color-mix(in srgb,var(--t-ssr) 35%,transparent)}
+.card.final-UR{box-shadow:0 0 0 2px var(--t-ur),0 0 34px color-mix(in srgb,var(--t-ur) 35%,transparent)}
 .card-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--ink);padding-bottom:8px}
 .doc-title{font-family:var(--f-display);font-size:18px;letter-spacing:.04em}
 .doc-no{font-family:var(--f-mono);font-size:12px;color:var(--muted);align-self:end}
+.stamp{justify-self:start;font-family:var(--f-display);font-size:17px;padding:3px 12px;border:3px double currentColor;border-radius:4px;transform:rotate(-4deg)}
 .name-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
 .rock-name{font-family:var(--f-display);font-size:clamp(30px,7vw,42px);line-height:1.1;margin:0}
 .rock-meta{color:var(--muted);font-size:13px}
-.chip{display:inline-block;font-family:var(--f-mono);font-weight:600;font-size:12px;padding:2px 9px;border-radius:4px;border:1.5px solid currentColor;letter-spacing:.06em}
+.chip{display:inline-block;font-family:var(--f-mono);font-weight:600;font-size:12px;padding:2px 9px;border-radius:4px;border:1.5px solid currentColor;letter-spacing:.06em;line-height:1.5}
 .t-N{color:var(--t-n)} .t-R{color:var(--t-r)} .t-SR{color:var(--t-sr)} .t-SSR{color:var(--t-ssr)} .t-UR{color:var(--t-ur)}
 .bonus{display:flex;flex-wrap:wrap;gap:6px}
 .grid2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
@@ -85,26 +102,45 @@ svg.section{width:100%;height:auto;display:block}
 svg .lbl{font-family:var(--f-body);font-size:11px;fill:var(--muted)}
 svg .tick{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
 svg .you{font-family:var(--f-body);font-size:12px;font-weight:700;fill:var(--ink)}
+svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--hl)}
 #marker{transition:transform 1s cubic-bezier(.3,1.25,.5,1)}
 .visuals{display:grid;gap:14px;min-width:0}
 .globe-fig{margin:0;display:grid;justify-items:center;gap:4px}
 svg.globe{width:100%;max-width:280px;height:auto;display:block}
 .globe-fig figcaption{font-size:13px;text-align:center}
 .globe-fig figcaption b{color:var(--hl)}
-svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--hl)}
 
-.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.dex-tile{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px;background:var(--paper)}
+/* 도감 */
+.dex-sum{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin:0 0 10px}
+.dex-cat{border-top:1px solid var(--line)}
+.dex-cat:last-child{border-bottom:1px solid var(--line)}
+.dex-cat summary{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 2px;cursor:pointer;list-style:none}
+.dex-cat summary::-webkit-details-marker{display:none}
+.dex-cat summary::before{content:'▸';color:var(--muted);margin-right:6px;transition:transform .15s;display:inline-block}
+.dex-cat[open] summary::before{transform:rotate(90deg)}
+.cat-name{font-weight:700;flex:1;min-width:0}
+.cat-meta{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;padding:2px 0 14px}
+.dex-tile{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:3px;align-content:start;background:var(--paper);text-align:left;font:inherit;color:inherit;min-width:0}
+button.dex-tile{cursor:pointer}
+button.dex-tile:hover{border-color:var(--muted)}
 .dex-tile.locked{background:transparent;border-style:dashed}
-.dex-tile .nm{font-weight:700;font-size:14px}
+.dex-tile .nm{font-weight:700;font-size:14px;overflow-wrap:anywhere}
 .dex-tile.locked .nm{color:var(--muted)}
 .dex-tile .ct{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.dex-sum{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin:0 0 10px}
+.dex-tile.open{grid-column:1/-1}
+.dex-detail{display:grid;gap:8px;margin-top:6px;border-top:1px dashed var(--line);padding-top:10px}
+.dex-detail dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;margin:0;font-size:13px}
+.dex-detail dt{color:var(--muted);white-space:nowrap}
+.dex-detail dd{margin:0;min-width:0}
+.dex-detail p{margin:0;font-size:14px}
 
+/* 구성비 막대 */
 .bars{display:grid;gap:6px}
-.bar-row{display:grid;grid-template-columns:9.5em minmax(0,1fr) 3.6em;gap:10px;align-items:center;font-size:13px}
+.bar-row{display:grid;grid-template-columns:10em minmax(0,1fr) 3.6em;gap:10px;align-items:center;font-size:13px}
+.bar-row .bn{overflow-wrap:anywhere}
 .bar-row .track{height:12px;background:color-mix(in srgb,var(--line) 45%,transparent);border-radius:2px;overflow:hidden}
-.bar-row .fill{height:100%;background:var(--muted)}
+.bar-row .fill{display:block;height:100%;background:var(--muted)}
 .bar-row.now .fill{background:var(--accent)}
 .bar-row.now .bn{font-weight:700}
 .bar-row .pc{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
@@ -114,11 +150,36 @@ svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--h
 .history li{display:flex;gap:10px;min-width:0}
 .history .hn{font-family:var(--f-mono);color:var(--muted);flex:none;width:3.2em}
 .history .ht{min-width:0}
+.hchip{font-size:10px;padding:0 5px}
 
 .notes{font-size:12.5px;color:var(--muted);display:grid;gap:6px}
 .notes p{margin:0;max-width:75ch}
 .notes a{color:var(--accent)}
-@media (prefers-reduced-motion: reduce){#marker,.card,#roll{transition:none}}
+
+/* SSR 이상 연출 */
+.fx{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px 16px;background:var(--fx-bg);overflow:hidden;overflow:clip;color:var(--fx-ink)}
+.fx.SSR{--fx-c:var(--fx-ssr)} .fx.UR{--fx-c:var(--fx-ur)}
+.fx-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--fx-c) 55%,transparent) 0,transparent 55%)}
+.fx-rays{position:absolute;left:50%;top:45%;width:180vmax;height:180vmax;margin:-90vmax 0 0 -90vmax;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--fx-c) 30%,transparent) 0deg 5deg,transparent 5deg 15deg);-webkit-mask-image:radial-gradient(circle,#000 0,transparent 45%);mask-image:radial-gradient(circle,#000 0,transparent 45%);animation:fxspin 18s linear infinite}
+.fx-flash{position:absolute;inset:0;background:var(--fx-ink);pointer-events:none;animation:fxflash .7s ease-out both}
+#fxc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fx-box{position:relative;text-align:center;display:grid;gap:10px;justify-items:center;max-width:440px}
+.fx-tier{font-family:var(--f-display);font-size:clamp(84px,26vw,150px);line-height:1;color:var(--fx-c);text-shadow:0 0 22px var(--fx-c),0 0 70px var(--fx-c);animation:fxslam .75s cubic-bezier(.2,1.5,.4,1) both}
+.fx.UR .fx-tier{background:linear-gradient(90deg,#ff6b6b,#ffc46b,#7af3ff,#b98cff,#ff6b6b);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 0 20px rgba(255,255,255,.55));animation:fxslam .75s cubic-bezier(.2,1.5,.4,1) both,fxshine 2.2s linear infinite}
+.fx-kicker{font-family:var(--f-mono);font-size:13px;letter-spacing:.12em;opacity:.8;animation:fxrise .5s .35s both}
+.fx-name{font-family:var(--f-display);font-size:clamp(32px,9vw,50px);line-height:1.1;animation:fxrise .6s .5s both}
+.fx-msg{margin:0;font-size:15px;line-height:1.6;animation:fxrise .6s .75s both}
+.fx-odds{font-family:var(--f-mono);font-size:13px;opacity:.8;animation:fxrise .6s .85s both}
+#fxok{margin-top:8px;font-family:var(--f-display);font-size:18px;padding:11px 24px;border-radius:999px;border:0;background:var(--fx-c);color:#1a1408;cursor:pointer;animation:fxrise .6s 1s both}
+@keyframes fxspin{to{transform:rotate(360deg)}}
+@keyframes fxflash{0%{opacity:.95}100%{opacity:0}}
+@keyframes fxslam{0%{transform:scale(3.2);opacity:0}55%{opacity:1}100%{transform:scale(1)}}
+@keyframes fxrise{0%{transform:translateY(14px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes fxshine{to{background-position:-200% 0}}
+@media (prefers-reduced-motion: reduce){
+  #marker,.card,#roll{transition:none}
+  .fx-rays,.fx-flash,.fx-tier,.fx-kicker,.fx-name,.fx-msg,.fx-odds,#fxok{animation:none}
+}
 </style>
 </head>
 <body>
@@ -127,19 +188,22 @@ svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--h
   <header>
     <div class="eyebrow">Random Chanhee Reincarnation</div>
     <h1>랜덤찬희 다시태어나기</h1>
-    <p class="sub">지구 지각을 주먹만 한 돌(1리터)로 쪼개면 약 <b>94해 개</b>(9.4×10²¹)가 나옵니다. 그중 하나로 무작위 환생합니다. 암석 종류는 실제 지각 부피 구성비, 위치는 실제 국가·대양 면적 비율대로 뽑습니다.</p>
+    <p class="sub">지구 지각을 주먹만 한 찬희(1리터)로 쪼개면 약 <b>94해 개</b>(9.4×10²¹)가 나옵니다. 그중 하나로 무작위 환생합니다. 암찬희는 실제 지각 부피 구성비, 광물은 실제 광물 구성비, 광찬희는 실제 원소 존재비, 위치는 국가·대양 면적 비율대로 뽑습니다. 도감에 <b id="dextotal">—</b>종이 있습니다.</p>
     <div class="roll-row">
-      <button id="roll" type="button">돌로 다시 태어나기</button>
+      <button id="roll" type="button">찬희로 다시 태어나기</button>
       <span class="count" id="count">환생 0회</span>
     </div>
+    <p class="rule" id="rule"></p>
+    <p class="locked-note" id="lockednote" hidden></p>
   </header>
 
   <section class="card" id="card" aria-live="polite">
     <div class="card-head">
-      <span class="doc-title">돌적등본 石籍謄本</span>
+      <span class="doc-title">찬희적등본</span>
       <span class="doc-no" id="docno">발급번호 —</span>
     </div>
     <p class="example-note" id="exnote">아래는 예시 결과입니다. 버튼을 누르면 직접 태어납니다.</p>
+    <span class="stamp" id="stamp" hidden></span>
     <div class="name-row">
       <h2 class="rock-name" id="rname">—</h2>
       <span class="chip" id="rtier">N</span>
@@ -154,6 +218,7 @@ svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--h
         <dt>누르는 압력</dt><dd id="fpress" class="num"></dd>
         <dt>나이</dt><dd id="fage" class="num"></dd>
         <dt>앞날</dt><dd id="ffuture"></dd>
+        <dt>이 찬희 확률</dt><dd id="fitem"></dd>
         <dt>이 조합 확률</dt><dd id="fprob"></dd>
       </dl>
       <div class="visuals">
@@ -169,9 +234,9 @@ svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--h
   </section>
 
   <section>
-    <h2>돌 도감</h2>
+    <h2>찬희 도감</h2>
     <p class="dex-sum" id="dexsum"></p>
-    <div class="dex" id="dex"></div>
+    <div id="dexcats"></div>
   </section>
 
   <section>
@@ -181,17 +246,35 @@ svg .place{font-family:var(--f-body);font-size:11px;font-weight:700;fill:var(--h
 
   <section>
     <h2>실제 지각 구성비</h2>
+    <h3>암찬희 (부피 %)</h3>
     <div class="cls-row" id="clsrow"></div>
     <div class="bars" id="bars"></div>
+    <h3>광물 (부피 %)</h3>
+    <div class="bars" id="mbars"></div>
   </section>
 
   <section class="notes">
     <p><b>데이터 출처</b></p>
-    <p>암석 구성비: Ronov &amp; Yaroshevsky (1969), "Chemical composition of the Earth's crust", AGU Geophysical Monograph 13 — 지각 부피 기준 %, 교과서 재인용 값. 퇴적암 수치(셰일 4.2·탄산염암 2.0·사암 1.7%)는 <a href="https://sandatlas.org/composition-of-the-earths-crust/" target="_blank" rel="noopener">Sandatlas</a>와 대조했습니다.</p>
+    <p>암찬희 구성비와 광물 구성비: Ronov &amp; Yaroshevsky (1969), "Chemical composition of the Earth's crust", AGU Geophysical Monograph 13 — 지각 부피 기준 %, 교과서 재인용 값(<a href="https://geology.com/minerals/rock-forming-minerals" target="_blank" rel="noopener">geology.com</a>, <a href="https://sandatlas.org/composition-of-the-earths-crust/" target="_blank" rel="noopener">Sandatlas</a>와 대조). 광찬희 비율: 각 금속의 지각 존재비(ppm), CRC Handbook of Chemistry and Physics 97판 값(<a href="https://en.wikipedia.org/wiki/Abundance_of_elements_in_Earth%27s_crust" target="_blank" rel="noopener">위키백과 표</a>). 운찬희 비율: 관측된 낙하 운석의 종류별 비율 근사.</p>
     <p>국가 면적: 각국 총면적 근사치(km², CIA World Factbook 계열), 남극 1,420만 km², 전 세계 육지 1억 4,894만 km². 목록에 없는 나라는 남은 면적을 지도상 면적 비율로 나눴습니다. 지구본 지도: Datamaps world(Natural Earth 기반). 대양 면적: CIA World Factbook. 지각 부피: 대륙지각 약 72억 km³ + 해양지각 약 22억 km³(근사).</p>
-    <p><b>단순화한 가정</b> — 암석별 대륙·대륙붕·해양 배분, 암석별 깊이 범위, 지온 경사(대륙 약 30 °C/km에서 점점 완만), 압력(암석 27 MPa/km, 바닷물 10 MPa/km), 침식 속도 0.05 mm/년, 해양지각 나이 0~1.8억 년(젊을수록 많음), 대륙 결정질 암석 나이 0~40.3억 년. 놀이용 계산이며 학술 결과가 아닙니다.</p>
+    <p><b>추정으로 정한 값</b> — 찬희 1개가 통째로 광물 결정일 확률 5%, 광찬희 1%, 보찬희 0.1%, 화찬희 0.05%, 운찬희 0.01%, 사람 손을 탄 찬희 0.01%(나머지 93.83%는 암찬희를 실제 구성비대로 나눔). 각 암찬희 계열 안의 세부 비율, '기타 규산염·비규산염' 광물의 세부 비율, 보찬희끼리의 비율도 추정입니다. 암찬희별 대륙·대륙붕·해양 배분과 깊이 범위, 지온 경사(대륙 약 30 °C/km에서 점점 완만), 압력(27 MPa/km, 바닷물 10 MPa/km), 침식 속도 0.05 mm/년, 해양지각 나이 0~1.8억 년, 대륙 결정질 암찬희 나이 0~40.3억 년도 단순화한 가정입니다. 놀이용 계산이며 학술 결과가 아닙니다.</p>
   </section>
 </main>
+
+<div class="fx" id="fx" hidden role="dialog" aria-modal="true" aria-labelledby="fxname">
+  <div class="fx-glow"></div>
+  <div class="fx-rays"></div>
+  <canvas id="fxc"></canvas>
+  <div class="fx-flash"></div>
+  <div class="fx-box">
+    <div class="fx-tier" id="fxtier">SSR</div>
+    <div class="fx-kicker">이번 생 확정</div>
+    <div class="fx-name" id="fxname">—</div>
+    <p class="fx-msg" id="fxmsg"></p>
+    <div class="fx-odds" id="fxodds"></div>
+    <button id="fxok" type="button">찬희적등본 보기</button>
+  </div>
+</div>
 
 <script>
 !function(){function n(n){return n&&(n.ownerDocument||n.document||n).documentElement}function t(n){return n&&(n.ownerDocument&&n.ownerDocument.defaultView||n.document&&n||n.defaultView)}function e(n,t){return t>n?-1:n>t?1:n>=t?0:NaN}function r(n){return null===n?NaN:+n}function i(n){return!isNaN(n)}function u(n){return{left:function(t,e,r,i){for(arguments.length<3&&(r=0),arguments.length<4&&(i=t.length);i>r;){var u=r+i>>>1;n(t[u],e)<0?r=u+1:i=u}return r},right:function(t,e,r,i){for(arguments.length<3&&(r=0),arguments.length<4&&(i=t.length);i>r;){var u=r+i>>>1;n(t[u],e)>0?i=u:r=u+1}return r}}}function o(n){return n.length}function a(n){for(var t=1;n*t%1;)t*=10;return t}function l(n,t){for(var e in t)Object.defineProperty(n.prototype,e,{value:t[e],enumerable:!1})}function c(){this._=Object.create(null)}function f(n){return(n+="")===bo||n[0]===_o?_o+n:n}function s(n){return(n+="")[0]===_o?n.slice(1):n}function h(n){return f(n)in this._}function p(n){return(n=f(n))in this._&&delete this._[n]}function g(){var n=[];for(var t in this._)n.push(s(t));return n}function v(){var n=0;for(var t in this._)++n;return n}function d(){for(var n in this._)return!1;return!0}function y(){this._=Object.create(null)}function m(n){return n}function M(n,t,e){return function(){var r=e.apply(t,arguments);return r===t?n:r}}function x(n,t){if(t in n)return t;t=t.charAt(0).toUpperCase()+t.slice(1);for(var e=0,r=wo.length;r>e;++e){var i=wo[e]+t;if(i in n)return i}}function b(){}function _(){}function w(n){function t(){for(var t,r=e,i=-1,u=r.length;++i<u;)(t=r[i].on)&&t.apply(this,arguments);return n}var e=[],r=new c;return t.on=function(t,i){var u,o=r.get(t);return arguments.length<2?o&&o.on:(o&&(o.on=null,e=e.slice(0,u=e.indexOf(o)).concat(e.slice(u+1)),r.remove(t)),i&&e.push(r.set(t,{on:i})),n)},t}function S(){ao.event.preventDefault()}function k(){for(var n,t=ao.event;n=t.sourceEvent;)t=n;return t}function N(n){for(var t=new _,e=0,r=arguments.length;++e<r;)t[arguments[e]]=w(t);return t.of=function(e,r){return function(i){try{var u=i.sourceEvent=ao.event;i.target=n,ao.event=i,t[i.type].apply(e,r)}finally{ao.event=u}}},t}function E(n){return ko(n,Co),n}function A(n){return"function"==typeof n?n:function(){return No(n,this)}}function C(n){return"function"==typeof n?n:function(){return Eo(n,this)}}function z(n,t){function e(){this.removeAttribute(n)}function r(){this.removeAttributeNS(n.space,n.local)}function i(){this.setAttribute(n,t)}function u(){this.setAttributeNS(n.space,n.local,t)}function o(){var e=t.apply(this,arguments);null==e?this.removeAttribute(n):this.setAttribute(n,e)}function a(){var e=t.apply(this,arguments);null==e?this.removeAttributeNS(n.space,n.local):this.setAttributeNS(n.space,n.local,e)}return n=ao.ns.qualify(n),null==t?n.local?r:e:"function"==typeof t?n.local?a:o:n.local?u:i}function L(n){return n.trim().replace(/\s+/g," ")}function q(n){return new RegExp("(?:^|\\s+)"+ao.requote(n)+"(?:\\s+|$)","g")}function T(n){return(n+"").trim().split(/^|\s+/)}function R(n,t){function e(){for(var e=-1;++e<i;)n[e](this,t)}function r(){for(var e=-1,r=t.apply(this,arguments);++e<i;)n[e](this,r)}n=T(n).map(D);var i=n.length;return"function"==typeof t?r:e}function D(n){var t=q(n);return function(e,r){if(i=e.classList)return r?i.add(n):i.remove(n);var i=e.getAttribute("class")||"";r?(t.lastIndex=0,t.test(i)||e.setAttribute("class",L(i+" "+n))):e.setAttribute("class",L(i.replace(t," ")))}}function P(n,t,e){function r(){this.style.removeProperty(n)}function i(){this.style.setProperty(n,t,e)}function u(){var r=t.apply(this,arguments);null==r?this.style.removeProperty(n):this.style.setProperty(n,r,e)}return null==t?r:"function"==typeof t?u:i}function U(n,t){function e(){delete this[n]}function r(){this[n]=t}function i(){var e=t.apply(this,arguments);null==e?delete this[n]:this[n]=e}return null==t?e:"function"==typeof t?i:r}function j(n){function t(){var t=this.ownerDocument,e=this.namespaceURI;return e===zo&&t.documentElement.namespaceURI===zo?t.createElement(n):t.createElementNS(e,n)}function e(){return this.ownerDocument.createElementNS(n.space,n.local)}return"function"==typeof n?n:(n=ao.ns.qualify(n)).local?e:t}function F(){var n=this.parentNode;n&&n.removeChild(this)}function H(n){return{__data__:n}}function O(n){return function(){return Ao(this,n)}}function I(n){return arguments.length||(n=e),function(t,e){return t&&e?n(t.__data__,e.__data__):!t-!e}}function Y(n,t){for(var e=0,r=n.length;r>e;e++)for(var i,u=n[e],o=0,a=u.length;a>o;o++)(i=u[o])&&t(i,o,e);return n}function Z(n){return ko(n,qo),n}function V(n){var t,e;return function(r,i,u){var o,a=n[u].update,l=a.length;for(u!=e&&(e=u,t=0),i>=t&&(t=i+1);!(o=a[t])&&++t<l;);return o}}function X(n,t,e){function r(){var t=this[o];t&&(this.removeEventListener(n,t,t.$),delete this[o])}function i(){var i=l(t,co(arguments));r.call(this),this.addEventListener(n,this[o]=i,i.$=e),i._=t}function u(){var t,e=new RegExp("^__on([^.]+)"+ao.requote(n)+"$");for(var r in this)if(t=r.match(e)){var i=this[r];this.removeEventListener(t[1],i,i.$),delete this[r]}}var o="__on"+n,a=n.indexOf("."),l=$;a>0&&(n=n.slice(0,a));var c=To.get(n);return c&&(n=c,l=B),a?t?i:r:t?b:u}function $(n,t){return function(e){var r=ao.event;ao.event=e,t[0]=this.__data__;try{n.apply(this,t)}finally{ao.event=r}}}function B(n,t){var e=$(n,t);return function(n){var t=this,r=n.relatedTarget;r&&(r===t||8&r.compareDocumentPosition(t))||e.call(t,n)}}function W(e){var r=".dragsuppress-"+ ++Do,i="click"+r,u=ao.select(t(e)).on("touchmove"+r,S).on("dragstart"+r,S).on("selectstart"+r,S);if(null==Ro&&(Ro="onselectstart"in e?!1:x(e.style,"userSelect")),Ro){var o=n(e).style,a=o[Ro];o[Ro]="none"}return function(n){if(u.on(r,null),Ro&&(o[Ro]=a),n){var t=function(){u.on(i,null)};u.on(i,function(){S(),t()},!0),setTimeout(t,0)}}}function J(n,e){e.changedTouches&&(e=e.changedTouches[0]);var r=n.ownerSVGElement||n;if(r.createSVGPoint){var i=r.createSVGPoint();if(0>Po){var u=t(n);if(u.scrollX||u.scrollY){r=ao.select("body").append("svg").style({position:"absolute",top:0,left:0,margin:0,padding:0,border:"none"},"important");var o=r[0][0].getScreenCTM();Po=!(o.f||o.e),r.remove()}}return Po?(i.x=e.pageX,i.y=e.pageY):(i.x=e.clientX,i.y=e.clientY),i=i.matrixTransform(n.getScreenCTM().inverse()),[i.x,i.y]}var a=n.getBoundingClientRect();return[e.clientX-a.left-n.clientLeft,e.clientY-a.top-n.clientTop]}function G(){return ao.event.changedTouches[0].identifier}function K(n){return n>0?1:0>n?-1:0}function Q(n,t,e){return(t[0]-n[0])*(e[1]-n[1])-(t[1]-n[1])*(e[0]-n[0])}function nn(n){return n>1?0:-1>n?Fo:Math.acos(n)}function tn(n){return n>1?Io:-1>n?-Io:Math.asin(n)}function en(n){return((n=Math.exp(n))-1/n)/2}function rn(n){return((n=Math.exp(n))+1/n)/2}function un(n){return((n=Math.exp(2*n))-1)/(n+1)}function on(n){return(n=Math.sin(n/2))*n}function an(){}function ln(n,t,e){return this instanceof ln?(this.h=+n,this.s=+t,void(this.l=+e)):arguments.length<2?n instanceof ln?new ln(n.h,n.s,n.l):_n(""+n,wn,ln):new ln(n,t,e)}function cn(n,t,e){function r(n){return n>360?n-=360:0>n&&(n+=360),60>n?u+(o-u)*n/60:180>n?o:240>n?u+(o-u)*(240-n)/60:u}function i(n){return Math.round(255*r(n))}var u,o;return n=isNaN(n)?0:(n%=360)<0?n+360:n,t=isNaN(t)?0:0>t?0:t>1?1:t,e=0>e?0:e>1?1:e,o=.5>=e?e*(1+t):e+t-e*t,u=2*e-o,new mn(i(n+120),i(n),i(n-120))}function fn(n,t,e){return this instanceof fn?(this.h=+n,this.c=+t,void(this.l=+e)):arguments.length<2?n instanceof fn?new fn(n.h,n.c,n.l):n instanceof hn?gn(n.l,n.a,n.b):gn((n=Sn((n=ao.rgb(n)).r,n.g,n.b)).l,n.a,n.b):new fn(n,t,e)}function sn(n,t,e){return isNaN(n)&&(n=0),isNaN(t)&&(t=0),new hn(e,Math.cos(n*=Yo)*t,Math.sin(n)*t)}function hn(n,t,e){return this instanceof hn?(this.l=+n,this.a=+t,void(this.b=+e)):arguments.length<2?n instanceof hn?new hn(n.l,n.a,n.b):n instanceof fn?sn(n.h,n.c,n.l):Sn((n=mn(n)).r,n.g,n.b):new hn(n,t,e)}function pn(n,t,e){var r=(n+16)/116,i=r+t/500,u=r-e/200;return i=vn(i)*na,r=vn(r)*ta,u=vn(u)*ea,new mn(yn(3.2404542*i-1.5371385*r-.4985314*u),yn(-.969266*i+1.8760108*r+.041556*u),yn(.0556434*i-.2040259*r+1.0572252*u))}function gn(n,t,e){return n>0?new fn(Math.atan2(e,t)*Zo,Math.sqrt(t*t+e*e),n):new fn(NaN,NaN,n)}function vn(n){return n>.206893034?n*n*n:(n-4/29)/7.787037}function dn(n){return n>.008856?Math.pow(n,1/3):7.787037*n+4/29}function yn(n){return Math.round(255*(.00304>=n?12.92*n:1.055*Math.pow(n,1/2.4)-.055))}function mn(n,t,e){return this instanceof mn?(this.r=~~n,this.g=~~t,void(this.b=~~e)):arguments.length<2?n instanceof mn?new mn(n.r,n.g,n.b):_n(""+n,mn,cn):new mn(n,t,e)}function Mn(n){return new mn(n>>16,n>>8&255,255&n)}function xn(n){return Mn(n)+""}function bn(n){return 16>n?"0"+Math.max(0,n).toString(16):Math.min(255,n).toString(16)}function _n(n,t,e){var r,i,u,o=0,a=0,l=0;if(r=/([a-z]+)\((.*)\)/.exec(n=n.toLowerCase()))switch(i=r[2].split(","),r[1]){case"hsl":return e(parseFloat(i[0]),parseFloat(i[1])/100,parseFloat(i[2])/100);case"rgb":return t(Nn(i[0]),Nn(i[1]),Nn(i[2]))}return(u=ua.get(n))?t(u.r,u.g,u.b):(null==n||"#"!==n.charAt(0)||isNaN(u=parseInt(n.slice(1),16))||(4===n.length?(o=(3840&u)>>4,o=o>>4|o,a=240&u,a=a>>4|a,l=15&u,l=l<<4|l):7===n.length&&(o=(16711680&u)>>16,a=(65280&u)>>8,l=255&u)),t(o,a,l))}function wn(n,t,e){var r,i,u=Math.min(n/=255,t/=255,e/=255),o=Math.max(n,t,e),a=o-u,l=(o+u)/2;return a?(i=.5>l?a/(o+u):a/(2-o-u),r=n==o?(t-e)/a+(e>t?6:0):t==o?(e-n)/a+2:(n-t)/a+4,r*=60):(r=NaN,i=l>0&&1>l?0:r),new ln(r,i,l)}function Sn(n,t,e){n=kn(n),t=kn(t),e=kn(e);var r=dn((.4124564*n+.3575761*t+.1804375*e)/na),i=dn((.2126729*n+.7151522*t+.072175*e)/ta),u=dn((.0193339*n+.119192*t+.9503041*e)/ea);return hn(116*i-16,500*(r-i),200*(i-u))}function kn(n){return(n/=255)<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4)}function Nn(n){var t=parseFloat(n);return"%"===n.charAt(n.length-1)?Math.round(2.55*t):t}function En(n){return"function"==typeof n?n:function(){return n}}function An(n){return function(t,e,r){return 2===arguments.length&&"function"==typeof e&&(r=e,e=null),Cn(t,e,n,r)}}function Cn(n,t,e,r){function i(){var n,t=l.status;if(!t&&Ln(l)||t>=200&&300>t||304===t){try{n=e.call(u,l)}catch(r){return void o.error.call(u,r)}o.load.call(u,n)}else o.error.call(u,l)}var u={},o=ao.dispatch("beforesend","progress","load","error"),a={},l=new XMLHttpRequest,c=null;return!this.XDomainRequest||"withCredentials"in l||!/^(http(s)?:)?\/\//.test(n)||(l=new XDomainRequest),"onload"in l?l.onload=l.onerror=i:l.onreadystatechange=function(){l.readyState>3&&i()},l.onprogress=function(n){var t=ao.event;ao.event=n;try{o.progress.call(u,l)}finally{ao.event=t}},u.header=function(n,t){return n=(n+"").toLowerCase(),arguments.length<2?a[n]:(null==t?delete a[n]:a[n]=t+"",u)},u.mimeType=function(n){return arguments.length?(t=null==n?null:n+"",u):t},u.responseType=function(n){return arguments.length?(c=n,u):c},u.response=function(n){return e=n,u},["get","post"].forEach(function(n){u[n]=function(){return u.send.apply(u,[n].concat(co(arguments)))}}),u.send=function(e,r,i){if(2===arguments.length&&"function"==typeof r&&(i=r,r=null),l.open(e,n,!0),null==t||"accept"in a||(a.accept=t+",*/*"),l.setRequestHeader)for(var f in a)l.setRequestHeader(f,a[f]);return null!=t&&l.overrideMimeType&&l.overrideMimeType(t),null!=c&&(l.responseType=c),null!=i&&u.on("error",i).on("load",function(n){i(null,n)}),o.beforesend.call(u,l),l.send(null==r?null:r),u},u.abort=function(){return l.abort(),u},ao.rebind(u,o,"on"),null==r?u:u.get(zn(r))}function zn(n){return 1===n.length?function(t,e){n(null==t?e:null)}:n}function Ln(n){var t=n.responseType;return t&&"text"!==t?n.response:n.responseText}function qn(n,t,e){var r=arguments.length;2>r&&(t=0),3>r&&(e=Date.now());var i=e+t,u={c:n,t:i,n:null};return aa?aa.n=u:oa=u,aa=u,la||(ca=clearTimeout(ca),la=1,fa(Tn)),u}function Tn(){var n=Rn(),t=Dn()-n;t>24?(isFinite(t)&&(clearTimeout(ca),ca=setTimeout(Tn,t)),la=0):(la=1,fa(Tn))}function Rn(){for(var n=Date.now(),t=oa;t;)n>=t.t&&t.c(n-t.t)&&(t.c=null),t=t.n;return n}function Dn(){for(var n,t=oa,e=1/0;t;)t.c?(t.t<e&&(e=t.t),t=(n=t).n):t=n?n.n=t.n:oa=t.n;return aa=n,e}function Pn(n,t){return t-(n?Math.ceil(Math.log(n)/Math.LN10):1)}function Un(n,t){var e=Math.pow(10,3*xo(8-t));return{scale:t>8?function(n){return n/e}:function(n){return n*e},symbol:n}}function jn(n){var t=n.decimal,e=n.thousands,r=n.grouping,i=n.currency,u=r&&e?function(n,t){for(var i=n.length,u=[],o=0,a=r[0],l=0;i>0&&a>0&&(l+a+1>t&&(a=Math.max(1,t-l)),u.push(n.substring(i-=a,i+a)),!((l+=a+1)>t));)a=r[o=(o+1)%r.length];return u.reverse().join(e)}:m;return function(n){var e=ha.exec(n),r=e[1]||" ",o=e[2]||">",a=e[3]||"-",l=e[4]||"",c=e[5],f=+e[6],s=e[7],h=e[8],p=e[9],g=1,v="",d="",y=!1,m=!0;switch(h&&(h=+h.substring(1)),(c||"0"===r&&"="===o)&&(c=r="0",o="="),p){case"n":s=!0,p="g";break;case"%":g=100,d="%",p="f";break;case"p":g=100,d="%",p="r";break;case"b":case"o":case"x":case"X":"#"===l&&(v="0"+p.toLowerCase());case"c":m=!1;case"d":y=!0,h=0;break;case"s":g=-1,p="r"}"$"===l&&(v=i[0],d=i[1]),"r"!=p||h||(p="g"),null!=h&&("g"==p?h=Math.max(1,Math.min(21,h)):"e"!=p&&"f"!=p||(h=Math.max(0,Math.min(20,h)))),p=pa.get(p)||Fn;var M=c&&s;return function(n){var e=d;if(y&&n%1)return"";var i=0>n||0===n&&0>1/n?(n=-n,"-"):"-"===a?"":a;if(0>g){var l=ao.formatPrefix(n,h);n=l.scale(n),e=l.symbol+d}else n*=g;n=p(n,h);var x,b,_=n.lastIndexOf(".");if(0>_){var w=m?n.lastIndexOf("e"):-1;0>w?(x=n,b=""):(x=n.substring(0,w),b=n.substring(w))}else x=n.substring(0,_),b=t+n.substring(_+1);!c&&s&&(x=u(x,1/0));var S=v.length+x.length+b.length+(M?0:i.length),k=f>S?new Array(S=f-S+1).join(r):"";return M&&(x=u(k+x,k.length?f-b.length:1/0)),i+=v,n=x+b,("<"===o?i+n+k:">"===o?k+i+n:"^"===o?k.substring(0,S>>=1)+i+n+k.substring(S):i+(M?n:k+n))+e}}}function Fn(n){return n+""}function Hn(){this._=new Date(arguments.length>1?Date.UTC.apply(this,arguments):arguments[0])}function On(n,t,e){function r(t){var e=n(t),r=u(e,1);return r-t>t-e?e:r}function i(e){return t(e=n(new va(e-1)),1),e}function u(n,e){return t(n=new va(+n),e),n}function o(n,r,u){var o=i(n),a=[];if(u>1)for(;r>o;)e(o)%u||a.push(new Date(+o)),t(o,1);else for(;r>o;)a.push(new Date(+o)),t(o,1);return a}function a(n,t,e){try{va=Hn;var r=new Hn;return r._=n,o(r,t,e)}finally{va=Date}}n.floor=n,n.round=r,n.ceil=i,n.offset=u,n.range=o;var l=n.utc=In(n);return l.floor=l,l.round=In(r),l.ceil=In(i),l.offset=In(u),l.range=a,n}function In(n){return function(t,e){try{va=Hn;var r=new Hn;return r._=t,n(r,e)._}finally{va=Date}}}function Yn(n){function t(n){function t(t){for(var e,i,u,o=[],a=-1,l=0;++a<r;)37===n.charCodeAt(a)&&(o.push(n.slice(l,a)),null!=(i=ya[e=n.charAt(++a)])&&(e=n.charAt(++a)),(u=A[e])&&(e=u(t,null==i?"e"===e?" ":"0":i)),o.push(e),l=a+1);return o.push(n.slice(l,a)),o.join("")}var r=n.length;return t.parse=function(t){var r={y:1900,m:0,d:1,H:0,M:0,S:0,L:0,Z:null},i=e(r,n,t,0);if(i!=t.length)return null;"p"in r&&(r.H=r.H%12+12*r.p);var u=null!=r.Z&&va!==Hn,o=new(u?Hn:va);return"j"in r?o.setFullYear(r.y,0,r.j):"W"in r||"U"in r?("w"in r||(r.w="W"in r?1:0),o.setFullYear(r.y,0,1),o.setFullYear(r.y,0,"W"in r?(r.w+6)%7+7*r.W-(o.getDay()+5)%7:r.w+7*r.U-(o.getDay()+6)%7)):o.setFullYear(r.y,r.m,r.d),o.setHours(r.H+(r.Z/100|0),r.M+r.Z%100,r.S,r.L),u?o._:o},t.toString=function(){return n},t}function e(n,t,e,r){for(var i,u,o,a=0,l=t.length,c=e.length;l>a;){if(r>=c)return-1;if(i=t.charCodeAt(a++),37===i){if(o=t.charAt(a++),u=C[o in ya?t.charAt(a++):o],!u||(r=u(n,e,r))<0)return-1}else if(i!=e.charCodeAt(r++))return-1}return r}function r(n,t,e){_.lastIndex=0;var r=_.exec(t.slice(e));return r?(n.w=w.get(r[0].toLowerCase()),e+r[0].length):-1}function i(n,t,e){x.lastIndex=0;var r=x.exec(t.slice(e));return r?(n.w=b.get(r[0].toLowerCase()),e+r[0].length):-1}function u(n,t,e){N.lastIndex=0;var r=N.exec(t.slice(e));return r?(n.m=E.get(r[0].toLowerCase()),e+r[0].length):-1}function o(n,t,e){S.lastIndex=0;var r=S.exec(t.slice(e));return r?(n.m=k.get(r[0].toLowerCase()),e+r[0].length):-1}function a(n,t,r){return e(n,A.c.toString(),t,r)}function l(n,t,r){return e(n,A.x.toString(),t,r)}function c(n,t,r){return e(n,A.X.toString(),t,r)}function f(n,t,e){var r=M.get(t.slice(e,e+=2).toLowerCase());return null==r?-1:(n.p=r,e)}var s=n.dateTime,h=n.date,p=n.time,g=n.periods,v=n.days,d=n.shortDays,y=n.months,m=n.shortMonths;t.utc=function(n){function e(n){try{va=Hn;var t=new va;return t._=n,r(t)}finally{va=Date}}var r=t(n);return e.parse=function(n){try{va=Hn;var t=r.parse(n);return t&&t._}finally{va=Date}},e.toString=r.toString,e},t.multi=t.utc.multi=ct;var M=ao.map(),x=Vn(v),b=Xn(v),_=Vn(d),w=Xn(d),S=Vn(y),k=Xn(y),N=Vn(m),E=Xn(m);g.forEach(function(n,t){M.set(n.toLowerCase(),t)});var A={a:function(n){return d[n.getDay()]},A:function(n){return v[n.getDay()]},b:function(n){return m[n.getMonth()]},B:function(n){return y[n.getMonth()]},c:t(s),d:function(n,t){return Zn(n.getDate(),t,2)},e:function(n,t){return Zn(n.getDate(),t,2)},H:function(n,t){return Zn(n.getHours(),t,2)},I:function(n,t){return Zn(n.getHours()%12||12,t,2)},j:function(n,t){return Zn(1+ga.dayOfYear(n),t,3)},L:function(n,t){return Zn(n.getMilliseconds(),t,3)},m:function(n,t){return Zn(n.getMonth()+1,t,2)},M:function(n,t){return Zn(n.getMinutes(),t,2)},p:function(n){return g[+(n.getHours()>=12)]},S:function(n,t){return Zn(n.getSeconds(),t,2)},U:function(n,t){return Zn(ga.sundayOfYear(n),t,2)},w:function(n){return n.getDay()},W:function(n,t){return Zn(ga.mondayOfYear(n),t,2)},x:t(h),X:t(p),y:function(n,t){return Zn(n.getFullYear()%100,t,2)},Y:function(n,t){return Zn(n.getFullYear()%1e4,t,4)},Z:at,"%":function(){return"%"}},C={a:r,A:i,b:u,B:o,c:a,d:tt,e:tt,H:rt,I:rt,j:et,L:ot,m:nt,M:it,p:f,S:ut,U:Bn,w:$n,W:Wn,x:l,X:c,y:Gn,Y:Jn,Z:Kn,"%":lt};return t}function Zn(n,t,e){var r=0>n?"-":"",i=(r?-n:n)+"",u=i.length;return r+(e>u?new Array(e-u+1).join(t)+i:i)}function Vn(n){return new RegExp("^(?:"+n.map(ao.requote).join("|")+")","i")}function Xn(n){for(var t=new c,e=-1,r=n.length;++e<r;)t.set(n[e].toLowerCase(),e);return t}function $n(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+1));return r?(n.w=+r[0],e+r[0].length):-1}function Bn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e));return r?(n.U=+r[0],e+r[0].length):-1}function Wn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e));return r?(n.W=+r[0],e+r[0].length):-1}function Jn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+4));return r?(n.y=+r[0],e+r[0].length):-1}function Gn(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.y=Qn(+r[0]),e+r[0].length):-1}function Kn(n,t,e){return/^[+-]\d{4}$/.test(t=t.slice(e,e+5))?(n.Z=-t,e+5):-1}function Qn(n){return n+(n>68?1900:2e3)}function nt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.m=r[0]-1,e+r[0].length):-1}function tt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.d=+r[0],e+r[0].length):-1}function et(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+3));return r?(n.j=+r[0],e+r[0].length):-1}function rt(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.H=+r[0],e+r[0].length):-1}function it(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.M=+r[0],e+r[0].length):-1}function ut(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+2));return r?(n.S=+r[0],e+r[0].length):-1}function ot(n,t,e){ma.lastIndex=0;var r=ma.exec(t.slice(e,e+3));return r?(n.L=+r[0],e+r[0].length):-1}function at(n){var t=n.getTimezoneOffset(),e=t>0?"-":"+",r=xo(t)/60|0,i=xo(t)%60;return e+Zn(r,"0",2)+Zn(i,"0",2)}function lt(n,t,e){Ma.lastIndex=0;var r=Ma.exec(t.slice(e,e+1));return r?e+r[0].length:-1}function ct(n){for(var t=n.length,e=-1;++e<t;)n[e][0]=this(n[e][0]);return function(t){for(var e=0,r=n[e];!r[1](t);)r=n[++e];return r[0](t)}}function ft(){}function st(n,t,e){var r=e.s=n+t,i=r-n,u=r-i;e.t=n-u+(t-i)}function ht(n,t){n&&wa.hasOwnProperty(n.type)&&wa[n.type](n,t)}function pt(n,t,e){var r,i=-1,u=n.length-e;for(t.lineStart();++i<u;)r=n[i],t.point(r[0],r[1],r[2]);t.lineEnd()}function gt(n,t){var e=-1,r=n.length;for(t.polygonStart();++e<r;)pt(n[e],t,1);t.polygonEnd()}function vt(){function n(n,t){n*=Yo,t=t*Yo/2+Fo/4;var e=n-r,o=e>=0?1:-1,a=o*e,l=Math.cos(t),c=Math.sin(t),f=u*c,s=i*l+f*Math.cos(a),h=f*o*Math.sin(a);ka.add(Math.atan2(h,s)),r=n,i=l,u=c}var t,e,r,i,u;Na.point=function(o,a){Na.point=n,r=(t=o)*Yo,i=Math.cos(a=(e=a)*Yo/2+Fo/4),u=Math.sin(a)},Na.lineEnd=function(){n(t,e)}}function dt(n){var t=n[0],e=n[1],r=Math.cos(e);return[r*Math.cos(t),r*Math.sin(t),Math.sin(e)]}function yt(n,t){return n[0]*t[0]+n[1]*t[1]+n[2]*t[2]}function mt(n,t){return[n[1]*t[2]-n[2]*t[1],n[2]*t[0]-n[0]*t[2],n[0]*t[1]-n[1]*t[0]]}function Mt(n,t){n[0]+=t[0],n[1]+=t[1],n[2]+=t[2]}function xt(n,t){return[n[0]*t,n[1]*t,n[2]*t]}function bt(n){var t=Math.sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]);n[0]/=t,n[1]/=t,n[2]/=t}function _t(n){return[Math.atan2(n[1],n[0]),tn(n[2])]}function wt(n,t){return xo(n[0]-t[0])<Uo&&xo(n[1]-t[1])<Uo}function St(n,t){n*=Yo;var e=Math.cos(t*=Yo);kt(e*Math.cos(n),e*Math.sin(n),Math.sin(t))}function kt(n,t,e){++Ea,Ca+=(n-Ca)/Ea,za+=(t-za)/Ea,La+=(e-La)/Ea}function Nt(){function n(n,i){n*=Yo;var u=Math.cos(i*=Yo),o=u*Math.cos(n),a=u*Math.sin(n),l=Math.sin(i),c=Math.atan2(Math.sqrt((c=e*l-r*a)*c+(c=r*o-t*l)*c+(c=t*a-e*o)*c),t*o+e*a+r*l);Aa+=c,qa+=c*(t+(t=o)),Ta+=c*(e+(e=a)),Ra+=c*(r+(r=l)),kt(t,e,r)}var t,e,r;ja.point=function(i,u){i*=Yo;var o=Math.cos(u*=Yo);t=o*Math.cos(i),e=o*Math.sin(i),r=Math.sin(u),ja.point=n,kt(t,e,r)}}function Et(){ja.point=St}function At(){function n(n,t){n*=Yo;var e=Math.cos(t*=Yo),o=e*Math.cos(n),a=e*Math.sin(n),l=Math.sin(t),c=i*l-u*a,f=u*o-r*l,s=r*a-i*o,h=Math.sqrt(c*c+f*f+s*s),p=r*o+i*a+u*l,g=h&&-nn(p)/h,v=Math.atan2(h,p);Da+=g*c,Pa+=g*f,Ua+=g*s,Aa+=v,qa+=v*(r+(r=o)),Ta+=v*(i+(i=a)),Ra+=v*(u+(u=l)),kt(r,i,u)}var t,e,r,i,u;ja.point=function(o,a){t=o,e=a,ja.point=n,o*=Yo;var l=Math.cos(a*=Yo);r=l*Math.cos(o),i=l*Math.sin(o),u=Math.sin(a),kt(r,i,u)},ja.lineEnd=function(){n(t,e),ja.lineEnd=Et,ja.point=St}}function Ct(n,t){function e(e,r){return e=n(e,r),t(e[0],e[1])}return n.invert&&t.invert&&(e.invert=function(e,r){return e=t.invert(e,r),e&&n.invert(e[0],e[1])}),e}function zt(){return!0}function Lt(n,t,e,r,i){var u=[],o=[];if(n.forEach(function(n){if(!((t=n.length-1)<=0)){var t,e=n[0],r=n[t];if(wt(e,r)){i.lineStart();for(var a=0;t>a;++a)i.point((e=n[a])[0],e[1]);return void i.lineEnd()}var l=new Tt(e,n,null,!0),c=new Tt(e,null,l,!1);l.o=c,u.push(l),o.push(c),l=new Tt(r,n,null,!1),c=new Tt(r,null,l,!0),l.o=c,u.push(l),o.push(c)}}),o.sort(t),qt(u),qt(o),u.length){for(var a=0,l=e,c=o.length;c>a;++a)o[a].e=l=!l;for(var f,s,h=u[0];;){for(var p=h,g=!0;p.v;)if((p=p.n)===h)return;f=p.z,i.lineStart();do{if(p.v=p.o.v=!0,p.e){if(g)for(var a=0,c=f.length;c>a;++a)i.point((s=f[a])[0],s[1]);else r(p.x,p.n.x,1,i);p=p.n}else{if(g){f=p.p.z;for(var a=f.length-1;a>=0;--a)i.point((s=f[a])[0],s[1])}else r(p.x,p.p.x,-1,i);p=p.p}p=p.o,f=p.z,g=!g}while(!p.v);i.lineEnd()}}}function qt(n){if(t=n.length){for(var t,e,r=0,i=n[0];++r<t;)i.n=e=n[r],e.p=i,i=e;i.n=e=n[0],e.p=i}}function Tt(n,t,e,r){this.x=n,this.z=t,this.o=e,this.e=r,this.v=!1,this.n=this.p=null}function Rt(n,t,e,r){return function(i,u){function o(t,e){var r=i(t,e);n(t=r[0],e=r[1])&&u.point(t,e)}function a(n,t){var e=i(n,t);d.point(e[0],e[1])}function l(){m.point=a,d.lineStart()}function c(){m.point=o,d.lineEnd()}function f(n,t){v.push([n,t]);var e=i(n,t);x.point(e[0],e[1])}function s(){x.lineStart(),v=[]}function h(){f(v[0][0],v[0][1]),x.lineEnd();var n,t=x.clean(),e=M.buffer(),r=e.length;if(v.pop(),g.push(v),v=null,r)if(1&t){n=e[0];var i,r=n.length-1,o=-1;if(r>0){for(b||(u.polygonStart(),b=!0),u.lineStart();++o<r;)u.point((i=n[o])[0],i[1]);u.lineEnd()}}else r>1&&2&t&&e.push(e.pop().concat(e.shift())),p.push(e.filter(Dt))}var p,g,v,d=t(u),y=i.invert(r[0],r[1]),m={point:o,lineStart:l,lineEnd:c,polygonStart:function(){m.point=f,m.lineStart=s,m.lineEnd=h,p=[],g=[]},polygonEnd:function(){m.point=o,m.lineStart=l,m.lineEnd=c,p=ao.merge(p);var n=Ot(y,g);p.length?(b||(u.polygonStart(),b=!0),Lt(p,Ut,n,e,u)):n&&(b||(u.polygonStart(),b=!0),u.lineStart(),e(null,null,1,u),u.lineEnd()),b&&(u.polygonEnd(),b=!1),p=g=null},sphere:function(){u.polygonStart(),u.lineStart(),e(null,null,1,u),u.lineEnd(),u.polygonEnd()}},M=Pt(),x=t(M),b=!1;return m}}function Dt(n){return n.length>1}function Pt(){var n,t=[];return{lineStart:function(){t.push(n=[])},point:function(t,e){n.push([t,e])},lineEnd:b,buffer:function(){var e=t;return t=[],n=null,e},rejoin:function(){t.length>1&&t.push(t.pop().concat(t.shift()))}}}function Ut(n,t){return((n=n.x)[0]<0?n[1]-Io-Uo:Io-n[1])-((t=t.x)[0]<0?t[1]-Io-Uo:Io-t[1])}function jt(n){var t,e=NaN,r=NaN,i=NaN;return{lineStart:function(){n.lineStart(),t=1},point:function(u,o){var a=u>0?Fo:-Fo,l=xo(u-e);xo(l-Fo)<Uo?(n.point(e,r=(r+o)/2>0?Io:-Io),n.point(i,r),n.lineEnd(),n.lineStart(),n.point(a,r),n.point(u,r),t=0):i!==a&&l>=Fo&&(xo(e-i)<Uo&&(e-=i*Uo),xo(u-a)<Uo&&(u-=a*Uo),r=Ft(e,r,u,o),n.point(i,r),n.lineEnd(),n.lineStart(),n.point(a,r),t=0),n.point(e=u,r=o),i=a},lineEnd:function(){n.lineEnd(),e=r=NaN},clean:function(){return 2-t}}}function Ft(n,t,e,r){var i,u,o=Math.sin(n-e);return xo(o)>Uo?Math.atan((Math.sin(t)*(u=Math.cos(r))*Math.sin(e)-Math.sin(r)*(i=Math.cos(t))*Math.sin(n))/(i*u*o)):(t+r)/2}function Ht(n,t,e,r){var i;if(null==n)i=e*Io,r.point(-Fo,i),r.point(0,i),r.point(Fo,i),r.point(Fo,0),r.point(Fo,-i),r.point(0,-i),r.point(-Fo,-i),r.point(-Fo,0),r.point(-Fo,i);else if(xo(n[0]-t[0])>Uo){var u=n[0]<t[0]?Fo:-Fo;i=e*u/2,r.point(-u,i),r.point(0,i),r.point(u,i)}else r.point(t[0],t[1])}function Ot(n,t){var e=n[0],r=n[1],i=[Math.sin(e),-Math.cos(e),0],u=0,o=0;ka.reset();for(var a=0,l=t.length;l>a;++a){var c=t[a],f=c.length;if(f)for(var s=c[0],h=s[0],p=s[1]/2+Fo/4,g=Math.sin(p),v=Math.cos(p),d=1;;){d===f&&(d=0),n=c[d];var y=n[0],m=n[1]/2+Fo/4,M=Math.sin(m),x=Math.cos(m),b=y-h,_=b>=0?1:-1,w=_*b,S=w>Fo,k=g*M;if(ka.add(Math.atan2(k*_*Math.sin(w),v*x+k*Math.cos(w))),u+=S?b+_*Ho:b,S^h>=e^y>=e){var N=mt(dt(s),dt(n));bt(N);var E=mt(i,N);bt(E);var A=(S^b>=0?-1:1)*tn(E[2]);(r>A||r===A&&(N[0]||N[1]))&&(o+=S^b>=0?1:-1)}if(!d++)break;h=y,g=M,v=x,s=n}}return(-Uo>u||Uo>u&&-Uo>ka)^1&o}function It(n){function t(n,t){return Math.cos(n)*Math.cos(t)>u}function e(n){var e,u,l,c,f;return{lineStart:function(){c=l=!1,f=1},point:function(s,h){var p,g=[s,h],v=t(s,h),d=o?v?0:i(s,h):v?i(s+(0>s?Fo:-Fo),h):0;if(!e&&(c=l=v)&&n.lineStart(),v!==l&&(p=r(e,g),(wt(e,p)||wt(g,p))&&(g[0]+=Uo,g[1]+=Uo,v=t(g[0],g[1]))),v!==l)f=0,v?(n.lineStart(),p=r(g,e),n.point(p[0],p[1])):(p=r(e,g),n.point(p[0],p[1]),n.lineEnd()),e=p;else if(a&&e&&o^v){var y;d&u||!(y=r(g,e,!0))||(f=0,o?(n.lineStart(),n.point(y[0][0],y[0][1]),n.point(y[1][0],y[1][1]),n.lineEnd()):(n.point(y[1][0],y[1][1]),n.lineEnd(),n.lineStart(),n.point(y[0][0],y[0][1])))}!v||e&&wt(e,g)||n.point(g[0],g[1]),e=g,l=v,u=d},lineEnd:function(){l&&n.lineEnd(),e=null},clean:function(){return f|(c&&l)<<1}}}function r(n,t,e){var r=dt(n),i=dt(t),o=[1,0,0],a=mt(r,i),l=yt(a,a),c=a[0],f=l-c*c;if(!f)return!e&&n;var s=u*l/f,h=-u*c/f,p=mt(o,a),g=xt(o,s),v=xt(a,h);Mt(g,v);var d=p,y=yt(g,d),m=yt(d,d),M=y*y-m*(yt(g,g)-1);if(!(0>M)){var x=Math.sqrt(M),b=xt(d,(-y-x)/m);if(Mt(b,g),b=_t(b),!e)return b;var _,w=n[0],S=t[0],k=n[1],N=t[1];w>S&&(_=w,w=S,S=_);var E=S-w,A=xo(E-Fo)<Uo,C=A||Uo>E;if(!A&&k>N&&(_=k,k=N,N=_),C?A?k+N>0^b[1]<(xo(b[0]-w)<Uo?k:N):k<=b[1]&&b[1]<=N:E>Fo^(w<=b[0]&&b[0]<=S)){var z=xt(d,(-y+x)/m);return Mt(z,g),[b,_t(z)]}}}function i(t,e){var r=o?n:Fo-n,i=0;return-r>t?i|=1:t>r&&(i|=2),-r>e?i|=4:e>r&&(i|=8),i}var u=Math.cos(n),o=u>0,a=xo(u)>Uo,l=ve(n,6*Yo);return Rt(t,e,l,o?[0,-n]:[-Fo,n-Fo])}function Yt(n,t,e,r){return function(i){var u,o=i.a,a=i.b,l=o.x,c=o.y,f=a.x,s=a.y,h=0,p=1,g=f-l,v=s-c;if(u=n-l,g||!(u>0)){if(u/=g,0>g){if(h>u)return;p>u&&(p=u)}else if(g>0){if(u>p)return;u>h&&(h=u)}if(u=e-l,g||!(0>u)){if(u/=g,0>g){if(u>p)return;u>h&&(h=u)}else if(g>0){if(h>u)return;p>u&&(p=u)}if(u=t-c,v||!(u>0)){if(u/=v,0>v){if(h>u)return;p>u&&(p=u)}else if(v>0){if(u>p)return;u>h&&(h=u)}if(u=r-c,v||!(0>u)){if(u/=v,0>v){if(u>p)return;u>h&&(h=u)}else if(v>0){if(h>u)return;p>u&&(p=u)}return h>0&&(i.a={x:l+h*g,y:c+h*v}),1>p&&(i.b={x:l+p*g,y:c+p*v}),i}}}}}}function Zt(n,t,e,r){function i(r,i){return xo(r[0]-n)<Uo?i>0?0:3:xo(r[0]-e)<Uo?i>0?2:1:xo(r[1]-t)<Uo?i>0?1:0:i>0?3:2}function u(n,t){return o(n.x,t.x)}function o(n,t){var e=i(n,1),r=i(t,1);return e!==r?e-r:0===e?t[1]-n[1]:1===e?n[0]-t[0]:2===e?n[1]-t[1]:t[0]-n[0]}return function(a){function l(n){for(var t=0,e=d.length,r=n[1],i=0;e>i;++i)for(var u,o=1,a=d[i],l=a.length,c=a[0];l>o;++o)u=a[o],c[1]<=r?u[1]>r&&Q(c,u,n)>0&&++t:u[1]<=r&&Q(c,u,n)<0&&--t,c=u;return 0!==t}function c(u,a,l,c){var f=0,s=0;if(null==u||(f=i(u,l))!==(s=i(a,l))||o(u,a)<0^l>0){do c.point(0===f||3===f?n:e,f>1?r:t);while((f=(f+l+4)%4)!==s)}else c.point(a[0],a[1])}function f(i,u){return i>=n&&e>=i&&u>=t&&r>=u}function s(n,t){f(n,t)&&a.point(n,t)}function h(){C.point=g,d&&d.push(y=[]),S=!0,w=!1,b=_=NaN}function p(){v&&(g(m,M),x&&w&&E.rejoin(),v.push(E.buffer())),C.point=s,w&&a.lineEnd()}function g(n,t){n=Math.max(-Ha,Math.min(Ha,n)),t=Math.max(-Ha,Math.min(Ha,t));var e=f(n,t);if(d&&y.push([n,t]),S)m=n,M=t,x=e,S=!1,e&&(a.lineStart(),a.point(n,t));else if(e&&w)a.point(n,t);else{var r={a:{x:b,y:_},b:{x:n,y:t}};A(r)?(w||(a.lineStart(),a.point(r.a.x,r.a.y)),a.point(r.b.x,r.b.y),e||a.lineEnd(),k=!1):e&&(a.lineStart(),a.point(n,t),k=!1)}b=n,_=t,w=e}var v,d,y,m,M,x,b,_,w,S,k,N=a,E=Pt(),A=Yt(n,t,e,r),C={point:s,lineStart:h,lineEnd:p,polygonStart:function(){a=E,v=[],d=[],k=!0},polygonEnd:function(){a=N,v=ao.merge(v);var t=l([n,r]),e=k&&t,i=v.length;(e||i)&&(a.polygonStart(),e&&(a.lineStart(),c(null,null,1,a),a.lineEnd()),i&&Lt(v,u,t,c,a),a.polygonEnd()),v=d=y=null}};return C}}function Vt(n){var t=0,e=Fo/3,r=ae(n),i=r(t,e);return i.parallels=function(n){return arguments.length?r(t=n[0]*Fo/180,e=n[1]*Fo/180):[t/Fo*180,e/Fo*180]},i}function Xt(n,t){function e(n,t){var e=Math.sqrt(u-2*i*Math.sin(t))/i;return[e*Math.sin(n*=i),o-e*Math.cos(n)]}var r=Math.sin(n),i=(r+Math.sin(t))/2,u=1+r*(2*i-r),o=Math.sqrt(u)/i;return e.invert=function(n,t){var e=o-t;return[Math.atan2(n,e)/i,tn((u-(n*n+e*e)*i*i)/(2*i))]},e}function $t(){function n(n,t){Ia+=i*n-r*t,r=n,i=t}var t,e,r,i;$a.point=function(u,o){$a.point=n,t=r=u,e=i=o},$a.lineEnd=function(){n(t,e)}}function Bt(n,t){Ya>n&&(Ya=n),n>Va&&(Va=n),Za>t&&(Za=t),t>Xa&&(Xa=t)}function Wt(){function n(n,t){o.push("M",n,",",t,u)}function t(n,t){o.push("M",n,",",t),a.point=e}function e(n,t){o.push("L",n,",",t)}function r(){a.point=n}function i(){o.push("Z")}var u=Jt(4.5),o=[],a={point:n,lineStart:function(){a.point=t},lineEnd:r,polygonStart:function(){a.lineEnd=i},polygonEnd:function(){a.lineEnd=r,a.point=n},pointRadius:function(n){return u=Jt(n),a},result:function(){if(o.length){var n=o.join("");return o=[],n}}};return a}function Jt(n){return"m0,"+n+"a"+n+","+n+" 0 1,1 0,"+-2*n+"a"+n+","+n+" 0 1,1 0,"+2*n+"z"}function Gt(n,t){Ca+=n,za+=t,++La}function Kt(){function n(n,r){var i=n-t,u=r-e,o=Math.sqrt(i*i+u*u);qa+=o*(t+n)/2,Ta+=o*(e+r)/2,Ra+=o,Gt(t=n,e=r)}var t,e;Wa.point=function(r,i){Wa.point=n,Gt(t=r,e=i)}}function Qt(){Wa.point=Gt}function ne(){function n(n,t){var e=n-r,u=t-i,o=Math.sqrt(e*e+u*u);qa+=o*(r+n)/2,Ta+=o*(i+t)/2,Ra+=o,o=i*n-r*t,Da+=o*(r+n),Pa+=o*(i+t),Ua+=3*o,Gt(r=n,i=t)}var t,e,r,i;Wa.point=function(u,o){Wa.point=n,Gt(t=r=u,e=i=o)},Wa.lineEnd=function(){n(t,e)}}function te(n){function t(t,e){n.moveTo(t+o,e),n.arc(t,e,o,0,Ho)}function e(t,e){n.moveTo(t,e),a.point=r}function r(t,e){n.lineTo(t,e)}function i(){a.point=t}function u(){n.closePath()}var o=4.5,a={point:t,lineStart:function(){a.point=e},lineEnd:i,polygonStart:function(){a.lineEnd=u},polygonEnd:function(){a.lineEnd=i,a.point=t},pointRadius:function(n){return o=n,a},result:b};return a}function ee(n){function t(n){return(a?r:e)(n)}function e(t){return ue(t,function(e,r){e=n(e,r),t.point(e[0],e[1])})}function r(t){function e(e,r){e=n(e,r),t.point(e[0],e[1])}function r(){M=NaN,S.point=u,t.lineStart()}function u(e,r){var u=dt([e,r]),o=n(e,r);i(M,x,m,b,_,w,M=o[0],x=o[1],m=e,b=u[0],_=u[1],w=u[2],a,t),t.point(M,x)}function o(){S.point=e,t.lineEnd()}function l(){
@@ -212,41 +295,213 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 (function(){
   'use strict';
 
-  var ROCKS = [
-    {id:'mafic', ko:'현무암·반려암', sub:'각섬암·에클로자이트 포함', cls:'화성암', pct:42.5, tier:'N',
-      zones:{ocean:.54, land:.38, shelf:.08}, depth:{ocean:[0,7], land:[20,40], shelf:[20,40]},
-      fact:'해양지각은 거의 전부 이 돌입니다. 제주 돌하르방도 현무암으로 깎았습니다.'},
-    {id:'gneiss', ko:'편마암', cls:'변성암', pct:21.4, tier:'N',
-      zones:{land:.82, shelf:.18}, depth:{land:[5,35], shelf:[5,35]},
-      fact:'지금까지 발견된 가장 오래된 암석(캐나다 아카스타 편마암, 약 40억 년)이 이 종류입니다. 한반도 기반암에도 흔합니다.'},
-    {id:'grd', ko:'화강섬록암·섬록암', cls:'화성암', pct:11.2, tier:'R',
-      zones:{land:.82, shelf:.18}, depth:{land:[2,25], shelf:[2,25]},
-      fact:'대영박물관의 로제타석이 화강섬록암입니다.'},
-    {id:'granite', ko:'화강암', cls:'화성암', pct:10.4, tier:'R',
-      zones:{land:.82, shelf:.18}, depth:{land:[0,20], shelf:[0,20]},
-      fact:'북한산·설악산의 하얀 바위 봉우리가 화강암입니다. 비석과 건물 외벽에도 많이 씁니다.'},
-    {id:'schist', ko:'결정편암', sub:'운모편암 등', cls:'변성암', pct:5.1, tier:'R',
-      zones:{land:.82, shelf:.18}, depth:{land:[3,30], shelf:[3,30]},
-      fact:'뉴욕 맨해튼의 고층 빌딩들이 맨해튼 편암 위에 서 있습니다.'},
-    {id:'shale', ko:'셰일·점토암', cls:'퇴적암', pct:4.2, tier:'SR',
-      zones:{land:.6, shelf:.25, ocean:.15}, depth:{land:[0,6], shelf:[0,6], ocean:[0,1]},
-      fact:'진흙이 굳어 된 돌입니다. 셰일가스가 이 돌 틈에 갇혀 있습니다.'},
-    {id:'carb', ko:'석회암·백운암', cls:'퇴적암', pct:2.0, tier:'SR',
-      zones:{land:.6, shelf:.25, ocean:.15}, depth:{land:[0,5], shelf:[0,5], ocean:[0,1]},
-      fact:'기자 대피라미드의 몸체가 석회암입니다. 시멘트 원료이고, 강원도 석회동굴도 이 돌이 녹아서 생겼습니다.'},
-    {id:'sand', ko:'사암', cls:'퇴적암', pct:1.7, tier:'SR',
-      zones:{land:.6, shelf:.25, ocean:.15}, depth:{land:[0,5], shelf:[0,5], ocean:[0,1]},
-      fact:'모래가 굳어 된 돌입니다. 요르단 페트라 유적은 붉은 사암 절벽을 깎아 만들었습니다.'},
-    {id:'marble', ko:'대리암', cls:'변성암', pct:0.9, tier:'SSR',
-      zones:{land:.82, shelf:.18}, depth:{land:[2,20], shelf:[2,20]},
-      fact:'석회암이 열과 압력을 받아 변한 돌입니다. 타지마할이 대리암입니다.'},
-    {id:'syenite', ko:'섬장암', cls:'화성암', pct:0.4, tier:'SSR',
-      zones:{land:.85, shelf:.15}, depth:{land:[0,15], shelf:[0,15]},
-      fact:'이름은 이집트 아스완의 옛 지명 시에네(Syene)에서 왔습니다.'},
-    {id:'ultra', ko:'감람암·두나이트', cls:'화성암', pct:0.2, tier:'UR',
-      zones:{ocean:.6, land:.4}, depth:{ocean:[5,7], land:[30,40]},
-      fact:'맨틀 대부분을 이루는 돌이라 지각에서는 귀합니다. 보석 페리도트가 이 돌 속 감람석입니다.'}
+  // 석 → 찬희, 돌 → 찬희
+  function chan(s){ return String(s).replace(/석/g,'찬희').replace(/돌/g,'찬희'); }
+
+  // ---------- 찬희 데이터 ----------
+  // 암찬희 계열: ronov = 지각 부피 % (Ronov & Yaroshevsky 1969). 계열 안 w는 추정 비율.
+  // 특수 계열: share = 전체 환생 중 비율 % (추정). 계열 안 w는 실제 데이터(광물 부피 %, 원소 ppm, 낙하 비율) 또는 추정.
+  var LAND = {land:.82, shelf:.18};
+  var SED = {land:.6, shelf:.25, ocean:.15};
+  var GROUPS = [
+    {id:'mafic', ko:'현무암·반려암 계열', cls:'화성암', ronov:42.5, kind:'rock',
+      zones:{ocean:.54, land:.38, shelf:.08}, depth:{ocean:[0,7], land:[20,40], shelf:[20,40]}, items:[
+      {id:'gabbro', n:'반려암', w:38, t:'현무암과 성분은 같지만 땅속 깊은 곳에서 천천히 식어 알갱이가 큽니다. 해양지각 아래층 대부분이 반려암입니다.'},
+      {id:'basalt', n:'현무암', w:31, t:'지구 표면에서 가장 흔한 화산암입니다. 제주 돌하르방과 돌담이 현무암입니다.'},
+      {id:'amphibolite', n:'각섬암', w:14, t:'현무암이 높은 온도와 압력을 받아 각섬석 위주로 바뀐 변성암입니다.'},
+      {id:'diabase', n:'휘록암', w:12, t:'현무암과 반려암 중간 굵기의 관입암입니다. 영국 스톤헨지의 블루스톤 일부가 휘록암입니다.'},
+      {id:'eclogite', n:'에클로자이트', w:3, t:'현무암이 섭입대 깊이 60 km 넘게 끌려 내려가 생기는 고압 변성암입니다. 붉은 석류석과 초록 휘석이 섞여 있습니다.'},
+      {id:'scoria', n:'스코리아', w:2, t:'가스 구멍이 숭숭 뚫린 검붉은 화산 쇄설물입니다. 제주 오름의 송이가 스코리아입니다.'}
+    ]},
+    {id:'gneiss', ko:'편마암 계열', cls:'변성암', ronov:21.4, kind:'rock',
+      zones:LAND, depth:{land:[5,35], shelf:[5,35]}, items:[
+      {id:'granite_gneiss', n:'화강편마암', w:40, t:'화강암이 변성된 암석으로, 한반도 선캄브리아 기반암에 흔합니다.'},
+      {id:'banded_gneiss', n:'호상편마암', w:28, t:'밝은 띠와 어두운 띠가 번갈아 줄무늬를 이룹니다. 압력을 받은 광물이 층층이 재배열된 결과입니다.'},
+      {id:'migmatite', n:'미그마타이트', w:15, t:'일부가 녹다 만 편마암입니다. 변성암과 화성암의 경계에 있습니다.'},
+      {id:'augen_gneiss', n:'안구상 편마암', w:10, t:'장석 결정이 눈알처럼 박혀 붙은 이름입니다. augen은 독일어로 눈입니다.'},
+      {id:'granulite', n:'그래뉼라이트', w:7, t:'하부 지각의 높은 온도에서 물이 빠져나가며 생긴 변성암입니다. 하부 지각을 대표합니다.'}
+    ]},
+    {id:'grd', ko:'화강섬록암·섬록암 계열', cls:'화성암', ronov:11.2, kind:'rock',
+      zones:LAND, depth:{land:[2,25], shelf:[2,25]}, items:[
+      {id:'granodiorite', n:'화강섬록암', w:50, t:'대륙 지각 상부에 가장 흔한 심성암입니다. 대영박물관의 로제타석이 화강섬록암입니다.'},
+      {id:'diorite', n:'섬록암', w:25, t:'흰 장석과 검은 각섬석이 반반 섞여 소금후추처럼 보입니다.'},
+      {id:'tonalite', n:'토날라이트', w:13, t:'칼리장석이 거의 없는 심성암입니다. 초기 대륙 지각의 주성분입니다.'},
+      {id:'andesite', n:'안산암', w:12, t:'섬록암과 성분이 같은 화산암입니다. 남미 안데스산맥에서 이름이 왔습니다.'}
+    ]},
+    {id:'granite', ko:'화강암 계열', cls:'화성암', ronov:10.4, kind:'rock',
+      zones:LAND, depth:{land:[0,20], shelf:[0,20]}, items:[
+      {id:'granite', n:'화강암', w:69, t:'북한산·설악산의 하얀 바위 봉우리가 화강암입니다. 비석과 건물 외벽에도 많이 씁니다.'},
+      {id:'rhyolite', n:'유문암', w:14, t:'화강암과 성분이 같은 화산암입니다. 끈적한 마그마라 폭발적인 분화를 일으킵니다.'},
+      {id:'tuff', n:'응회암', w:6, t:'화산재가 쌓여 굳은 암석입니다. 이스터섬 모아이 석상이 응회암입니다.'},
+      {id:'pegmatite', n:'페그마타이트', w:6, t:'결정이 수 cm에서 수 m까지 크게 자란 화강암질 암석입니다. 리튬 광석과 보석이 많이 나옵니다.'},
+      {id:'pumice', n:'부석', w:3, t:'가스 구멍이 너무 많아 물에 뜹니다. 경석이라고도 하고, 발 각질 미는 데 씁니다.'},
+      {id:'obsidian', n:'흑요석', w:2, t:'빨리 식어 결정이 생기지 못한 화산 유리입니다. 깨진 면이 날카로워 석기 시대에 칼과 화살촉으로 썼습니다.'}
+    ]},
+    {id:'schist', ko:'결정편암 계열', cls:'변성암', ronov:5.1, kind:'rock',
+      zones:LAND, depth:{land:[3,30], shelf:[3,30]}, items:[
+      {id:'mica_schist', n:'운모편암', w:45, t:'운모가 반짝이며 얇게 쪼개지는 변성암입니다. 뉴욕 맨해튼 고층 빌딩들이 맨해튼 편암 위에 서 있습니다.'},
+      {id:'greenschist', n:'녹색편암', w:20, t:'녹니석과 녹렴석 때문에 초록색을 띱니다.'},
+      {id:'phyllite', n:'천매암', w:17, t:'점판암보다 조금 더 변성되어 비단 같은 광택이 납니다.'},
+      {id:'slate', n:'점판암', w:15, t:'셰일이 약하게 변성되어 얇은 판으로 쪼개집니다. 지붕 기와와 옛날 칠판으로 썼습니다.'},
+      {id:'blueschist', n:'청색편암', w:3, t:'섭입대의 낮은 온도·높은 압력에서만 생깁니다. 남섬석이라는 광물 때문에 푸릅니다.'}
+    ]},
+    {id:'shale', ko:'셰일·이암 계열', cls:'퇴적암', ronov:4.2, kind:'rock',
+      zones:SED, depth:{land:[0,6], shelf:[0,6], ocean:[0,1]}, items:[
+      {id:'shale', n:'셰일', w:50, t:'진흙이 얇은 층으로 쌓여 굳었습니다. 셰일가스가 이 암석 틈에 갇혀 있습니다.'},
+      {id:'mudstone', n:'이암', w:25, t:'층리 없이 덩어리로 굳은 진흙입니다.'},
+      {id:'black_shale', n:'흑색 셰일', w:12, t:'산소 없는 바닥에서 유기물과 함께 쌓여 검습니다. 석유가 여기서 만들어집니다.'},
+      {id:'oil_shale', n:'오일셰일', w:5, t:'가열하면 기름이 나옵니다. 에스토니아는 오랫동안 오일셰일로 전기를 만들어 왔습니다.'},
+      {id:'coal', n:'석탄', w:5, t:'식물이 묻혀 탄화된 퇴적암입니다. 강원도 태백·정선이 대표 탄광 지대였습니다.'},
+      {id:'fossil_shale', n:'화석 품은 셰일', w:3, t:'캐나다 버지스 셰일처럼 고대 생물 흔적이 고스란히 남은 셰일입니다.'}
+    ]},
+    {id:'carb', ko:'석회암·백운암 계열', cls:'퇴적암', ronov:2.0, kind:'rock',
+      zones:SED, depth:{land:[0,5], shelf:[0,5], ocean:[0,1]}, items:[
+      {id:'limestone', n:'석회암', w:60, t:'기자 대피라미드 몸체가 석회암입니다. 시멘트 원료라 강원·충북 남부에 시멘트 공장이 몰려 있습니다.'},
+      {id:'dolostone', n:'백운암', w:22, t:'석회암의 칼슘 일부가 마그네슘으로 바뀐 암석입니다. 이탈리아 알프스 동부의 흰 봉우리들이 백운암입니다.'},
+      {id:'marl', n:'이회암', w:6, t:'진흙이 섞인 석회암입니다.'},
+      {id:'chalk', n:'백악', w:6, t:'플랑크톤 껍데기가 쌓인 하얀 석회암입니다. 영국 도버의 하얀 절벽이 백악입니다.'},
+      {id:'travertine', n:'트래버틴', w:4, t:'온천수에서 탄산칼슘이 가라앉아 생겼습니다. 로마 콜로세움을 트래버틴으로 지었습니다.'},
+      {id:'speleothem', n:'종유석·석순', w:2, t:'동굴 천장에서 떨어지는 물방울이 수천 년 쌓여 자랍니다. 단양 고수동굴에서 볼 수 있습니다.'}
+    ]},
+    {id:'sand', ko:'사암·역암 계열', cls:'퇴적암', ronov:1.7, kind:'rock',
+      zones:SED, depth:{land:[0,5], shelf:[0,5], ocean:[0,1]}, items:[
+      {id:'sandstone', n:'사암', w:50, t:'모래가 굳은 암석입니다. 요르단 페트라는 붉은 사암 절벽을 깎아 만들었습니다.'},
+      {id:'siltstone', n:'실트암', w:15, t:'모래보다 곱고 진흙보다 굵은 알갱이로 되어 있습니다.'},
+      {id:'conglomerate', n:'역암', w:15, t:'둥근 자갈이 박혀 굳었습니다. 옛 강바닥이나 해변의 흔적입니다.'},
+      {id:'quartzite', n:'규암', w:10, t:'사암이 변성되어 석영 알갱이끼리 붙어 버린 매우 단단한 암석입니다.'},
+      {id:'breccia', n:'각력암', w:7, t:'모난 조각들이 굳었습니다. 단층이 생기거나 운석이 부딪혀 부서진 곳에서 생깁니다.'},
+      {id:'arkose', n:'장석질 사암', w:3, t:'장석이 많이 섞인 사암입니다. 화강암이 가까이에서 빠르게 깎여 쌓였다는 뜻입니다.'}
+    ]},
+    {id:'marble', ko:'대리암 계열', cls:'변성암', ronov:0.9, kind:'rock',
+      zones:LAND, depth:{land:[2,20], shelf:[2,20]}, items:[
+      {id:'marble', n:'대리암', w:80, t:'석회암이 열과 압력을 받아 변했습니다. 타지마할과 미켈란젤로의 다비드상이 대리암입니다.'},
+      {id:'skarn', n:'스카른', w:20, t:'마그마가 석회암을 파고들며 생긴 변성암입니다. 영월 상동 텅스텐 광산이 스카른 광상입니다.'}
+    ]},
+    {id:'syenite', ko:'섬장암 계열', cls:'화성암', ronov:0.4, kind:'rock',
+      zones:{land:.85, shelf:.15}, depth:{land:[0,15], shelf:[0,15]}, items:[
+      {id:'syenite', n:'섬장암', w:65, t:'석영이 거의 없는 화강암 비슷한 암석입니다. 이름은 이집트 아스완의 옛 지명 시에네에서 왔습니다.'},
+      {id:'trachyte', n:'조면암', w:22, t:'섬장암과 성분이 같은 화산암입니다. 울릉도에 조면암이 많습니다.'},
+      {id:'nepheline_syenite', n:'하석 섬장암', w:9, t:'석영 대신 하석이 든 섬장암입니다. 유리와 도자기 원료로 씁니다.'},
+      {id:'carbonatite', n:'카보나타이트', w:4, t:'마그마에서 굳은 탄산염 암석으로 희토류 광상과 관련이 깊습니다. 미국 마운틴패스 희토류 광산이 대표적입니다.'}
+    ]},
+    {id:'ultra', ko:'감람암 계열 (초고철질암)', cls:'화성암', ronov:0.2, kind:'rock',
+      zones:{ocean:.6, land:.4}, depth:{ocean:[5,7], land:[30,40]}, items:[
+      {id:'peridotite', n:'감람암', w:50, t:'맨틀 대부분을 이루는 암석입니다. 판끼리 맞부딪히며 맨틀 조각이 밀려 올라온 곳에서만 지표에 보입니다.'},
+      {id:'serpentinite', n:'사문암', w:25, t:'감람암이 물과 반응해 뱀 껍질 무늬로 변했습니다.'},
+      {id:'dunite', n:'두나이트', w:12, t:'감람석이 90% 넘습니다. 뉴질랜드 던산(Dun Mountain)에서 이름이 왔습니다.'},
+      {id:'pyroxenite', n:'휘석암', w:6, t:'휘석이 대부분인 초고철질암입니다.'},
+      {id:'komatiite', n:'코마티아이트', w:4, t:'용암 온도가 1,600 °C에 달하던 초기 지구에만 분출했습니다. 남아공 코마티강에서 이름이 왔습니다.'},
+      {id:'kimberlite', n:'킴벌라이트', w:3, t:'깊이 150 km 넘는 곳에서 다이아몬드를 싣고 올라오는 화산암입니다. 남아공 킴벌리에서 이름이 왔습니다.'}
+    ]},
+
+    {id:'mineral', ko:'광물 결정', cls:'광물', share:5, kind:'mineral',
+      zones:{land:.8, shelf:.2}, depth:{land:[0.5,15], shelf:[0.5,15]}, items:[
+      {id:'plagioclase', n:'사장석', w:39, f:'NaAlSi₃O₈–CaAl₂Si₂O₈', h:'6–6.5', t:'지각에서 가장 흔한 광물입니다. 지각 부피의 약 39%가 사장석입니다.'},
+      {id:'orthoclase', n:'정장석', w:12, f:'KAlSi₃O₈', h:'6', t:'모스 경도 6의 기준 광물입니다. 분홍빛 화강암의 분홍색이 칼리장석입니다.'},
+      {id:'quartz', n:'석영', w:12, f:'SiO₂', h:'7', t:'모스 경도 7의 기준 광물입니다. 모래알 대부분이 석영이고, 쿼츠 시계와 반도체 실리콘의 원료입니다.'},
+      {id:'pyroxene', n:'휘석', w:11, f:'(Ca,Mg,Fe)₂Si₂O₆', h:'5–6.5', t:'현무암과 반려암 속 검은 알갱이 대부분이 휘석입니다.'},
+      {id:'amphibole', n:'각섬석', w:5, f:'(Ca,Na)₂(Mg,Fe,Al)₅(Si,Al)₈O₂₂(OH)₂', h:'5–6', t:'물을 품은 규산염 광물입니다. 석면 가운데 일부가 각섬석 계열입니다.'},
+      {id:'mica', n:'운모', w:5, f:'K(Mg,Fe)₃AlSi₃O₁₀(OH)₂ 등', h:'2–3', t:'책장처럼 얇게 벗겨집니다. 화장품의 반짝이는 펄로 씁니다.'},
+      {id:'kaolinite', n:'고령토(점토 광물)', w:5, f:'Al₂Si₂O₅(OH)₄', h:'2–2.5', t:'도자기 원료입니다. 중국 징더전 근처 가오링(高嶺) 마을에서 이름이 왔습니다.'},
+      {id:'olivine', n:'감람석', w:1.4, f:'(Mg,Fe)₂SiO₄', h:'6.5–7', t:'맨틀 윗부분에서 가장 흔한 광물입니다. 올리브색이라 붙은 이름입니다.'},
+      {id:'garnet', n:'석류석', w:0.7, f:'X₃Y₂(SiO₄)₃', h:'6.5–7.5', t:'석류 알맹이처럼 붉어 붙은 이름입니다. 1월 탄생석입니다.'},
+      {id:'epidote', n:'녹렴석', w:0.4, f:'Ca₂(Al,Fe)₃(SiO₄)₃(OH)', h:'6–7', t:'피스타치오색 결정이 특징인 변성 광물입니다.'},
+      {id:'chlorite', n:'녹니석', w:0.3, f:'(Mg,Fe)₅Al(AlSi₃O₁₀)(OH)₈', h:'2–2.5', t:'녹색편암을 초록으로 물들이는 광물입니다.'},
+      {id:'talc', n:'활석', w:0.2, f:'Mg₃Si₄O₁₀(OH)₂', h:'1', t:'모스 경도 1, 가장 무른 광물입니다. 손톱으로도 긁힙니다.'},
+      {id:'calcite', n:'방해석', w:3, f:'CaCO₃', h:'3', t:'모스 경도 3의 기준 광물입니다. 투명한 결정을 글자 위에 올리면 글자가 두 개로 보입니다(복굴절).'},
+      {id:'magnetite', n:'자철석', w:2, f:'Fe₃O₄', h:'5.5–6.5', t:'자연에서 자성이 가장 강한 광물입니다. 옛사람들이 쓰던 천연 자석이 자철석입니다.'},
+      {id:'dolomite', n:'백운석', w:1.2, f:'CaMg(CO₃)₂', h:'3.5–4', t:'백운암을 이루는 광물입니다. 프랑스 지질학자 Dolomieu의 이름을 땄습니다.'},
+      {id:'apatite', n:'인회석', w:0.6, f:'Ca₅(PO₄)₃(F,Cl,OH)', h:'5', t:'모스 경도 5의 기준 광물입니다. 사람 뼈와 치아 성분이 인회석과 같은 계열입니다.'},
+      {id:'gypsum', n:'석고', w:0.6, f:'CaSO₄·2H₂O', h:'2', t:'모스 경도 2의 기준 광물입니다. 깁스와 석고보드의 원료입니다.'},
+      {id:'halite', n:'암염', w:0.4, f:'NaCl', h:'2.5', t:'소금 그 자체입니다. 폴란드 비엘리치카 소금 광산에는 암염을 깎아 만든 성당이 있습니다.'},
+      {id:'fluorite', n:'형석', w:0.2, f:'CaF₂', h:'4', t:'모스 경도 4의 기준 광물입니다. 형광(fluorescence)이라는 말이 이 광물(fluorite)에서 나왔습니다.'}
+    ]},
+    {id:'ore', ko:'광석', cls:'광석', share:1, kind:'ore',
+      zones:{land:.9, shelf:.1}, depth:{land:[0,2], shelf:[0,2]}, items:[
+      {id:'bauxite', n:'보크사이트', el:'Al', w:82300, f:'Al(OH)₃ 등', h:'1–3', t:'알루미늄 원료입니다. 열대의 비가 오랫동안 씻어 내 알루미늄만 남은 흙 같은 암석입니다.'},
+      {id:'hematite', n:'적철석', el:'Fe', w:56300, f:'Fe₂O₃', h:'5.5–6.5', t:'세계 철광석의 주력입니다. 화성이 붉은 것도 적철석 같은 산화철 때문입니다.'},
+      {id:'ilmenite', n:'티탄철석', el:'Ti', w:5650, f:'FeTiO₃', h:'5–6', t:'티타늄 원료입니다. 흰 페인트 안료인 이산화티타늄도 여기서 나옵니다.'},
+      {id:'pyrolusite', n:'연망간석', el:'Mn', w:950, f:'MnO₂', h:'6–6.5', t:'망간 원료입니다. 건전지 속 검은 가루가 이산화망간입니다.'},
+      {id:'pyrite', n:'황철석', el:'S', w:350, f:'FeS₂', h:'6–6.5', t:'금처럼 반짝여 바보의 금이라 불립니다.'},
+      {id:'chromite', n:'크롬철석', el:'Cr', w:102, f:'FeCr₂O₄', h:'5.5', t:'크로뮴의 주원료입니다. 스테인리스강이 녹슬지 않는 비결이 크로뮴입니다.'},
+      {id:'pentlandite', n:'펜틀란드석', el:'Ni', w:84, f:'(Fe,Ni)₉S₈', h:'3.5–4', t:'니켈 원료입니다. 전기차 배터리 양극재에 들어갑니다.'},
+      {id:'sphalerite', n:'섬아연석', el:'Zn', w:70, f:'ZnS', h:'3.5–4', t:'아연 원료입니다. 철이 녹슬지 않게 입히는 아연 도금의 출발점입니다.'},
+      {id:'chalcopyrite', n:'황동석', el:'Cu', w:60, f:'CuFeS₂', h:'3.5–4', t:'가장 중요한 구리 광석입니다. 전선 속 구리 상당수가 여기서 나옵니다.'},
+      {id:'spodumene', n:'리티아휘석', el:'Li', w:20, f:'LiAlSi₂O₆', h:'6.5–7', t:'리튬 원료입니다. 호주 광산에서 캐낸 리티아휘석이 배터리가 됩니다.'},
+      {id:'galena', n:'방연석', el:'Pb', w:14, f:'PbS', h:'2.5', t:'납 원료입니다. 정육면체로 깔끔하게 쪼개지고 손에 들면 깜짝 놀랄 만큼 무겁습니다.'},
+      {id:'uraninite', n:'섬우라늄석', el:'U', w:2.7, f:'UO₂', h:'5–6', t:'우라늄 원료입니다. 퀴리 부부가 라듐을 처음 분리한 피치블렌드가 이 광물입니다.'},
+      {id:'cassiterite', n:'주석석', el:'Sn', w:2.3, f:'SnO₂', h:'6–7', t:'청동에 들어가는 금속 Sn의 원료입니다. 청동기 시대를 연 광물입니다.'},
+      {id:'scheelite', n:'회중석', el:'W', w:1.25, f:'CaWO₄', h:'4.5–5', t:'텅스텐 원료입니다. 영월 상동 광산은 한때 세계 최대급 텅스텐 광산이었습니다.'},
+      {id:'molybdenite', n:'휘수연석', el:'Mo', w:1.2, f:'MoS₂', h:'1–1.5', t:'몰리브데넘 원료입니다. 흑연처럼 미끄러워 윤활제로도 씁니다.'},
+      {id:'cinnabar', n:'진사', el:'Hg', w:0.085, f:'HgS', h:'2–2.5', t:'수은 원료인 붉은 광물입니다. 옛날 붉은 안료와 도장 인주에 썼습니다.'},
+      {id:'native_silver', n:'자연은', el:'Ag', w:0.075, f:'Ag', h:'2.5–3', t:'순수한 은이 그대로 결정이 된 것입니다. 철사처럼 꼬불꼬불하게 자라기도 합니다.'},
+      {id:'native_platinum', n:'자연백금', el:'Pt', w:0.005, f:'Pt', h:'4–4.5', t:'금만큼 드문 금속 덩어리입니다. 세계 백금 대부분이 남아공 부시벨트에서 나옵니다.'},
+      {id:'native_gold', n:'자연금', el:'Au', w:0.004, f:'Au', h:'2.5–3', t:'인류가 지금까지 캔 금을 다 모아도 한 변 약 22 m 정육면체에 들어갑니다.'}
+    ]},
+    {id:'gem', ko:'보석', cls:'보석', share:0.1, kind:'gem',
+      zones:{land:1}, depth:{land:[0,2]}, items:[
+      {id:'agate', n:'마노', w:31, f:'SiO₂', h:'6.5–7', t:'석영이 층층이 자라 줄무늬가 생겼습니다.'},
+      {id:'amethyst', n:'자수정', w:25, f:'SiO₂', h:'7', t:'보라색 석영입니다. 울산 언양이 자수정 산지로 유명합니다.'},
+      {id:'opal', n:'오팔', w:10, f:'SiO₂·nH₂O', h:'5.5–6.5', t:'물을 품은 비정질 실리카입니다. 세계 오팔 대부분이 호주에서 나옵니다.'},
+      {id:'turquoise', n:'터키석', w:8, f:'CuAl₆(PO₄)₄(OH)₈·4H₂O', h:'5–6', t:'터키를 거쳐 유럽에 들어와 붙은 이름입니다. 구리가 하늘색을 냅니다.'},
+      {id:'topaz', n:'토파즈(황옥)', w:8, f:'Al₂SiO₄(F,OH)₂', h:'8', t:'모스 경도 8의 기준 광물입니다.'},
+      {id:'jadeite', n:'비취(경옥)', w:6, f:'NaAlSi₂O₆', h:'6.5–7', t:'미얀마산 경옥이 최고급으로 꼽힙니다.'},
+      {id:'peridot', n:'페리도트', w:5, f:'(Mg,Fe)₂SiO₄', h:'6.5–7', t:'보석이 된 감람석입니다. 하와이 파파콜레아 해변의 초록 모래가 이 광물입니다.'},
+      {id:'sapphire', n:'사파이어', w:3, f:'Al₂O₃', h:'9', t:'붉지 않은 강옥은 모두 사파이어입니다. 강옥은 모스 경도 9의 기준 광물입니다.'},
+      {id:'emerald', n:'에메랄드', w:2, f:'Be₃Al₂Si₆O₁₈', h:'7.5–8', t:'크로뮴이나 바나듐이 든 녹주석입니다. 콜롬비아산이 유명합니다.'},
+      {id:'ruby', n:'루비', w:1.5, f:'Al₂O₃', h:'9', t:'크로뮴이 든 붉은 강옥입니다. 미얀마 모곡산이 최고급입니다.'},
+      {id:'diamond', n:'다이아몬드(금강석)', w:0.5, f:'C', h:'10', t:'가장 단단한 천연 물질입니다. 깊이 150 km 넘는 맨틀에서 만들어져 킴벌라이트를 타고 올라옵니다.'}
+    ]},
+    {id:'fossil', ko:'화석', cls:'화석', share:0.05, kind:'fossil',
+      zones:{land:.7, shelf:.3}, depth:{land:[0,1.5], shelf:[0,1.5]}, items:[
+      {id:'ammonite', n:'암모나이트 화석', w:30, age:[66,400], t:'앵무조개를 닮은 고대 두족류입니다. 공룡과 함께 6,600만 년 전에 사라졌습니다.'},
+      {id:'trilobite', n:'삼엽충 화석', w:25, age:[252,521], t:'고생대 바다를 3억 년 가까이 누빈 절지동물입니다. 강원도 영월·태백에서도 나옵니다.'},
+      {id:'petrified_wood', n:'규화목', w:20, age:[2,300], t:'묻힌 나무의 세포 하나하나가 석영으로 바뀌었습니다.'},
+      {id:'dino_egg', n:'공룡알 화석', w:10, age:[66,100], t:'경기도 화성 시화호 일대에서 공룡알 화석이 무더기로 나왔습니다.'},
+      {id:'dino_bone', n:'공룡 뼈 화석', w:8, age:[66,230], t:'뼈의 빈틈이 광물로 채워져 암석이 됐습니다.'},
+      {id:'dino_track', n:'공룡 발자국 화석', w:5, age:[80,140], t:'경남 고성은 세계적인 공룡 발자국 산지입니다.'},
+      {id:'stromatolite', n:'스트로마톨라이트', w:2, age:[500,3500], t:'남세균이 층층이 쌓아 올린 생물의 흔적입니다. 인천 소청도에서도 나옵니다.'}
+    ]},
+    {id:'meteor', ko:'운석', cls:'운석', share:0.01, kind:'meteor',
+      zones:{ocean:.71, land:.29}, depth:{ocean:[0,0.002], land:[0,0.003]}, items:[
+      {id:'ordinary_chondrite', n:'보통 콘드라이트 운석', w:80, age:[4560,4568], t:'떨어지는 운석의 대부분입니다. 태양계가 생길 때의 작은 알갱이(콘드룰)가 그대로 들어 있습니다.'},
+      {id:'hed', n:'베스타 운석(HED)', w:6, age:[4400,4560], t:'소행성 베스타에서 떨어져 나온 것으로 보는 현무암질 운석입니다.'},
+      {id:'iron', n:'철운석', w:5, age:[4500,4568], t:'깨진 소행성 핵 조각입니다. 잘라서 닦으면 비트만슈테텐 무늬가 나타납니다.'},
+      {id:'carbonaceous', n:'탄소질 콘드라이트 운석', w:4, age:[4560,4568], t:'물과 유기물, 아미노산까지 든 원시 운석입니다.'},
+      {id:'enstatite', n:'엔스타타이트 콘드라이트 운석', w:2, age:[4560,4568], t:'화학 조성이 지구와 가장 닮은 운석입니다.'},
+      {id:'stony_iron', n:'석철운석', w:1, age:[4500,4568], t:'암석과 철이 반반 섞였습니다. 팔라사이트는 철 속에 감람석이 박혀 있습니다.'},
+      {id:'martian', n:'화성 운석', w:0.5, age:[170,4100], t:'화성 표면이 소행성에 맞아 튕겨 나와 지구까지 날아왔습니다.'},
+      {id:'lunar', n:'달 운석', w:0.5, age:[3000,4400], t:'달 표면이 소행성에 맞아 튕겨 나와 지구에 떨어졌습니다.'},
+      {id:'jinju', n:'진주 운석', w:0.05, age:[4560,4568], fixed:'KOR', t:'2014년 3월 경남 진주에 떨어진 운석입니다. 20 kg이 넘는 조각도 나왔습니다.'}
+    ]},
+    {id:'human', ko:'사람 손을 탄 돌', cls:'사람 손', share:0.01, kind:'human',
+      zones:{land:1}, depth:{land:[0,0]}, items:[
+      {id:'dolmen', n:'고인돌', w:25, t:'청동기 시대 무덤입니다. 고창·화순·강화 고인돌 유적은 세계유산입니다.'},
+      {id:'millstone', n:'맷돌', w:15, t:'곡식을 가는 두 짝짜리 도구입니다.'},
+      {id:'whetstone', n:'숫돌', w:15, t:'칼을 가는 데 씁니다.'},
+      {id:'go_stone', n:'바둑돌', w:15, t:'고급 바둑알은 흰 알을 조개껍데기로, 검은 알을 점판암으로 만들기도 합니다.'},
+      {id:'stele', n:'비석', w:10, t:'글을 새겨 세운 것입니다. 광개토대왕릉비는 높이가 6 m를 넘습니다.'},
+      {id:'cornerstone', n:'주춧돌', w:10, t:'기둥 밑을 받칩니다.'},
+      {id:'harubang', n:'돌하르방', w:10, fixed:'KOR', t:'제주 현무암을 깎아 만든 석상입니다. 옛 제주 성문 앞을 지켰습니다.'}
+    ]}
   ];
+
+  // 확률 계산: 특수 계열이 먼저 몫을 가져가고, 나머지를 암찬희 부피 구성비대로 나눈다
+  var SPECIAL_TOTAL = 0, RONOV_TOTAL = 0;
+  GROUPS.forEach(function(g){ if (g.share) SPECIAL_TOTAL += g.share; else RONOV_TOTAL += g.ronov; });
+  var ITEMS = {}, ITEM_LIST = [];
+  GROUPS.forEach(function(g){
+    if (!g.share) g.share = g.ronov / RONOV_TOTAL * (100 - SPECIAL_TOTAL);
+    var sw = g.items.reduce(function(s,i){return s+i.w;},0);
+    g.items.forEach(function(it){
+      it.g = g;
+      it.p = g.share/100 * it.w/sw;
+      it.tier = it.p >= .02 ? 'N' : it.p >= .005 ? 'R' : it.p >= .0015 ? 'SR' : it.p >= .00002 ? 'SSR' : 'UR';
+      it.ch = chan(it.n);
+      ITEMS[it.id] = it; ITEM_LIST.push(it);
+    });
+  });
+  var P_TOP = ITEM_LIST.reduce(function(s,i){ return s + (i.tier === 'SSR' || i.tier === 'UR' ? i.p : 0); },0);
 
   // [이름, 총면적 km², 내륙국 여부, ISO3]
   var COUNTRIES = [
@@ -304,15 +559,12 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     return d3.geo.centroid(best);
   }
 
-  var TOTAL_STONES = 9.4e21;
-  var TIER_ORDER = ['N','R','SR','SSR','UR'];
-
   // ---------- 저장 (이 브라우저에만) ----------
-  var KEY = 'random-rock-reborn-v1';
-  var state = {count:0, dex:{}, hist:[]};
+  var KEY = 'random-chanhee-reborn-v2';
+  var state = {count:0, dex:{}, hist:[], final:null};
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (saved && typeof saved.count === 'number') state = {count:saved.count, dex:saved.dex||{}, hist:saved.hist||[]};
+    if (saved && typeof saved.count === 'number') state = {count:saved.count, dex:saved.dex||{}, hist:saved.hist||[], final:saved.final||null};
   } catch(e) {}
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
 
@@ -341,49 +593,57 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     if (km < 1) return Math.round(km*1000).toLocaleString('ko-KR') + ' m';
     return km.toFixed(1) + ' km';
   }
-  function fmtOdds(p){
-    var n = 1/p;
-    var pc = p*100;
-    var pcs = pc >= 1 ? pc.toFixed(1) : pc >= 0.01 ? pc.toFixed(3) : pc.toPrecision(2);
-    return '약 ' + Math.round(n).toLocaleString('ko-KR') + '분의 1 <span class="small num">(' + pcs + '%)</span>';
+  function bigKo(n){
+    function r(x){ return x >= 100 ? Math.round(x).toLocaleString('ko-KR') : x >= 10 ? Math.round(x) : Math.round(x*10)/10; }
+    if (n >= 1e12) return r(n/1e12) + '조';
+    if (n >= 1e8) return r(n/1e8) + '억';
+    if (n >= 1e4) return r(n/1e4) + '만';
+    return Math.round(n).toLocaleString('ko-KR');
   }
+  function odds(p){ return '약 ' + bigKo(1/p) + '분의 1'; }
+  function pct(p){
+    var pc = p*100;
+    return (pc >= 1 ? pc.toFixed(1) : pc >= 0.01 ? pc.toFixed(3) : pc.toPrecision(2)) + '%';
+  }
+  function oddsHtml(p){ return odds(p) + ' <span class="small num">(' + pct(p) + ')</span>'; }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function placeName(r){ return r.oceanName || (r.country === '그 밖의 나라' ? '어느 나라' : r.country); }
 
   // ---------- 환생 ----------
   function roll(){
-    var R = pick(ROCKS, function(r){return r.pct;});
-    var rock = R.item;
-    var zoneKeys = Object.keys(rock.zones);
-    var Z = pick(zoneKeys, function(k){return rock.zones[k];});
-    var zone = Z.item;
+    var G = pick(GROUPS, function(g){return g.share;}).item;
+    var item = pick(G.items, function(i){return i.w;}).item;
+    var zone = pick(Object.keys(G.zones), function(k){return G.zones[k];}).item;
+    var pZone = G.zones[zone] / Object.keys(G.zones).reduce(function(s,k){return s+G.zones[k];},0);
 
-    var P, place, country = null, iso = null, oceanName = null, pt = null, pPlace;
-    if (zone === 'ocean'){
-      P = pick(OCEANS, function(o){return o[1];});
-      oceanName = P.item[0];
-      var cands = P.item[2];
+    var place, country = null, iso = null, oceanName = null, pt = null, pPlace;
+    if (item.fixed === 'KOR' && zone !== 'ocean'){
+      country = '대한민국'; iso = 'KOR'; pPlace = 1; zone = 'land'; pZone = 1;
+      place = item.id === 'jinju' ? '대한민국 경남 진주 논밭' : '대한민국 제주 길가';
+    } else if (zone === 'ocean'){
+      var O = pick(OCEANS, function(o){return o[1];});
+      oceanName = O.item[0];
+      var cands = O.item[2];
       var c0 = cands[Math.floor(Math.random()*cands.length)];
       pt = [c0[0] + uni(-4,4), c0[1] + uni(-3,3)];
-      pPlace = P.p;
-      place = oceanName + ' 깊은 바다 밑 (해양지각)';
+      pPlace = O.p;
+      place = oceanName + (G.kind === 'meteor' ? ' 바닥 진흙 위' : ' 깊은 바다 밑 (해양지각)');
     } else {
       var pool = zone === 'land' ? COUNTRIES : COUNTRIES.filter(function(c){return !c[2];});
-      P = pick(pool, function(c){return c[1];});
+      if (G.kind === 'human') pool = pool.filter(function(c){ return c[0] !== '남극'; });
+      var P = pick(pool, function(c){return c[1];});
       country = P.item[0]; iso = P.item[3]; pPlace = P.p;
       if (!iso && MAP){
         var sub = pick(MAP.others.filter(function(o){ return zone === 'land' || !o.landlocked; }), function(o){return o.a;});
         country = sub.item.ko; iso = sub.item.id; pPlace = P.p * sub.p;
       }
-      if (zone === 'land'){
-        place = country === '남극' ? '남극 대륙 얼음 아래'
-              : country === '그 밖의 나라' ? '그 밖의 나라 땅 아래 (약 170개국 중 하나)'
-              : country + ' 땅 아래';
-      } else {
-        place = (country === '그 밖의 나라' ? '다른 나라' : country) + ' 앞바다 대륙붕 밑';
-      }
+      var where = country === '그 밖의 나라' ? '그 밖의 나라' : country;
+      if (G.kind === 'human') place = where + ' 어느 마을 땅 위';
+      else if (zone === 'land') place = country === '남극' ? '남극 대륙 얼음 아래' : where + ' 땅 아래';
+      else place = (country === '그 밖의 나라' ? '다른 나라' : country) + ' 앞바다 대륙붕 밑';
     }
 
-    var range = rock.depth[zone];
+    var range = G.depth[zone] || G.depth.land;
     var d = uni(range[0], range[1]);
     var water = zone === 'ocean' ? uni(3,6) : zone === 'shelf' ? uni(0.03,0.2) : 0;
 
@@ -393,26 +653,30 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     var mpa = 0.1 + 10*water + 27*d;
 
     var age;
-    if (zone === 'ocean') age = 180*(1 - Math.sqrt(1 - Math.random()));
-    else if (rock.cls === '퇴적암') age = Math.random() < .7 ? uni(0,541) : uni(541,2500);
+    if (item.age) age = uni(item.age[0], item.age[1]);
+    else if (G.kind === 'rock' && zone === 'ocean') age = 180*(1 - Math.sqrt(1 - Math.random()));
+    else if (G.cls === '퇴적암') age = Math.random() < .7 ? uni(0,541) : uni(541,2500);
     else age = (Math.random()+Math.random())/2 * 4030;
 
     var surface = zone === 'land' && d < 0.001;
     var future;
-    if (surface) future = '이미 지표에 있습니다. 비와 바람에 깎이는 중입니다.';
+    if (G.kind === 'human') future = '사람들 곁에서 쓰이다가 언젠가 다시 흙으로 돌아갑니다.';
+    else if (surface) future = '이미 지표에 있습니다. 비와 바람에 깎이는 중입니다.';
+    else if (zone === 'ocean' && G.kind === 'meteor') future = '바다 밑 진흙에 천천히 묻혀 갑니다.';
     else if (zone === 'ocean') future = '판을 타고 이동하다 약 ' + fmtYears(Math.random()*Math.max(5,200-age)) + ' 뒤 해구에서 맨틀로 끌려 들어갑니다.';
+    else if (G.kind === 'ore' || G.kind === 'gem') future = '광산이 들어서면 캐내집니다. 그렇지 않으면 약 ' + fmtYears(d*20) + ' 뒤 지표에 드러납니다.';
     else future = '위쪽 땅이 다 깎여 나가 지표에 드러나기까지 약 ' + fmtYears(d*20) + ' 걸립니다.';
 
     return {
-      rock:rock, zone:zone, place:place, country:country, iso:iso, oceanName:oceanName, pt:pt,
+      iid:item.id, item:item, zone:zone, place:place, country:country, iso:iso, oceanName:oceanName, pt:pt,
       d:d, water:water, temp:temp, mpa:mpa, age:age, surface:surface, future:future,
-      pPlace:pPlace, prob:R.p*Z.p*pPlace
+      pPlace:pPlace, prob:item.p*pZone*pPlace
     };
   }
 
   function bonuses(r){
     var b = [];
-    if (r.surface) b.push(['UR','햇빛 보는 돌']);
+    if (r.surface) b.push(['UR','햇빛 보는 찬희']);
     if (r.country === '대한민국') b.push(['SSR','대한민국 픽업']);
     if (r.age > 3800) b.push(['SSR','40억 년 원로']);
     if (r.zone === 'ocean' && r.water > 5.5) b.push(['SR','심해 5 km 아래']);
@@ -420,10 +684,17 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
   }
 
   function verdict(r){
-    if (r.surface) return '햇빛 보는 돌로 태어났습니다. 땅속 돌 가운데 지표 1 m 안에 있을 확률은 수만 분의 1입니다.';
+    var it = r.item, k = it.g.kind;
+    if (k === 'human') return '사람 손에 다듬어진 찬희로 태어났습니다. 땅속에 묻힌 94해 개 찬희 가운데 손에 꼽히는 팔자입니다.';
+    if (k === 'meteor') return '우주에서 떨어진 운찬희입니다. 나이가 지구보다 많습니다.';
+    if (k === 'gem') return '보찬희로 태어났습니다. 누군가 캐내면 반지 위에 올라갈 운명입니다.';
+    if (it.el === 'Au' || it.el === 'Ag' || it.el === 'Pt') return '귀금속 덩어리로 태어났습니다. 광부가 찾아오는 날이 이번 생의 절정입니다.';
+    if (k === 'ore') return '광찬희로 태어났습니다. 언젠가 캐내져 제련소로 갑니다.';
+    if (k === 'fossil') return '몸속에 옛 생물을 품은 화찬희입니다. 박물관행이 유력합니다.';
+    if (r.surface) return '햇빛 보는 찬희로 태어났습니다. 땅속 찬희 가운데 지표 1 m 안에 있을 확률은 수만 분의 1입니다.';
     if (r.country === '대한민국') return '대한민국 땅 아래로 태어났습니다. 육지 면적 기준으로 0.07%짜리 픽업입니다.';
-    if (r.age > 3800) return '40억 년 가까이 된 돌입니다. 지구에서 가장 오래된 암석과 같은 급입니다.';
-    if (r.rock.tier === 'UR') return '맨틀에서 올라온 돌입니다. 지각 부피의 0.2%뿐인 최고 희귀 등급입니다.';
+    if (r.age > 3800) return '40억 년 가까이 된 찬희입니다. 지구에서 가장 오래된 암찬희와 같은 급입니다.';
+    if (k === 'mineral') return '통째로 한 가지 광물인 결정 덩어리로 태어났습니다.';
     if (r.zone === 'ocean') return '바닷물 ' + r.water.toFixed(1) + ' km 아래, 수온 2 °C의 어둠 속입니다. 당신을 볼 사람은 없습니다.';
     if (r.country === '남극') return '남극 얼음 밑입니다. 펭귄도 당신을 모릅니다.';
     if (r.d > 15) return '앞으로 ' + fmtYears(r.d*20) + ' 동안 아무도 당신을 만나지 않습니다.';
@@ -453,7 +724,7 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
     svg.appendChild(el('rect',{x:x0,y:0,width:x1-x0,height:top,fill:'var(--sky)'}));
     svg.appendChild(el('text',{x:x0+6,y:top-8,'class':'lbl'}, ocean || r.zone === 'shelf' ? '해수면' : '지표'));
-    svg.appendChild(el('text',{x:x1-6,y:top-8,'text-anchor':'end','class':'place'}, r.oceanName || (r.country === '그 밖의 나라' ? '어느 나라' : r.country)));
+    svg.appendChild(el('text',{x:x1-6,y:top-8,'text-anchor':'end','class':'place'}, placeName(r)));
     layers.forEach(function(L){
       if (L[2] - L[1] <= 0) return;
       var y0 = y(L[1]), y1 = y(L[2]);
@@ -489,13 +760,12 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
   var globeRot = [-127, -30];   // 처음엔 한반도 쪽
   var globeAnim = null;
   function drawGlobe(r, animate){
-    var fig = document.getElementById('globefig');
     var cap = document.getElementById('globecap');
     var share = (r.pPlace*100);
     var shareTxt = share >= 1 ? share.toFixed(1) : share >= 0.01 ? share.toFixed(2) : share.toPrecision(2);
-    var where = r.oceanName ? r.oceanName : (r.country === '그 밖의 나라' ? '어느 나라' : r.country);
     var basis = r.oceanName ? '대양 면적의 ' : r.zone === 'shelf' ? '바다에 닿은 나라 면적 기준 ' : '육지 면적 기준 ';
-    cap.innerHTML = '<b>' + esc(where) + '</b>' + (r.zone === 'shelf' ? ' 앞바다' : '') + ' <span class="small num">· ' + basis + shareTxt + '%</span>';
+    cap.innerHTML = '<b>' + esc(placeName(r)) + '</b>' + (r.zone === 'shelf' ? ' 앞바다' : '') +
+      (r.pPlace < 1 ? ' <span class="small num">· ' + basis + shareTxt + '%</span>' : '');
     if (!MAP){ document.getElementById('globe').hidden = true; return; }
 
     var target = null;
@@ -531,8 +801,7 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     }
 
     if (globeAnim) cancelAnimationFrame(globeAnim);
-    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!animate || reduce){ globeRot = to; paint(to); return; }
+    if (!animate || REDUCE){ globeRot = to; paint(to); return; }
     var from = globeRot.slice();
     var dl = ((to[0] - from[0] + 540) % 360) - 180;
     var t0 = null, dur = 1100;
@@ -547,17 +816,88 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     globeAnim = requestAnimationFrame(step);
   }
 
+  // ---------- SSR 이상 연출 ----------
+  var REDUCE = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var fxRun = null;
+  function showFx(r){
+    var it = r.item, fx = $('fx');
+    fx.className = 'fx ' + it.tier;
+    $('fxtier').textContent = it.tier;
+    $('fxname').textContent = it.ch;
+    $('fxmsg').textContent = '이번 생은 ' + it.ch + '(으)로 확정됐습니다. 이 기기에서는 더 이상 환생할 수 없습니다.';
+    $('fxodds').textContent = '이 찬희가 나올 확률 ' + odds(it.p);
+    fx.hidden = false;
+    document.body.style.overflow = 'hidden';
+    fx.scrollTop = 0;
+    setTimeout(function(){ try { $('fxok').focus({preventScroll:true}); } catch(e) {} fx.scrollTop = 0; }, 50);
+    if (!REDUCE) burst(it.tier);
+  }
+  function hideFx(){
+    $('fx').hidden = true;
+    document.body.style.overflow = '';
+    if (fxRun) cancelAnimationFrame(fxRun);
+    $('card').scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block:'start'});
+  }
+  function burst(tier){
+    var cv = $('fxc'), ctx = cv.getContext('2d');
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    var W = window.innerWidth, H = window.innerHeight;
+    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var cols = tier === 'UR' ? ['#ff6b6b','#ffc46b','#7af3ff','#b98cff','#ffffff','#9dff8a'] : ['#ffd36a','#fff1c2','#f2a93b','#ffffff','#ffe08a'];
+    var parts = [];
+    function spawn(n, cx, cy, speed){
+      for (var i=0;i<n;i++){
+        var a = Math.random()*Math.PI*2, s = speed*(0.35 + Math.random());
+        parts.push({x:cx, y:cy, vx:Math.cos(a)*s, vy:Math.sin(a)*s - 2, life:0, max:110 + Math.random()*90,
+          size:2 + Math.random()*4, rot:Math.random()*6, vr:(Math.random()-.5)*.3, c:cols[i % cols.length], star:Math.random() < .35});
+      }
+    }
+    spawn(170, W/2, H*0.42, 11);
+    setTimeout(function(){ spawn(110, W*0.25, H*0.35, 8); spawn(110, W*0.75, H*0.35, 8); }, 450);
+    if (tier === 'UR') setTimeout(function(){ spawn(200, W/2, H*0.42, 14); }, 900);
+    function star(x,y,s){
+      ctx.beginPath();
+      for (var i=0;i<8;i++){ var rr = i%2 ? s*0.4 : s*1.6, a = i*Math.PI/4; ctx.lineTo(x+Math.cos(a)*rr, y+Math.sin(a)*rr); }
+      ctx.closePath(); ctx.fill();
+    }
+    var start = performance.now();
+    function frame(ts){
+      ctx.clearRect(0,0,W,H);
+      parts = parts.filter(function(p){ return p.life < p.max; });
+      parts.forEach(function(p){
+        p.life++; p.vx *= .985; p.vy = p.vy*.985 + .13; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx.globalAlpha = Math.max(0, 1 - p.life/p.max);
+        ctx.fillStyle = p.c;
+        if (p.star) star(p.x, p.y, p.size);
+        else { ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillRect(-p.size, -p.size/2.5, p.size*2, p.size/1.25); ctx.restore(); }
+      });
+      ctx.globalAlpha = 1;
+      if (parts.length || ts - start < 1200) fxRun = requestAnimationFrame(frame);
+      else ctx.clearRect(0,0,W,H);
+    }
+    if (fxRun) cancelAnimationFrame(fxRun);
+    fxRun = requestAnimationFrame(frame);
+  }
+
   // ---------- 화면 ----------
   function $(id){ return document.getElementById(id); }
   var current = null;
+  var openCats = {}, openTiles = {};
 
   function render(r, animate){
     current = r;
-    $('rname').textContent = r.rock.ko;
+    var it = r.item, g = it.g;
+    $('rname').textContent = it.ch;
     var tier = $('rtier');
-    tier.textContent = r.rock.tier;
-    tier.className = 'chip t-' + r.rock.tier;
-    $('rmeta').textContent = r.rock.cls + (r.rock.sub ? ' · ' + r.rock.sub : '') + ' · 지각의 ' + r.rock.pct + '%';
+    tier.textContent = it.tier;
+    tier.className = 'chip t-' + it.tier;
+    var meta = [];
+    if (it.ch !== it.n) meta.push('원래 이름 ' + it.n);
+    meta.push(chan(g.ko));
+    if (g.cls !== g.ko && g.kind === 'rock') meta.push(g.cls);
+    if (it.f) meta.push(it.f);
+    if (it.h) meta.push('경도 ' + it.h);
+    $('rmeta').textContent = meta.join(' · ');
     var bz = $('bonus'); bz.innerHTML = '';
     bonuses(r).forEach(function(b){
       var s = document.createElement('span');
@@ -567,33 +907,93 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     });
     bz.hidden = !bz.firstChild;
     $('fplace').textContent = r.place;
-    $('fdepth').innerHTML = esc(r.zone === 'land' ? '지표 아래 ' + fmtDepth(r.d) : '바닥 아래 ' + fmtDepth(r.d) + ' (물 깊이 ' + fmtDepth(r.water) + ')');
+    $('fdepth').textContent = r.zone === 'land' ? (r.d === 0 ? '지표 위' : '지표 아래 ' + fmtDepth(r.d)) : '바닥 아래 ' + fmtDepth(r.d) + ' (물 깊이 ' + fmtDepth(r.water) + ')';
     $('ftemp').textContent = '약 ' + Math.round(r.temp) + ' °C';
-    $('fpress').textContent = '약 ' + Math.round(r.mpa*9.87).toLocaleString('ko-KR') + ' 기압 (' + Math.round(r.mpa).toLocaleString('ko-KR') + ' MPa)';
+    $('fpress').textContent = '약 ' + Math.round(r.mpa*9.87).toLocaleString('ko-KR') + ' 기압 (' + (r.mpa < 1 ? r.mpa.toFixed(1) : Math.round(r.mpa).toLocaleString('ko-KR')) + ' MPa)';
     $('fage').textContent = '약 ' + fmtYears(r.age);
     $('ffuture').textContent = r.future;
-    $('fprob').innerHTML = fmtOdds(r.prob);
-    $('rfact').textContent = r.rock.fact;
+    $('fitem').innerHTML = oddsHtml(it.p);
+    $('fprob').innerHTML = oddsHtml(r.prob);
+    $('rfact').textContent = chan(it.t);
     $('verdict').textContent = verdict(r);
     drawSection(r, animate);
     drawGlobe(r, animate);
     renderBars();
   }
 
+  function renderLock(){
+    var f = state.final, card = $('card'), stamp = $('stamp');
+    card.classList.remove('final-SSR','final-UR');
+    if (!f){ stamp.hidden = true; $('lockednote').hidden = true; return; }
+    var it = ITEMS[f.iid];
+    var tier = it ? it.tier : 'SSR';
+    card.classList.add('final-' + tier);
+    stamp.className = 'stamp t-' + tier;
+    stamp.textContent = tier + ' 확정 · 이번 생 종료';
+    stamp.hidden = false;
+    var btn = $('roll');
+    btn.disabled = true;
+    btn.textContent = '환생 끝 · ' + tier + ' 확정';
+    $('lockednote').textContent = '#' + f.n + ' 환생에서 ' + (it ? it.ch : '?') + '(' + tier + ')이(가) 나와 이번 생으로 확정됐습니다. 이 기기에서는 더 환생할 수 없습니다.';
+    $('lockednote').hidden = false;
+  }
+
   function renderDex(){
-    var box = $('dex'); box.innerHTML = '';
-    var got = 0;
-    ROCKS.forEach(function(rk){
-      var n = state.dex[rk.id] || 0;
-      if (n) got++;
-      var d = document.createElement('div');
-      d.className = 'dex-tile' + (n ? '' : ' locked');
-      d.innerHTML = '<span class="chip t-' + rk.tier + '" style="justify-self:start">' + rk.tier + '</span>' +
-        '<span class="nm">' + (n ? esc(rk.ko) : '???') + '</span>' +
-        '<span class="ct">' + (n ? n + '회 환생' : '지각의 ' + rk.pct + '%') + '</span>';
-      box.appendChild(d);
+    var box = $('dexcats'); box.innerHTML = '';
+    var got = 0, top = 0;
+    GROUPS.forEach(function(g){
+      var gGot = g.items.filter(function(it){ return state.dex[it.id]; }).length;
+      got += gGot;
+      var det = document.createElement('details');
+      det.className = 'dex-cat';
+      if (openCats[g.id] === undefined) openCats[g.id] = gGot > 0;
+      det.open = openCats[g.id];
+      det.addEventListener('toggle', function(){ openCats[g.id] = det.open; });
+      var sum = document.createElement('summary');
+      sum.innerHTML = '<span class="cat-name">' + esc(chan(g.ko)) + '</span><span class="cat-meta">' + gGot + ' / ' + g.items.length + '</span>';
+      det.appendChild(sum);
+      var grid = document.createElement('div');
+      grid.className = 'dex';
+      g.items.forEach(function(it){
+        var rec = state.dex[it.id];
+        if (rec && (it.tier === 'SSR' || it.tier === 'UR')) top++;
+        var t;
+        if (!rec){
+          t = document.createElement('div');
+          t.className = 'dex-tile locked';
+          t.innerHTML = '<span class="chip t-' + it.tier + '" style="justify-self:start">' + it.tier + '</span><span class="nm">???</span><span class="ct">' + odds(it.p) + '</span>';
+        } else {
+          t = document.createElement('button');
+          t.type = 'button';
+          var open = !!openTiles[it.id];
+          t.className = 'dex-tile' + (open ? ' open' : '');
+          t.setAttribute('aria-expanded', open ? 'true' : 'false');
+          var html = '<span class="chip t-' + it.tier + '" style="justify-self:start">' + it.tier + '</span><span class="nm">' + esc(it.ch) + '</span><span class="ct">' + rec.n + '회 환생</span>';
+          if (open){
+            var rows = [];
+            if (it.ch !== it.n) rows.push(['원래 이름', it.n]);
+            rows.push(['분류', chan(g.ko) + (g.kind === 'rock' ? ' · ' + g.cls : '')]);
+            rows.push(['나올 확률', odds(it.p) + ' (' + pct(it.p) + ')']);
+            if (it.f) rows.push(['화학식', it.f]);
+            if (it.h) rows.push(['모스 경도', it.h]);
+            if (it.el) rows.push(['지각 속 ' + it.el, it.w.toLocaleString('ko-KR') + ' ppm']);
+            if (g.ronov) rows.push(['계열 부피', '지각의 ' + g.ronov + '%']);
+            if (g.id === 'mineral') rows.push(['지각 광물 부피', it.w + '%' + (it.w < 4 ? ' (세부 비율 추정)' : '')]);
+            rows.push(['처음 만난 환생', '#' + rec.first]);
+            html += '<div class="dex-detail"><dl>' + rows.map(function(rw){ return '<dt>' + esc(rw[0]) + '</dt><dd>' + esc(rw[1]) + '</dd>'; }).join('') + '</dl><p>' + esc(chan(it.t)) + '</p></div>';
+          }
+          t.innerHTML = html;
+          t.addEventListener('click', function(){
+            openTiles[it.id] = !openTiles[it.id];
+            renderDex();
+          });
+        }
+        grid.appendChild(t);
+      });
+      det.appendChild(grid);
+      box.appendChild(det);
     });
-    $('dexsum').textContent = '수집 ' + got + ' / ' + ROCKS.length + '종 · 이 브라우저에만 저장됩니다';
+    $('dexsum').textContent = '수집 ' + got + ' / ' + ITEM_LIST.length + '종 · SSR 이상 ' + top + '종 · 모은 찬희를 누르면 정보가 펼쳐집니다 · 이 브라우저에만 저장됩니다';
   }
 
   function renderHistory(){
@@ -607,56 +1007,86 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
     }
     state.hist.slice(0,10).forEach(function(h){
       var li = document.createElement('li');
-      li.innerHTML = '<span class="hn">#' + h.n + '</span><span class="ht"><span class="chip t-' + h.t + '" style="font-size:10px;padding:0 5px">' + h.t + '</span> ' + esc(h.k) + ' · ' + esc(h.p) + ' · ' + esc(h.d) + '</span>';
+      li.innerHTML = '<span class="hn">#' + h.n + '</span><span class="ht"><span class="chip hchip t-' + h.t + '">' + h.t + '</span> ' + esc(h.k) + ' · ' + esc(h.p) + ' · ' + esc(h.d) + '</span>';
       ul.appendChild(li);
     });
   }
 
-  function renderBars(){
-    var box = $('bars'); box.innerHTML = '';
-    var max = ROCKS[0].pct;
-    ROCKS.forEach(function(rk){
+  function barRows(box, rows, max, nowId){
+    box.innerHTML = '';
+    rows.forEach(function(rw){
       var row = document.createElement('div');
-      row.className = 'bar-row' + (current && current.rock.id === rk.id ? ' now' : '');
-      row.innerHTML = '<span class="bn">' + esc(rk.ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + (rk.pct/max*100) + '%"></span></span><span class="pc">' + rk.pct + '%</span>';
+      row.className = 'bar-row' + (rw.id === nowId ? ' now' : '');
+      row.innerHTML = '<span class="bn">' + esc(rw.name) + '</span><span class="track"><span class="fill" style="width:' + (rw.v/max*100) + '%"></span></span><span class="pc">' + rw.v + '%</span>';
       box.appendChild(row);
     });
+  }
+  function renderBars(){
+    var rocks = GROUPS.filter(function(g){ return g.ronov; });
+    var nowG = current ? current.item.g.id : null;
+    barRows($('bars'), rocks.map(function(g){ return {id:g.id, name:chan(g.ko).replace(/ 계열.*$/,''), v:g.ronov}; }), rocks[0].ronov, nowG);
+    var mins = GROUPS.filter(function(g){ return g.id === 'mineral'; })[0].items.slice().sort(function(a,b){ return b.w - a.w; });
+    barRows($('mbars'), mins.map(function(it){ return {id:it.id, name:it.ch, v:it.w}; }), mins[0].w, current ? current.item.id : null);
   }
 
   function renderClassRow(){
     var sums = {};
-    ROCKS.forEach(function(r){ sums[r.cls] = (sums[r.cls]||0) + r.pct; });
+    GROUPS.forEach(function(g){ if (g.ronov) sums[g.cls] = (sums[g.cls]||0) + g.ronov; });
     $('clsrow').innerHTML = Object.keys(sums).map(function(k){ return '<span>' + k + ' <b class="num">' + sums[k].toFixed(1) + '%</b></span>'; }).join('');
   }
 
   function renderCount(){ $('count').textContent = '환생 ' + state.count.toLocaleString('ko-KR') + '회'; }
 
+  function serialize(r){
+    var o = {};
+    for (var k in r) if (k !== 'item') o[k] = r[k];
+    return o;
+  }
+
   $('roll').addEventListener('click', function(){
+    if (state.final) return;
     var btn = this, card = $('card');
     btn.disabled = true;
     card.classList.add('rolling');
     setTimeout(function(){
-      var r = roll();
+      var r = roll(), it = r.item;
       state.count++;
-      state.dex[r.rock.id] = (state.dex[r.rock.id]||0) + 1;
-      state.hist.unshift({n:state.count, t:r.rock.tier, k:r.rock.ko, p:r.place, d:fmtDepth(r.d)});
+      var rec = state.dex[it.id] || {n:0, first:state.count};
+      rec.n++; state.dex[it.id] = rec;
+      openCats[it.g.id] = true;
+      state.hist.unshift({n:state.count, t:it.tier, k:it.ch, p:r.place, d:r.d === 0 ? '지표 위' : fmtDepth(r.d)});
       state.hist = state.hist.slice(0,30);
+      var top = it.tier === 'SSR' || it.tier === 'UR';
+      if (top){ var f = serialize(r); f.n = state.count; state.final = f; }
       save();
       $('exnote').hidden = true;
       $('docno').textContent = '발급번호 ' + String(state.count).padStart(6,'0') + ' / 9.4×10²¹';
       card.classList.remove('rolling');
       render(r, true);
       renderDex(); renderHistory(); renderCount();
-      btn.disabled = false;
-      btn.textContent = '한 번 더 태어나기';
+      if (top){ renderLock(); showFx(r); }
+      else { btn.disabled = false; btn.textContent = '한 번 더 태어나기'; }
     }, 380);
   });
+  $('fxok').addEventListener('click', hideFx);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('fx').hidden) hideFx(); });
 
-  // 첫 화면: 기록에 남기지 않는 예시 한 번
+  // ---------- 시작 ----------
+  $('dextotal').textContent = ITEM_LIST.length;
+  $('rule').innerHTML = '<b>SSR 이상</b>이 나오면 그 생으로 확정되어 다시 환생할 수 없습니다. 한 번 환생할 때 SSR 이상이 나올 확률은 ' + odds(P_TOP) + '입니다.';
   renderClassRow();
-  render(roll(), false);
-  renderDex(); renderHistory(); renderCount();
-  if (state.count) $('roll').textContent = '한 번 더 태어나기';
+  if (state.final && ITEMS[state.final.iid]){
+    var fr = {}; for (var k in state.final) fr[k] = state.final[k];
+    fr.item = ITEMS[fr.iid];
+    $('exnote').hidden = true;
+    $('docno').textContent = '발급번호 ' + String(fr.n).padStart(6,'0') + ' / 9.4×10²¹';
+    render(fr, false);
+  } else {
+    state.final = null;
+    render(roll(), false);   // 기록에 남기지 않는 예시
+    if (state.count) $('roll').textContent = '한 번 더 태어나기';
+  }
+  renderDex(); renderHistory(); renderCount(); renderLock();
 })();
 </script>
 
