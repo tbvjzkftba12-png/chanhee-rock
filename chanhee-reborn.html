@@ -72,6 +72,28 @@ button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outli
 .count{font-family:var(--f-mono);color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
 .rule{margin:10px 0 0;font-size:13px;color:var(--muted)}
 .rule b{color:var(--t-ssr)}
+.ticket-row{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:12px}
+#ten{font-family:var(--f-display);font-size:18px;padding:10px 22px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--muted);cursor:not-allowed;transition:transform .12s}
+#ten.ready{border-color:var(--t-ssr);color:var(--t-ssr);cursor:pointer;box-shadow:0 0 0 3px color-mix(in srgb,var(--t-ssr) 18%,transparent)}
+#ten.ready:hover:not(:disabled){transform:translateY(-2px)}
+#ten.ready:disabled{opacity:.55;cursor:not-allowed}
+.prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);min-width:0}
+.prog-bar{width:120px;height:8px;border-radius:999px;background:color-mix(in srgb,var(--line) 60%,transparent);overflow:hidden;flex:none}
+.prog-bar span{display:block;height:100%;background:var(--t-ssr);transition:width .3s}
+.ten-box{display:grid;gap:10px}
+.ten-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ten-head h2{margin:0}
+.ten-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media (max-width:640px){.ten-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ten-tile{border:1px solid var(--line);border-radius:6px;padding:9px 10px;display:grid;gap:3px;align-content:start;background:var(--paper);text-align:left;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.ten-tile:hover{border-color:var(--muted)}
+.ten-tile.sel{outline:2px solid var(--accent);outline-offset:1px}
+.ten-tile.top-SSR{border-color:var(--t-ssr);box-shadow:0 0 14px color-mix(in srgb,var(--t-ssr) 30%,transparent)}
+.ten-tile.top-UR{border-color:var(--t-ur);box-shadow:0 0 14px color-mix(in srgb,var(--t-ur) 30%,transparent)}
+.ten-tile .nm{font-weight:700;font-size:14px;overflow-wrap:anywhere}
+.ten-tile .pl{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:90;background:var(--ink);color:var(--bg);font-family:var(--f-display);font-size:18px;padding:12px 22px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.25);border:2px solid var(--t-ssr);white-space:nowrap;animation:toastpop .5s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes toastpop{0%{transform:translate(-50%,30px) scale(.8);opacity:0}100%{transform:translate(-50%,0) scale(1);opacity:1}}
 
 .card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:18px;transition:opacity .25s,filter .25s,box-shadow .4s}
 .card.rolling{opacity:.35;filter:blur(2px)}
@@ -178,6 +200,7 @@ button.dex-tile:hover{border-color:var(--muted)}
 @keyframes fxshine{to{background-position:-200% 0}}
 @media (prefers-reduced-motion: reduce){
   #marker,.card,#roll{transition:none}
+  .toast{animation:none}
   .fx-rays,.fx-flash,.fx-tier,.fx-kicker,.fx-name,.fx-msg,.fx-odds,#fxok{animation:none}
 }
 </style>
@@ -193,8 +216,17 @@ button.dex-tile:hover{border-color:var(--muted)}
       <button id="roll" type="button">찬희로 다시 태어나기</button>
       <span class="count" id="count">환생 0회</span>
     </div>
+    <div class="ticket-row">
+      <button id="ten" type="button" disabled>10연 뽑기</button>
+      <div class="prog"><span class="prog-bar"><span id="progfill" style="width:0"></span></span><span id="progtxt"></span></div>
+    </div>
     <p class="rule" id="rule"></p>
   </header>
+
+  <section class="ten-box" id="tenbox" hidden>
+    <div class="ten-head"><h2>10연 결과</h2><span class="small" id="tensum"></span></div>
+    <div class="ten-grid" id="tengrid"></div>
+  </section>
 
   <section class="card" id="card" aria-live="polite">
     <div class="card-head">
@@ -259,6 +291,8 @@ button.dex-tile:hover{border-color:var(--muted)}
     <p><b>추정으로 정한 값</b> — 찬희 1개가 통째로 광물 결정일 확률 5%, 광찬희 1%, 보찬희 0.1%, 화찬희 0.05%, 운찬희 0.01%, 사람 손을 탄 찬희 0.01%(나머지 93.83%는 암찬희를 실제 구성비대로 나눔). 각 암찬희 계열 안의 세부 비율, '기타 규산염·비규산염' 광물의 세부 비율, 보찬희끼리의 비율도 추정입니다. 암찬희별 대륙·대륙붕·해양 배분과 깊이 범위, 지온 경사(대륙 약 30 °C/km에서 점점 완만), 압력(27 MPa/km, 바닷물 10 MPa/km), 침식 속도 0.05 mm/년, 해양지각 나이 0~1.8억 년, 대륙 결정질 암찬희 나이 0~40.3억 년도 단순화한 가정입니다. 놀이용 계산이며 학술 결과가 아닙니다.</p>
   </section>
 </main>
+
+<div class="toast" id="toast" hidden role="status"></div>
 
 <div class="fx" id="fx" hidden role="dialog" aria-modal="true" aria-labelledby="fxname">
   <div class="fx-glow"></div>
@@ -560,10 +594,12 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
   // ---------- 저장 (이 브라우저에만) ----------
   var KEY = 'random-chanhee-reborn-v2';
-  var state = {count:0, dex:{}, hist:[]};
+  var TICKET_EVERY = 50;
+  var state = {count:0, dex:{}, hist:[], prog:0, tickets:0};
   try {
     var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (saved && typeof saved.count === 'number') state = {count:saved.count, dex:saved.dex||{}, hist:saved.hist||[], final:saved.final||null};
+    if (saved && typeof saved.count === 'number') state = {count:saved.count, dex:saved.dex||{}, hist:saved.hist||[], final:saved.final||null,
+      prog: typeof saved.prog === 'number' ? saved.prog : saved.count % TICKET_EVERY, tickets: saved.tickets || 0};
   } catch(e) {}
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }
 
@@ -818,12 +854,12 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
   // ---------- SSR 이상 연출 ----------
   var REDUCE = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   var fxRun = null, fxTimer = null, FX_HOLD = 3;
-  function showFx(r){
+  function showFx(r, note){
     var it = r.item, fx = $('fx');
     fx.className = 'fx ' + it.tier;
     $('fxtier').textContent = it.tier;
     $('fxname').textContent = it.ch;
-    $('fxmsg').textContent = it.ch + '(으)로 태어났습니다. 연타로 넘어가지 않게 잠깐 멈춥니다.';
+    $('fxmsg').textContent = note || (it.ch + '(으)로 태어났습니다. 연타로 넘어가지 않게 잠깐 멈춥니다.');
     $('fxodds').textContent = '이 찬희가 나올 확률 ' + odds(it.p);
     fx.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -1045,37 +1081,119 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
 
   function renderCount(){ $('count').textContent = '환생 ' + state.count.toLocaleString('ko-KR') + '회'; }
 
+  var busy = false;
+  function setBusy(b){
+    busy = b;
+    $('roll').disabled = b;
+    $('ten').disabled = b || state.tickets < 1;
+  }
+  function renderTickets(){
+    var ten = $('ten');
+    ten.textContent = '10연 뽑기 · 뽑기권 ' + state.tickets + '장';
+    ten.classList.toggle('ready', state.tickets > 0);
+    ten.disabled = busy || state.tickets < 1;
+    $('progfill').style.width = (state.prog / TICKET_EVERY * 100) + '%';
+    $('progtxt').textContent = '한 번씩 ' + TICKET_EVERY + '번 뽑으면 10연뽑기권 1장 · 지금 ' + state.prog + ' / ' + TICKET_EVERY;
+  }
+  var toastTimer = null;
+  function toast(msg){
+    var t = $('toast');
+    t.hidden = true; void t.offsetWidth;
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.hidden = true; }, 2600);
+  }
+
+  // 환생 한 번을 기록에 반영
+  function applyRoll(r){
+    var it = r.item;
+    state.count++;
+    r.n = state.count;
+    var rec = state.dex[it.id] || {n:0, first:state.count};
+    rec.n++; state.dex[it.id] = rec;
+    openCats[it.g.id] = true;
+    state.hist.unshift({n:state.count, t:it.tier, k:it.ch, p:r.place, d:r.d === 0 ? '지표 위' : fmtDepth(r.d)});
+    state.hist = state.hist.slice(0,30);
+  }
+  var RANK = {N:0, R:1, SR:2, SSR:3, UR:4};
+  function isTop(it){ return it.tier === 'SSR' || it.tier === 'UR'; }
+  function showOnCard(r, animate){
+    $('exnote').hidden = true;
+    $('docno').textContent = '발급번호 ' + String(r.n).padStart(6,'0') + ' / 9.4×10²¹';
+    render(r, animate);
+    markCard(r.item);
+  }
+
+  // 한 번 뽑기: 50번마다 10연뽑기권 1장
   $('roll').addEventListener('click', function(){
-    if (!$('fx').hidden) return;
+    if (busy || !$('fx').hidden) return;
     var btn = this, card = $('card');
-    btn.disabled = true;
+    setBusy(true);
     card.classList.add('rolling');
     setTimeout(function(){
       var r = roll(), it = r.item;
-      state.count++;
-      var rec = state.dex[it.id] || {n:0, first:state.count};
-      rec.n++; state.dex[it.id] = rec;
-      openCats[it.g.id] = true;
-      state.hist.unshift({n:state.count, t:it.tier, k:it.ch, p:r.place, d:r.d === 0 ? '지표 위' : fmtDepth(r.d)});
-      state.hist = state.hist.slice(0,30);
-      var top = it.tier === 'SSR' || it.tier === 'UR';
+      applyRoll(r);
+      state.prog++;
+      var earned = false;
+      if (state.prog >= TICKET_EVERY){ state.prog -= TICKET_EVERY; state.tickets++; earned = true; }
       save();
-      $('exnote').hidden = true;
-      $('docno').textContent = '발급번호 ' + String(state.count).padStart(6,'0') + ' / 9.4×10²¹';
       card.classList.remove('rolling');
-      render(r, true);
-      markCard(it);
-      renderDex(); renderHistory(); renderCount();
+      $('tenbox').hidden = true;
+      showOnCard(r, true);
+      renderDex(); renderHistory(); renderCount(); renderTickets();
       btn.textContent = '한 번 더 태어나기';
-      if (top) showFx(r);
-      else btn.disabled = false;
+      if (earned) toast('10연뽑기권 1장 획득! (보유 ' + state.tickets + '장)');
+      if (isTop(it)) showFx(r);
+      else setBusy(false);
     }, 380);
   });
+
+  // 10연 뽑기: 뽑기권 1장으로 10번
+  var tenResults = [];
+  function renderTen(sel){
+    var grid = $('tengrid'); grid.innerHTML = '';
+    tenResults.forEach(function(r){
+      var it = r.item, b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ten-tile' + (isTop(it) ? ' top-' + it.tier : '') + (r === sel ? ' sel' : '');
+      b.innerHTML = '<span class="chip t-' + it.tier + '" style="justify-self:start">' + it.tier + '</span><span class="nm">' + esc(it.ch) + '</span><span class="pl">' + esc(placeName(r)) + '</span>';
+      b.addEventListener('click', function(){ showOnCard(r, true); renderTen(r); });
+      grid.appendChild(b);
+    });
+    var cnt = {};
+    tenResults.forEach(function(r){ cnt[r.item.tier] = (cnt[r.item.tier]||0) + 1; });
+    $('tensum').textContent = ['UR','SSR','SR','R','N'].filter(function(t){ return cnt[t]; }).map(function(t){ return t + ' ' + cnt[t]; }).join(' · ') + ' · 칸을 누르면 아래 등본에 표시';
+  }
+
+  $('ten').addEventListener('click', function(){
+    if (busy || !$('fx').hidden || state.tickets < 1) return;
+    var card = $('card');
+    state.tickets--;
+    setBusy(true);
+    card.classList.add('rolling');
+    setTimeout(function(){
+      tenResults = [];
+      for (var i=0;i<10;i++){ var r = roll(); applyRoll(r); tenResults.push(r); }
+      save();
+      var best = tenResults.slice().sort(function(a,b){ return (RANK[b.item.tier]-RANK[a.item.tier]) || (a.item.p - b.item.p); })[0];
+      card.classList.remove('rolling');
+      $('tenbox').hidden = false;
+      renderTen(best);
+      showOnCard(best, true);
+      renderDex(); renderHistory(); renderCount(); renderTickets();
+      $('roll').textContent = '한 번 더 태어나기';
+      $('tenbox').scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block:'start'});
+      var tops = tenResults.filter(function(r){ return isTop(r.item); }).length;
+      if (tops) showFx(best, '10연 중 SSR 이상 ' + tops + '개! 가장 귀한 것은 ' + best.item.ch + '입니다. 연타로 넘어가지 않게 잠깐 멈춥니다.');
+      else setBusy(false);
+    }, 600);
+  });
+
   $('fxok').addEventListener('click', function(){
     if (this.disabled) return;
     hideFx();
     // 창이 닫힌 뒤에도 잠깐 쉬었다가 다시 누를 수 있게
-    setTimeout(function(){ $('roll').disabled = false; }, 600);
+    setTimeout(function(){ setBusy(false); }, 600);
   });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !$('fx').hidden && !$('fxok').disabled) $('fxok').click(); });
 
@@ -1086,7 +1204,7 @@ transform:{scale:[.036003600360036005,.016927109510951093],translate:[-180,-85.6
   if (state.final){ delete state.final; save(); }   // 예전 잠금 기록은 풀어 준다
   render(roll(), false);   // 기록에 남기지 않는 예시
   if (state.count) $('roll').textContent = '한 번 더 태어나기';
-  renderDex(); renderHistory(); renderCount();
+  renderDex(); renderHistory(); renderCount(); renderTickets();
 })();
 </script>
 
