@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="안녕하세요, AI 닥터 김닥터모입니다. 풋살하다 다친 래규 왼쪽 무릎을 정리했습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tbvjzkftba12-png.github.io/chanhee-rock/knee/">
+<meta property="og:title" content="AI 닥터 김닥터모 · 래규 무릎 판독지">
+<meta property="og:description" content="풋살하다 다친 왼쪽 무릎, 원인부터 재활·병원까지 정리했습니다.">
+<meta property="og:image" content="https://tbvjzkftba12-png.github.io/chanhee-rock/knee/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>래규 무릎 판독지</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 판독지(라이트박스) 한 장을 위에서 아래로 넘겨 읽는 단일 컬럼, 섹션마다 움직이는 도해 하나 */
+:root{
+  --bg:#F3F6F7; --surface:#FFFFFF; --ink:#13202A; --muted:#5B6A74; --line:#D4DDE2;
+  --hurt:#D4473A; --hurt-soft:#F7DEDA; --bone:#1E7484; --bone-soft:#DCEDF0;
+  --lv1:#2F8F5B; --lv2:#D08A12; --lv3:#C7372B;
+  --film:#0F1A21; --film-ink:#E7EEF2;
+  --f-display:"Noto Serif KR","Nanum Myeongjo",serif;
+  --f-body:"IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D151B; --surface:#14202A; --ink:#E5ECF0; --muted:#94A4AE; --line:#24333E;
+  --hurt:#FF6B5D; --hurt-soft:#3A1E1C; --bone:#5BB8C8; --bone-soft:#15303A;
+  --lv1:#4CC184; --lv2:#F0A93A; --lv3:#FF6B5D; --film:#081016; --film-ink:#E7EEF2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D151B; --surface:#14202A; --ink:#E5ECF0; --muted:#94A4AE; --line:#24333E;
+  --hurt:#FF6B5D; --hurt-soft:#3A1E1C; --bone:#5BB8C8; --bone-soft:#15303A;
+  --lv1:#4CC184; --lv2:#F0A93A; --lv3:#FF6B5D; --film:#081016; --film-ink:#E7EEF2; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;margin:0;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:920px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h2{font-size:1.75rem;font-weight:900}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+a{color:var(--bone)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--hurt)}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.stack{display:flex;flex-direction:column;gap:14px}
+section{padding-block:56px 8px;scroll-margin-top:64px}
+section>header{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
+.lead{max-width:62ch}
+
+/* 상단 내비 */
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-block:1px solid var(--line);margin-top:28px}
+nav.toc .in{max-width:920px;margin:0 auto;padding:10px 20px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.mtab{flex:none;font:inherit;font-size:.92rem;font-weight:500;color:var(--muted);padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:flex;gap:6px;align-items:baseline;transition:color .2s,border-color .2s,transform .2s}
+.mtab .n{font-size:.7rem;color:var(--muted)}
+.mtab:hover{color:var(--ink);transform:translateY(-1px)}
+.mtab[aria-selected="true"]{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.mtab[aria-selected="true"] .n{color:var(--hurt)}
+.mtab:focus-visible{outline:2px solid var(--bone);outline-offset:2px}
+.panels section{padding-block:28px 8px}
+.panels section.enter{animation:panelIn .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes panelIn{from{opacity:.2;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:32px;padding-top:16px;border-top:1px dashed var(--line)}
+.pager .btn{display:flex;gap:6px;align-items:center}
+.pager .btn[hidden]{display:none}
+.hero-wrap{padding-bottom:0}
+
+/* 오프닝: 김닥터모 */
+.opening{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center;padding-block:36px 12px}
+.opening>*{min-width:0}
+.doc{position:relative;width:100%;max-width:260px;aspect-ratio:1;margin:0 auto}
+.doc img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid var(--surface);box-shadow:0 18px 40px -18px color-mix(in srgb,var(--bone) 70%,transparent);animation:bob 4s ease-in-out infinite}
+.doc .halo{position:absolute;inset:-10px;border-radius:50%;border:2px dashed var(--bone);opacity:.6;animation:spin 18s linear infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-6px) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(0)}75%{transform:translateY(-6px) rotate(1.5deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.talk{display:flex;flex-direction:column;gap:14px}
+.bubble{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.bubble::before{content:"";position:absolute;left:-9px;top:38px;width:16px;height:16px;background:var(--surface);border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+.bubble .hi{font-family:var(--f-display);font-weight:900;font-size:clamp(1.4rem,4vw,2rem);line-height:1.35}
+.bubble .hi b{color:var(--bone)}
+.bubble .sub{color:var(--muted)}
+.caret::after{content:"";display:inline-block;width:2px;height:1em;background:var(--hurt);margin-left:3px;vertical-align:-2px;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.row-open{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn.go{background:var(--ink);color:var(--bg);font-weight:700;padding:9px 18px}
+.btn.go:hover{background:var(--bone);border-color:var(--bone)}
+@media (max-width:760px){
+  .opening{grid-template-columns:1fr;gap:18px;text-align:left}
+  .doc{max-width:190px}
+  .bubble::before{left:50%;top:-9px;transform:translateX(-50%) rotate(135deg)}
+}
+
+/* 히어로 */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:28px;align-items:center;padding-block:36px 8px}
+.hero>*{min-width:0}
+.hero h1{font-size:clamp(2.1rem,6vw,3.3rem);font-weight:900;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--hurt)}
+.chart-meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:.9rem;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.chart-meta dt{color:var(--muted);font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;padding-top:3px}
+.chart-meta dd{margin:0}
+.film{position:relative;border-radius:14px;overflow:hidden;background:var(--film);aspect-ratio:16/9;max-width:100%}
+.film video{width:100%;height:100%;object-fit:cover;display:block}
+.film .tag{position:absolute;left:12px;top:10px;font-family:var(--f-mono);font-size:.7rem;color:var(--film-ink);opacity:.8;letter-spacing:.08em}
+.verdict{margin-top:18px;padding:16px 18px;border-radius:12px;background:var(--hurt-soft);display:flex;flex-direction:column;gap:6px}
+.verdict b{color:var(--hurt)}
+.disclaimer{margin-top:14px;font-size:.82rem;color:var(--muted)}
+
+/* 카드 */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+
+/* 사건 재구성 */
+.case{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
+.case>*{min-width:0}
+.kick svg{width:100%;height:auto;display:block}
+.kick{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px}
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.timeline li{display:grid;grid-template-columns:22px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.timeline li::before{content:"";position:absolute;left:10px;top:20px;bottom:0;width:2px;background:var(--line)}
+.timeline li:last-child::before{display:none}
+.timeline .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--bone);background:var(--surface);margin-top:2px}
+.timeline li.key .dot{border-color:var(--hurt);background:var(--hurt);box-shadow:0 0 0 0 var(--hurt);animation:ping 2.2s infinite}
+.timeline .q{font-size:.85rem;color:var(--muted)}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--hurt) 60%,transparent)}80%,100%{box-shadow:0 0 0 12px transparent}}
+
+/* 해부도 핫스팟 */
+.anat{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;max-width:100%}
+.anat img{display:block;width:100%;height:auto;transform:scaleX(-1)}
+.hs{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:0;padding:0;cursor:pointer;background:transparent}
+.hs::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--bone);border:2px solid #fff}
+.hs::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--bone);animation:ring 2s infinite}
+.hs.pain::before{background:var(--hurt)}
+.hs.pain::after{border-color:var(--hurt)}
+.hs[aria-pressed="true"]::before{transform:scale(1.35)}
+.hs:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@keyframes ring{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.anat .lbl{position:absolute;left:10px;bottom:8px;font-family:var(--f-mono);font-size:.68rem;color:#4b5a63;background:#ffffffd9;padding:2px 6px;border-radius:4px}
+.part-info{min-height:150px}
+.part-info .nm{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--f-mono);font-size:.72rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.chip.hot{border-color:var(--hurt);color:var(--hurt)}
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+.plates>*{min-width:0}
+.plate{margin:0;display:flex;flex-direction:column;gap:8px}
+.plate .pic{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+.plate img{display:block;margin:0 auto}
+.plate figcaption{font-size:.85rem;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.8rem}
+.legend span b{font-family:var(--f-mono);font-weight:500;color:var(--ink)}
+
+/* 기전 */
+.mech{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mech>*{min-width:0}
+.mech .card{display:flex;flex-direction:column;gap:8px}
+.mech svg{width:100%;height:auto;max-height:120px}
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.bar{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;font-size:.9rem}
+.bar .track{height:14px;border-radius:7px;background:var(--bone-soft);overflow:hidden}
+.bar .fill{height:100%;border-radius:7px;background:var(--bone);transform-origin:left;animation:grow 1.4s cubic-bezier(.2,.8,.2,1) both}
+.bar.top .fill{background:var(--hurt)}
+.bar .v{text-align:right}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 중증도 게이지 */
+.grade{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:stretch}
+.grade>*{min-width:0}
+.gauge-col{display:flex;flex-direction:column;align-items:center;gap:10px}
+.gauge{position:relative;width:64px;height:360px;border-radius:32px;background:linear-gradient(to top,var(--lv1) 0%,var(--lv1) 33.3%,var(--lv2) 33.3%,var(--lv2) 66.6%,var(--lv3) 66.6%);cursor:pointer;touch-action:none;outline:none}
+.gauge::after{content:"";position:absolute;inset:0;border-radius:32px;background:linear-gradient(to top,transparent 0 var(--pct,50%),color-mix(in srgb,var(--surface) 72%,transparent) var(--pct,50%));transition:background .2s}
+.gauge:focus-visible{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
+.gauge .thumb{position:absolute;left:50%;width:84px;height:30px;border-radius:15px;background:var(--surface);border:2px solid var(--ink);transform:translate(-50%,50%);bottom:var(--pct,50%);z-index:2;display:grid;place-items:center;font-weight:700;font-size:.9rem;transition:bottom .35s cubic-bezier(.3,1.4,.5,1)}
+.gauge .tick{position:absolute;left:100%;margin-left:10px;transform:translateY(50%);font-family:var(--f-display);font-weight:900;font-size:1.25rem;white-space:nowrap}
+.gauge .me{position:absolute;right:100%;margin-right:8px;transform:translateY(50%);font-size:.72rem;font-family:var(--f-mono);color:var(--hurt);white-space:nowrap;transition:bottom .35s}
+.gauge-help{font-size:.78rem;color:var(--muted);text-align:center}
+.lv-card{border-radius:14px;padding:20px;border:2px solid var(--lvc,var(--lv2));background:var(--surface);display:flex;flex-direction:column;gap:12px;transition:border-color .3s}
+.lv-card h3{font-size:1.5rem;color:var(--lvc,var(--lv2))}
+.lv-card dl{display:grid;grid-template-columns:96px 1fr;gap:8px 14px;margin:0}
+.lv-card dt{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);padding-top:4px}
+.lv-card dd{margin:0}
+.lv-card .fit{padding:10px 12px;border-radius:10px;background:var(--hurt-soft);font-size:.92rem}
+.lv-anim{animation:swap .35s ease}
+@keyframes swap{from{opacity:.25;transform:translateY(6px)}to{opacity:1;transform:none}}
+.check{margin-top:18px}
+.check ul{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check li{min-width:0}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--surface);font-size:.92rem;line-height:1.5}
+.check input{margin-top:3px;accent-color:var(--hurt);width:17px;height:17px;flex:none}
+.check label:has(input:checked){border-color:var(--hurt)}
+.score{margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.score .pill{font-weight:700;padding:4px 12px;border-radius:999px;color:#fff;background:var(--lvc,var(--lv2))}
+.btn{font:inherit;font-size:.88rem;padding:7px 14px;border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn:focus-visible{outline:2px solid var(--bone);outline-offset:2px}
+
+/* 재활 */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tab{font:inherit;font-size:.92rem;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--bone);color:var(--ink);box-shadow:inset 0 -3px 0 var(--bone)}
+.tab:focus-visible{outline:2px solid var(--bone);outline-offset:2px}
+.ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ex-grid>*{min-width:0}
+.ex{display:flex;flex-direction:column;gap:8px}
+.ex svg{width:100%;height:auto;background:var(--bone-soft);border-radius:10px}
+.ex .dose{font-family:var(--f-mono);font-size:.8rem;color:var(--bone)}
+.dont{margin-top:16px;border-left:4px solid var(--hurt);padding:12px 16px;background:var(--surface);border-radius:0 12px 12px 0}
+.dont ul{margin:6px 0 0;padding-left:20px}
+.stroke{stroke:var(--ink)}
+.fillink{fill:var(--ink)}
+
+/* 약 */
+.med h3{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.med ul{margin:8px 0 0;padding-left:18px}
+.warnlist{margin-top:16px}
+.warnlist ol{margin:8px 0 0;padding-left:20px}
+
+/* 병원 */
+.hosp{display:flex;flex-direction:column;gap:8px}
+.hosp .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.copyable{font-family:var(--f-mono);user-select:all;background:var(--bone-soft);padding:2px 8px;border-radius:6px}
+.script{white-space:pre-wrap;font-size:.92rem;background:var(--surface);border:1px dashed var(--bone);border-radius:12px;padding:16px;margin:10px 0 0}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:s}
+.steps>li{min-width:0;counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:.92rem}
+.steps>li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--bone);color:var(--surface);font-family:var(--f-mono);font-size:.8rem;margin-bottom:6px}
+
+.src ol{padding-left:20px;font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+footer{margin-top:40px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+
+@media (max-width:760px){
+  .hero,.case,.grid2,.plates,.mech,.ex-grid,.grid3{grid-template-columns:1fr}
+  .grade{grid-template-columns:1fr}
+  .gauge-col{flex-direction:row;justify-content:center;gap:56px}
+  .gauge{height:300px}
+  .check ul{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .bar{grid-template-columns:110px 1fr 42px}
+  .lv-card dl{grid-template-columns:1fr}
+  .lv-card dt{padding-top:0}
+  .kick{max-width:340px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<main class="wrap hero-wrap">
+
+<div class="opening">
+  <div class="doc">
+    <span class="halo" aria-hidden="true"></span>
+    <img src="img/doctor.jpg" width="720" height="720" alt="흰 가운에 청진기를 걸고 무릎 엑스레이 태블릿을 들고 손을 흔드는 3D 의사 캐릭터">
+  </div>
+  <div class="talk">
+    <div class="bubble">
+      <p class="hi" id="hi">안녕하세요, AI 닥터 <b>김닥터모</b>입니다.</p>
+      <p class="sub" id="hiSub">오늘은 풋살하다 다친 래규 님의 왼쪽 무릎을 같이 살펴보겠습니다. 아래 판독지부터 보시고, 궁금한 항목은 탭을 눌러 열어 보세요.</p>
+    </div>
+    <div class="row-open">
+      <button class="btn go" type="button" id="goBtn">진료 시작 ↓</button>
+      <span class="small muted">진짜 의사가 아니라, 공개 의학 자료를 정리해 주는 AI 캐릭터입니다.</span>
+    </div>
+  </div>
+</div>
+
+<div class="hero" id="heroTop">
+  <div>
+    <div class="eyebrow">무릎 판독지 · 참고용</div>
+    <h1>래규 <em>왼쪽 무릎</em> 판독지</h1>
+    <dl class="chart-meta">
+      <dt>부위</dt><dd>왼쪽 무릎 바깥쪽, 접히는 주름 바로 앞</dd>
+      <dt>상황</dt><dd>풋살 중 다리를 뻗다가 "똑" 소리</dd>
+      <dt>경과</dt><dd>다친 날 부음 · 잘 펴짐 · 누르면 아픔 · 뛰거나 계단 오를 때 아픔</dd>
+      <dt>작성</dt><dd class="mono">2026-10-08 · 단톡 대화와 공개 자료 기준</dd>
+    </dl>
+    <div class="verdict">
+      <span class="eyebrow" style="color:inherit">추정</span>
+      <p><b>바깥쪽 연골판 또는 바깥쪽 인대의 부분 손상</b>일 가능성이 가장 높고, 다친 날 부었기 때문에 <b>십자인대 손상도 배제할 수 없습니다.</b> 아래 '얼마나' 단계로는 <b>중</b>에 해당한다고 봅니다.</p>
+    </div>
+    <p class="disclaimer">의사가 쓴 진단서가 아닙니다. 대화 내용과 공개 의학 자료를 맞춰 본 참고용 정리이고, 확진은 정형외과 진찰과 MRI로만 할 수 있습니다.</p>
+  </div>
+  <div class="film">
+    <video src="img/hf_kick.mp4" autoplay muted loop playsinline aria-label="공을 차는 순간 무릎 바깥쪽에 힘이 몰리는 모습을 그린 3D 애니메이션"></video>
+    <span class="tag">AI 생성 애니메이션 · 기전 이해용</span>
+  </div>
+</div>
+</main>
+
+<nav class="toc" aria-label="항목"><div class="in" role="tablist" id="mainTabs">
+  <button class="mtab" role="tab" data-s="case"><span class="n mono">01</span>어쩌다가</button>
+  <button class="mtab" role="tab" data-s="where"><span class="n mono">02</span>어디가</button>
+  <button class="mtab" role="tab" data-s="why"><span class="n mono">03</span>왜</button>
+  <button class="mtab" role="tab" data-s="grade"><span class="n mono">04</span>얼마나</button>
+  <button class="mtab" role="tab" data-s="rehab"><span class="n mono">05</span>재활</button>
+  <button class="mtab" role="tab" data-s="meds"><span class="n mono">06</span>약</button>
+  <button class="mtab" role="tab" data-s="hospital"><span class="n mono">07</span>병원</button>
+  <button class="mtab" role="tab" data-s="sources"><span class="n mono">08</span>출처</button>
+</div></nav>
+
+<main class="wrap panels" id="panels">
+
+<!-- 1. 어쩌다가 -->
+<section id="case">
+  <header>
+    <div class="eyebrow">01 · 어쩌다가</div>
+    <h2>다친 순간 다시 보기</h2>
+    <p class="lead muted">단톡방 대화를 시간 순서대로 정리했습니다. 왼쪽 도해는 차는 다리가 쭉 펴지는 순간 무릎에 비트는 힘이 걸리는 모습을 단순화한 것입니다.</p>
+  </header>
+  <div class="case">
+    <div class="kick">
+      <svg viewBox="0 0 260 210" role="img" aria-label="차는 다리가 펴지는 순간 무릎에서 소리가 나는 도해">
+        <line x1="10" y1="196" x2="250" y2="196" stroke="var(--line)" stroke-width="3"/>
+        <!-- 디딤발 -->
+        <polyline points="112,52 104,124 108,192" fill="none" class="stroke" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".35"/>
+        <path d="M96 194 h28" class="stroke" stroke-width="8" stroke-linecap="round" opacity=".35"/>
+        <g opacity=".7"><path d="M92 202 l6 -5 M104 202 l6 -5 M116 202 l6 -5" stroke="var(--hurt)" stroke-width="2"/></g>
+        <!-- 몸통 -->
+        <line x1="112" y1="52" x2="104" y2="-10" class="stroke" stroke-width="12" stroke-linecap="round" opacity=".25"/>
+        <!-- 차는 다리 허벅지 -->
+        <line x1="116" y1="52" x2="150" y2="112" class="stroke" stroke-width="11" stroke-linecap="round"/>
+        <!-- 정강이(회전) -->
+        <g>
+          <line x1="150" y1="112" x2="150" y2="180" class="stroke" stroke-width="10" stroke-linecap="round"/>
+          <path d="M150 180 l18 4" class="stroke" stroke-width="8" stroke-linecap="round"/>
+          <animateTransform attributeName="transform" type="rotate" dur="2.8s" repeatCount="indefinite"
+            values="45 150 112; 45 150 112; -62 150 112; -58 150 112; 45 150 112" keyTimes="0;.25;.52;.75;1"
+            calcMode="spline" keySplines=".4 0 .6 1; .2 .9 .3 1; .4 0 .6 1; .4 0 .6 1"/>
+        </g>
+        <!-- 무릎 관절 -->
+        <circle cx="150" cy="112" r="9" fill="var(--surface)" class="stroke" stroke-width="3"/>
+        <!-- 똑 -->
+        <g>
+          <circle cx="150" cy="112" r="10" fill="none" stroke="var(--hurt)" stroke-width="3">
+            <animate attributeName="r" dur="2.8s" repeatCount="indefinite" values="10;10;10;34;34" keyTimes="0;.5;.52;.72;1"/>
+            <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;.5;.52;.72;1"/>
+          </circle>
+          <text x="176" y="96" font-family="var(--f-display)" font-weight="900" font-size="26" fill="var(--hurt)">똑!
+            <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;.5;.53;.7;1"/>
+          </text>
+          <path d="M136 128 a20 20 0 0 0 30 0" fill="none" stroke="var(--hurt)" stroke-width="2.5" marker-end="url(#arr)">
+            <animate attributeName="opacity" dur="2.8s" repeatCount="indefinite" values="0;0;1;0;0" keyTimes="0;.45;.52;.7;1"/>
+          </path>
+        </g>
+        <!-- 공 -->
+        <circle cx="226" cy="168" r="14" fill="var(--surface)" class="stroke" stroke-width="2.5">
+          <animate attributeName="cx" dur="2.8s" repeatCount="indefinite" values="226;226;226;290;226" keyTimes="0;.5;.53;.75;1"/>
+        </circle>
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="var(--hurt)"/></marker></defs>
+      </svg>
+    </div>
+    <ol class="timeline">
+      <li><span class="dot"></span><div><b>풋살 경기 중</b><p class="q">"풋살하다가 다리 뻗었는데"</p></div></li>
+      <li class="key"><span class="dot"></span><div><b>"똑" 소리와 함께 통증 시작</b><p class="q">"똑소리나면서", "접히는데 톡 끊어짐"</p></div></li>
+      <li class="key"><span class="dot"></span><div><b>다친 날 무릎이 부음</b><p class="q">"ㅇㅇ 첫날 부었었음". 판단에 가장 중요한 정보입니다.</p></div></li>
+      <li><span class="dot"></span><div><b>지금 상태</b><p>무릎은 끝까지 잘 펴지고, 바깥쪽을 누르면 아픕니다. 뛰거나 계단처럼 올라갈 때 통증이 있습니다. 하루 만 보 걷기는 하고 있습니다.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 2. 어디가 -->
+<section id="where">
+  <header>
+    <div class="eyebrow">02 · 어디가</div>
+    <h2>아픈 자리에 모여 있는 구조물</h2>
+    <p class="lead muted">왼쪽 무릎을 바깥쪽에서 본 그림입니다. 점을 누르면 설명이 바뀝니다. 빨간 점은 래규가 사진에서 가리킨 위치를 대략 옮겨 놓은 것입니다.</p>
+  </header>
+  <div class="grid2">
+    <div class="anat" id="anat">
+      <img src="img/knee_lateral.jpg" width="1200" height="671" alt="왼쪽 무릎 바깥쪽 해부 일러스트. 넙다리뼈, 정강뼈, 종아리뼈, 바깥쪽 연골판, 바깥쪽 인대, 허벅지 뒤 힘줄이 보인다">
+      <button class="hs pain" style="left:61%;top:43%" data-k="pain" aria-pressed="true" aria-label="래규가 아프다고 가리킨 곳"></button>
+      <button class="hs" style="left:49%;top:51%" data-k="lm" aria-pressed="false" aria-label="바깥쪽 연골판"></button>
+      <button class="hs" style="left:58.5%;top:55%" data-k="lcl" aria-pressed="false" aria-label="바깥쪽 인대"></button>
+      <button class="hs" style="left:66%;top:30%" data-k="bf" aria-pressed="false" aria-label="허벅지 뒤 바깥쪽 힘줄"></button>
+      <button class="hs" style="left:43%;top:38%" data-k="acl" aria-pressed="false" aria-label="전방십자인대"></button>
+      <span class="lbl">AI 생성 일러스트(좌우 반전) · 위치는 대략</span>
+    </div>
+    <div class="card part-info" id="partInfo" aria-live="polite"></div>
+  </div>
+
+  <div class="plates">
+    <figure class="plate">
+      <div class="pic"><img src="img/gray348.png" width="500" height="454" alt="그레이 해부학 348번 그림. 왼쪽 무릎을 뒤에서 본 모습으로 십자인대와 연골판이 보인다"></div>
+      <figcaption>
+        <b>실제 해부도</b> · 왼쪽 무릎을 뒤에서 본 모습(그레이 해부학, 1918)
+        <span class="legend" style="margin-top:6px">
+          <span><b>Lateral meniscus</b> 바깥쪽 연골판</span>
+          <span><b>Fibular collateral lig.</b> 바깥쪽 인대</span>
+          <span><b>Tendon of Popliteus</b> 오금근 힘줄</span>
+          <span><b>Ant. cruciate lig.</b> 전방십자인대</span>
+          <span><b>Post. cruciate lig.</b> 후방십자인대</span>
+        </span>
+      </figcaption>
+    </figure>
+    <figure class="plate">
+      <div class="pic"><img src="img/gray349.png" width="400" height="326" alt="그레이 해부학 349번 그림. 정강뼈 윗면을 위에서 본 모습으로 안쪽과 바깥쪽 연골판이 보인다"></div>
+      <figcaption>
+        <b>실제 해부도</b> · 정강뼈 윗면을 위에서 본 모습. 초승달 모양 두 개가 연골판입니다. 그림은 오른쪽 무릎이라 바깥쪽 연골판이 왼편에 있습니다(그레이 해부학, 1918). 무릎을 비틀면 이 연골판이 위아래 뼈 사이에 끼어 찢어집니다.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 3. 왜 -->
+<section id="why">
+  <header>
+    <div class="eyebrow">03 · 왜</div>
+    <h2>풋살에서 무릎 바깥쪽이 다치는 이유</h2>
+    <p class="lead muted">풋살은 좁은 코트에서 급하게 서고 방향을 바꾸는 운동입니다. 발이 바닥에 붙은 채 몸만 돌면 무릎이 그 회전을 다 받습니다.</p>
+  </header>
+  <div class="mech">
+    <div class="card">
+      <svg viewBox="0 0 160 110" aria-hidden="true">
+        <rect x="20" y="88" width="120" height="6" rx="3" fill="var(--line)"/>
+        <path d="M60 86 h40" class="stroke" stroke-width="8" stroke-linecap="round"/>
+        <line x1="80" y1="86" x2="80" y2="20" class="stroke" stroke-width="9" stroke-linecap="round" opacity=".5"/>
+        <g><path d="M50 30 a30 12 0 1 0 60 0" fill="none" stroke="var(--hurt)" stroke-width="3" marker-end="url(#arr)"/>
+          <animateTransform attributeName="transform" type="rotate" values="-8 80 30;8 80 30;-8 80 30" dur="1.6s" repeatCount="indefinite"/></g>
+      </svg>
+      <h3>발은 고정, 몸은 회전</h3>
+      <p class="small">방향을 틀거나 다리를 쭉 뻗을 때 발이 바닥에 걸려 있으면 무릎이 비틀립니다. 젊은 층의 연골판 손상은 이런 방향 전환과 비틀림이 흔한 원인입니다.</p>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 160 110" aria-hidden="true">
+        <path d="M30 40 q50 -26 100 0" fill="none" class="stroke" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+        <path d="M30 72 q50 26 100 0" fill="none" class="stroke" stroke-width="10" stroke-linecap="round" opacity=".45"/>
+        <path d="M44 56 q36 -12 72 0" fill="none" stroke="var(--bone)" stroke-width="9" stroke-linecap="round">
+          <animate attributeName="d" values="M44 56 q36 -12 72 0;M44 56 q36 -4 72 0;M44 56 q36 -12 72 0" dur="1.6s" repeatCount="indefinite"/>
+        </path>
+        <path d="M86 46 l-6 10 l8 2 l-6 10" fill="none" stroke="var(--hurt)" stroke-width="3">
+          <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <h3>연골판이 뼈 사이에 끼임</h3>
+      <p class="small">무릎이 비틀리며 눌리면 위아래 뼈 사이의 연골판이 갈려 찢어집니다. 그 순간 "똑" 소리가 나고, 이후 굽히거나 계단을 오를 때 아프고 걸리는 느낌이 남습니다.</p>
+    </div>
+    <div class="card">
+      <svg viewBox="0 0 160 110" aria-hidden="true">
+        <line x1="40" y1="18" x2="40" y2="92" stroke="var(--bone)" stroke-width="6" stroke-linecap="round" stroke-dasharray="6 5">
+          <animate attributeName="stroke-dasharray" values="6 5;6 9;6 5" dur="1.6s" repeatCount="indefinite"/>
+        </line>
+        <line x1="80" y1="20" x2="80" y2="90" class="stroke" stroke-width="14" stroke-linecap="round" opacity=".4"/>
+        <path d="M112 55 h-28" stroke="var(--hurt)" stroke-width="3" marker-end="url(#arr)">
+          <animate attributeName="opacity" values=".2;1;.2" dur="1.6s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <h3>바깥쪽 인대가 당겨짐</h3>
+      <p class="small">무릎이 안쪽으로 꺾이면 바깥쪽 인대가 늘어나거나 일부 찢어집니다. 이 경우 바깥쪽 한 지점을 누르면 아프고, 방향을 틀 때 흔들리는 느낌이 날 수 있습니다.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>"다친 날 부었다"가 중요한 이유</h3>
+    <p class="small muted" style="margin-top:4px">다친 직후 붓는 건 관절 안에 피가 찼다는 신호일 수 있습니다. 엑스레이는 정상인데 관절에 피가 찬 45명을 관절내시경으로 직접 들여다본 국내 연구 결과입니다.</p>
+    <div class="bars" role="list">
+      <div class="bar top" role="listitem"><span>전방십자인대 파열</span><span class="track"><span class="fill" style="display:block;width:31%"></span></span><span class="v mono">31%</span></div>
+      <div class="bar top" role="listitem"><span>바깥쪽 연골판 파열</span><span class="track"><span class="fill" style="display:block;width:29%;animation-delay:.15s"></span></span><span class="v mono">29%</span></div>
+      <div class="bar" role="listitem"><span>안쪽 연골판 파열</span><span class="track"><span class="fill" style="display:block;width:18%;animation-delay:.3s"></span></span><span class="v mono">18%</span></div>
+      <div class="bar" role="listitem"><span>내부 손상 없음</span><span class="track"><span class="fill" style="display:block;width:18%;animation-delay:.45s"></span></span><span class="v mono">18%</span></div>
+    </div>
+    <p class="small muted" style="margin-top:10px">출처: 대한정형외과학회지, 1995, 외상성 무릎 혈관절증 45례. 해외 연구들을 묶은 정리에서도 십자인대 파열이 가장 흔하고 연골판 파열이 다음이었습니다. 비율은 연구마다 차이가 큽니다.</p>
+  </div>
+</section>
+
+<!-- 4. 얼마나 -->
+<section id="grade">
+  <header>
+    <div class="eyebrow">04 · 얼마나</div>
+    <h2>중증도 하 · 중 · 상</h2>
+    <p class="lead muted">막대를 위아래로 끌거나 눌러서 단계를 바꿔 보세요. 키보드 화살표로도 움직입니다. 아래 증상 체크를 바꾸면 해당 단계로 막대가 따라 움직입니다.</p>
+  </header>
+  <div class="grade">
+    <div class="gauge-col">
+      <div class="gauge" id="gauge" role="slider" tabindex="0" aria-label="중증도" aria-valuemin="1" aria-valuemax="3" aria-valuenow="2" aria-valuetext="중">
+        <span class="tick" style="bottom:83.3%">상</span>
+        <span class="tick" style="bottom:50%">중</span>
+        <span class="tick" style="bottom:16.7%">하</span>
+        <span class="me" id="meMark" style="bottom:50%">래규 ▶</span>
+        <span class="thumb" id="thumb">중</span>
+      </div>
+      <p class="gauge-help">끌어서 올리고 내리기</p>
+    </div>
+    <article class="lv-card" id="lvCard" aria-live="polite"></article>
+  </div>
+
+  <div class="card check">
+    <h3>증상 체크</h3>
+    <p class="small muted">래규가 말한 증상은 미리 체크해 두었습니다. 새로 알게 된 게 있으면 바꿔 보세요.</p>
+    <ul id="checks">
+      <li><label><input type="checkbox" id="c-pop" data-w="1" checked>다친 순간 "똑" 소리가 났다</label></li>
+      <li><label><input type="checkbox" id="c-swell" data-w="2" checked>다친 날(몇 시간 안에) 무릎이 부었다</label></li>
+      <li><label><input type="checkbox" id="c-point" data-w="1" checked>누르면 아픈 지점이 분명하다</label></li>
+      <li><label><input type="checkbox" id="c-stairs" data-w="1" checked>뛰거나 계단 오를 때 아프다</label></li>
+      <li><label><input type="checkbox" id="c-give" data-w="3">방향을 틀 때 무릎이 빠지거나 흔들린다</label></li>
+      <li><label><input type="checkbox" id="c-lock" data-w="3">무릎이 걸려서 끝까지 안 펴지거나 안 굽혀진다</label></li>
+      <li><label><input type="checkbox" id="c-weight" data-w="3">체중을 싣기 어렵거나 절뚝거린다</label></li>
+      <li><label><input type="checkbox" id="c-long" data-w="2">붓기가 1주 넘게 빠지지 않는다</label></li>
+    </ul>
+    <div class="score"><span class="small">체크 결과</span><span class="pill" id="scorePill">중</span><span class="small muted mono" id="scoreNum"></span><button class="btn" id="resetBtn" type="button">래규 기준으로 되돌리기</button></div>
+    <p class="small muted" style="margin-top:8px">점수 기준은 이 보고서에서 정한 대략적인 구분입니다. 의학적으로 검증된 점수표가 아닙니다.</p>
+  </div>
+</section>
+
+<!-- 5. 재활 -->
+<section id="rehab">
+  <header>
+    <div class="eyebrow">05 · 재활</div>
+    <h2>단계별 재활 운동</h2>
+    <p class="lead muted">진단 전에는 무릎에 부담이 없는 운동만 합니다. 2단계부터는 진단 결과를 듣고 의사나 물리치료사가 괜찮다고 할 때 시작합니다. 아프면 범위를 줄이고, 통증이 커지면 멈춥니다.</p>
+  </header>
+  <div class="tabs" role="tablist" aria-label="재활 단계">
+    <button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">1단계 · 지금부터 진단 전까지</button>
+    <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">2단계 · 진단 후 허락받으면</button>
+    <button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="p3" tabindex="-1">3단계 · 복귀 준비</button>
+  </div>
+
+  <div role="tabpanel" id="p1" aria-labelledby="t1">
+    <div class="ex-grid">
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="92" x2="212" y2="92" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="26" cy="76" r="9" class="fillink"/>
+          <polyline points="38,82 100,84" class="stroke" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <polyline points="100,84 150,84 198,84 204,72" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <ellipse cx="124" cy="78" rx="22" ry="6" fill="var(--hurt)"><animate attributeName="opacity" values=".1;.85;.85;.1" keyTimes="0;.3;.7;1" dur="2.4s" repeatCount="indefinite"/></ellipse>
+          <circle cx="150" cy="90" r="5" fill="var(--bone)"/>
+          <path d="M150 62 v12" stroke="var(--bone)" stroke-width="3" marker-end="url(#arr)"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.3;.7;1" dur="2.4s" repeatCount="indefinite"/></path>
+        </svg>
+        <h3>허벅지 힘주기</h3>
+        <p class="small">다리를 펴고 앉거나 누워 무릎 밑에 수건을 말아 둡니다. 무릎 뒤로 수건을 꾹 누르며 허벅지 앞쪽에 힘을 줍니다.</p>
+        <span class="dose">약 6초 버티기 · 8~12회</span>
+      </div>
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="92" x2="212" y2="92" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="26" cy="76" r="9" class="fillink"/>
+          <polyline points="38,82 100,84" class="stroke" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <polyline points="100,84 130,56 160,86" class="stroke" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".35"/>
+          <g>
+            <polyline points="100,84 150,84 198,84 204,72" stroke="var(--hurt)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <animateTransform attributeName="transform" type="rotate" values="0 100 84;-22 100 84;-22 100 84;0 100 84;0 100 84" keyTimes="0;.3;.55;.85;1" dur="3s" repeatCount="indefinite"/>
+          </g>
+        </svg>
+        <h3>다리 펴고 들기</h3>
+        <p class="small">누워서 반대쪽 무릎은 세웁니다. 다친 다리는 무릎을 쭉 편 채 허벅지에 힘을 주고 뒤꿈치가 바닥에서 30cm쯤 뜨게 듭니다.</p>
+        <span class="dose">약 6초 버티고 천천히 내리기 · 8~12회</span>
+      </div>
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="92" x2="212" y2="92" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="26" cy="76" r="9" class="fillink"/>
+          <polyline points="38,82 100,84" class="stroke" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <polyline stroke="var(--hurt)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" points="100,84 150,84 198,84 204,72">
+            <animate attributeName="points" dur="3.2s" repeatCount="indefinite" keyTimes="0;.4;.6;1"
+              values="100,84 150,84 198,84 204,72;100,84 134,58 162,84 170,74;100,84 134,58 162,84 170,74;100,84 150,84 198,84 204,72"/>
+          </polyline>
+        </svg>
+        <h3>뒤꿈치 미끄러뜨리기</h3>
+        <p class="small">누워서 다친 쪽 뒤꿈치를 바닥에 댄 채 엉덩이 쪽으로 천천히 끌어와 무릎을 굽혔다가 다시 폅니다. 아프기 직전까지만 굽힙니다.</p>
+        <span class="dose">5~10초 버티기 · 10회</span>
+      </div>
+    </div>
+    <div class="dont">
+      <b>진단 전에 하지 말 것</b>
+      <ul class="small">
+        <li>풋살, 축구, 농구처럼 방향을 트는 운동</li>
+        <li>깊게 쪼그려 앉기, 양반다리, 무거운 스쿼트</li>
+        <li>계단 많이 오르내리기, 내리막 달리기</li>
+        <li>하루 만 보 걷기. 당분간은 필요한 만큼만 걷습니다.</li>
+      </ul>
+      <p class="small" style="margin-top:8px">다치고 2~3일은 얼음팩을 수건에 싸서 15~20분씩, 하루 3~4번 대 줍니다. 붓기가 있을 때는 뜨거운 찜질을 피합니다.</p>
+    </div>
+  </div>
+
+  <div role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+    <div class="ex-grid">
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="92" x2="212" y2="92" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="26" cy="80" r="9" class="fillink"/>
+          <polyline stroke="var(--hurt)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" points="40,86 100,86 134,58 160,88">
+            <animate attributeName="points" dur="3s" repeatCount="indefinite" keyTimes="0;.35;.65;1"
+              values="40,86 100,86 134,58 160,88;40,86 100,64 134,56 160,88;40,86 100,64 134,56 160,88;40,86 100,86 134,58 160,88"/>
+          </polyline>
+        </svg>
+        <h3>엉덩이 들기(브릿지)</h3>
+        <p class="small">누워서 무릎을 90도쯤 세우고 뒤꿈치로 바닥을 누릅니다. 엉덩이에 힘을 주고 어깨·골반·무릎이 일직선이 되게 엉덩이를 듭니다. 숨은 참지 않습니다.</p>
+        <span class="dose">약 6초 버티기 · 8~12회</span>
+      </div>
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="96" x2="212" y2="96" stroke="var(--line)" stroke-width="3"/>
+          <rect x="150" y="30" width="6" height="66" fill="var(--line)"/><rect x="140" y="28" width="30" height="6" rx="3" fill="var(--line)"/>
+          <g>
+            <circle cx="108" cy="14" r="8" class="fillink"/>
+            <animateTransform attributeName="transform" type="translate" values="0 0;-4 12;-4 12;0 0" keyTimes="0;.4;.6;1" dur="3s" repeatCount="indefinite"/>
+          </g>
+          <polyline stroke="var(--hurt)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" points="108,24 108,56 110,76 110,94">
+            <animate attributeName="points" dur="3s" repeatCount="indefinite" keyTimes="0;.4;.6;1"
+              values="108,24 108,56 110,76 110,94;104,36 98,66 116,78 110,94;104,36 98,66 116,78 110,94;108,24 108,56 110,76 110,94"/>
+          </polyline>
+        </svg>
+        <h3>얕게 무릎 굽히기</h3>
+        <p class="small">의자 등받이를 가볍게 잡고 어깨너비로 섭니다. 의자에 앉듯 15cm쯤만 내려갔다 천천히 올라옵니다. 무릎이 발끝보다 앞으로 나가지 않게 하고, 뒤꿈치는 계속 바닥에 붙입니다.</p>
+        <span class="dose">8~12회</span>
+      </div>
+      <div class="card ex">
+        <svg viewBox="0 0 220 100" aria-hidden="true">
+          <line x1="8" y1="92" x2="212" y2="92" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="40" cy="76" r="9" class="fillink"/>
+          <polyline points="52,80 110,84" class="stroke" stroke-width="8" stroke-linecap="round" fill="none"/>
+          <polyline stroke="var(--hurt)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none" points="110,84 160,84 206,84">
+            <animate attributeName="points" dur="3s" repeatCount="indefinite" keyTimes="0;.4;.6;1"
+              values="110,84 160,84 206,84;110,84 160,84 176,46;110,84 160,84 176,46;110,84 160,84 206,84"/>
+          </polyline>
+        </svg>
+        <h3>엎드려 무릎 굽히기</h3>
+        <p class="small">엎드려 다리를 펴고, 다친 쪽 발을 엉덩이 쪽으로 천천히 굽혔다 내립니다. 아프면 덜 굽힙니다. 아프지 않게 되면 밴드를 걸어 저항을 줍니다.</p>
+        <span class="dose">8~12회</span>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:12px">보조기를 차라고 하거나 수술을 하면 순서와 범위가 크게 달라집니다. 이 단계는 반드시 진료받은 곳의 지시를 따릅니다.</p>
+  </div>
+
+  <div role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+    <div class="grid3">
+      <div class="card"><h3>균형</h3><p class="small" style="margin-top:6px">다친 다리로 한 발 서기를 30초씩 버팁니다. 쉬워지면 눈을 감거나 쿠션 위에서 합니다.</p></div>
+      <div class="card"><h3>계단 오르기</h3><p class="small" style="margin-top:6px">낮은 발판에 천천히 올라섰다 내려옵니다. 무릎이 안쪽으로 모이지 않게 거울로 확인합니다.</p></div>
+      <div class="card"><h3>달리기</h3><p class="small" style="margin-top:6px">직선으로 가볍게 뛰기부터 시작합니다. 아프지 않으면 지그재그, 방향 전환 순서로 넓혀 갑니다.</p></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>풋살로 돌아가기 전 확인</h3>
+      <ul class="small" style="margin:8px 0 0;padding-left:20px">
+        <li>붓기가 없고, 무릎이 양쪽 똑같이 펴지고 굽혀진다</li>
+        <li>다친 다리로 한 발 서기, 한 발 점프가 아프지 않다</li>
+        <li>방향 전환 달리기를 해도 빠지는 느낌이 없다</li>
+        <li>진료받은 곳에서 복귀해도 된다고 했다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 약 -->
+<section id="meds">
+  <header>
+    <div class="eyebrow">06 · 약</div>
+    <h2>통증 약 고르는 법</h2>
+    <p class="lead muted">약은 통증을 줄일 뿐 다친 곳을 고치지는 않습니다. 진료 전까지 버티는 용도로만 쓰고, 약국에서 약사에게 "운동하다 무릎을 다쳐 부었다"고 말하고 고르는 게 가장 안전합니다. 먹는 양은 포장에 적힌 용법을 따릅니다.</p>
+  </header>
+  <div class="grid3">
+    <div class="card med">
+      <h3>소염진통제 <span class="chip">이부프로펜 · 덱시부프로펜 · 나프록센</span></h3>
+      <p class="small" style="margin-top:6px">통증과 염증을 같이 줄입니다. 다친 직후 붓고 아플 때 주로 고르는 계열입니다.</p>
+      <ul class="small"><li>속쓰림, 소화불량이 생길 수 있어 식후에 먹습니다.</li><li>위장 질환이나 신장 질환이 있으면 피하고 약사와 상의합니다.</li><li>같은 계열 약 두 가지를 함께 먹지 않습니다.</li></ul>
+    </div>
+    <div class="card med">
+      <h3>해열진통제 <span class="chip">아세트아미노펜(타이레놀 계열)</span></h3>
+      <p class="small" style="margin-top:6px">통증만 줄이고 염증을 줄이는 효과는 약합니다. 위장 부담이 적은 편입니다.</p>
+      <ul class="small"><li>술 마시기 전후로 먹으면 간이 크게 상할 수 있습니다.</li><li>감기약 등 다른 약에도 같은 성분이 들어 있는 경우가 많아 겹치지 않게 확인합니다.</li></ul>
+    </div>
+    <div class="card med">
+      <h3>붙이는 약 <span class="chip">소염진통 파스·겔</span></h3>
+      <p class="small" style="margin-top:6px">아픈 자리에 직접 붙이거나 바릅니다. 먹는 약보다 몸 전체에 주는 부담이 적습니다.</p>
+      <ul class="small"><li>케토프로펜 성분은 붙였던 자리에 햇빛을 쬐면 피부염이 생길 수 있어 가립니다.</li><li>상처나 피부 트러블이 있는 곳에는 쓰지 않습니다.</li></ul>
+    </div>
+  </div>
+  <div class="card warnlist">
+    <h3>약으로 버티면 안 되는 경우</h3>
+    <ol class="small">
+      <li>약을 2~3일 먹어도 붓기와 통증이 그대로일 때</li>
+      <li>무릎이 빠지는 느낌이나 걸리는 느낌이 있을 때</li>
+      <li>약 덕분에 안 아프다고 풋살을 다시 하려 할 때. 통증을 가리면 더 크게 다칠 수 있습니다.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 7. 병원 -->
+<section id="hospital">
+  <header>
+    <div class="eyebrow">07 · 병원</div>
+    <h2>오산에서 어디로, 어떻게</h2>
+    <p class="lead muted">무릎 MRI를 찍을 수 있는 정형외과로 가는 게 핵심입니다. 아래는 병원 홈페이지에서 무릎 진료와 MRI 보유를 확인한 곳입니다. 진료 시간과 의사 일정은 바뀔 수 있으니 전화로 먼저 확인합니다.</p>
+  </header>
+  <div class="grid2">
+    <div class="card hosp">
+      <h3>오산한국병원</h3>
+      <p class="small">종합병원(응급센터 있음). 정형외과 진료 항목에 십자인대·측부인대 파열, 반월상 연골판 손상, 스포츠 손상, 관절내시경 수술이 있고, MRI·CT를 보유하고 있다고 안내합니다.</p>
+      <div class="row small"><span class="muted">주소</span><span class="copyable">경기 오산시 밀머리로1번길 16</span></div>
+      <div class="row small"><span class="muted">대표</span><span class="copyable">1566-3534</span></div>
+      <a class="small" href="http://www.oshankook.net/theme/grape/mobile/sub04_10_p7.php" target="_blank" rel="noopener">정형외과 안내 페이지</a>
+    </div>
+    <div class="card hosp">
+      <h3>버팀병원 오산점</h3>
+      <p class="small">관절센터에 무릎을 보는 정형외과 전문의가 있고, MRI·CT·초음파 검사가 가능하다고 안내합니다. 관절센터는 평일 저녁 8시, 일요일에도 진료합니다(홈페이지 기준).</p>
+      <div class="row small"><span class="muted">위치</span><span>오산IC·오산시청 근처</span></div>
+      <div class="row small"><span class="muted">대표</span><span class="copyable">1661-0032</span></div>
+      <a class="small" href="https://www.osanburtim.co.kr/" target="_blank" rel="noopener">병원 홈페이지</a>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:10px">조은오산병원도 관절경·스포츠 외상을 전문으로 하는 정형외과 전문의가 있는 것으로 검색되지만, 홈페이지 접속이 안 돼 직접 확인하지 못했습니다.</p>
+
+  <h3 style="margin-top:26px">가는 순서</h3>
+  <ol class="steps" style="margin-top:12px">
+    <li><b>전화</b><br>"무릎 다쳐서 MRI까지 볼 수 있는 진료 받고 싶다"고 말하고 예약합니다.</li>
+    <li><b>진찰</b><br>의사가 무릎을 흔들어 인대 상태를 보고 엑스레이를 찍습니다.</li>
+    <li><b>MRI</b><br>필요하다고 하면 찍습니다. 연골판과 인대는 엑스레이에 보이지 않습니다.</li>
+    <li><b>계획</b><br>결과에 따라 보조기, 주사, 재활, 관절내시경 수술 중에서 정합니다.</li>
+  </ol>
+  <p class="small muted" style="margin-top:10px">MRI는 건강보험 적용이 안 되는 경우가 많아 비용이 클 수 있습니다. 실손보험에 들어 있는지 미리 확인하고, 영수증과 진료비 세부내역서를 챙깁니다.</p>
+
+  <div class="card" style="margin-top:16px">
+    <div class="row" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <h3>진료실에서 그대로 읽을 말</h3>
+      <button class="btn" type="button" id="copyBtn">복사</button>
+    </div>
+    <pre class="script" id="script">풋살하다가 다리를 뻗는 순간 왼쪽 무릎에서 '똑' 소리가 났습니다.
+다친 날 무릎이 부었습니다.
+지금은 무릎이 끝까지 펴지는데, 바깥쪽(접히는 주름 앞)을 누르면 아프고
+뛰거나 계단을 오를 때 아픕니다.
+무릎이 빠지거나 걸리는 느낌은 (있습니다 / 없습니다).
+연골판이나 인대, 십자인대 손상인지 확인하고 싶습니다.</pre>
+    <p class="small muted" id="copyMsg" style="margin-top:6px"></p>
+  </div>
+</section>
+
+<!-- 출처 -->
+<section id="sources" class="src">
+  <header><div class="eyebrow">08 · 출처</div><h2>참고한 자료</h2></header>
+  <ol>
+    <li><a href="https://synapse.koreamed.org/articles/1113185" target="_blank" rel="noopener">외상성 무릎 혈관절증의 관절경 소견</a>, 대한정형외과학회지, 1995. 다친 뒤 관절에 피가 찬 45명을 관절내시경으로 확인한 연구. 원문 초록에서 숫자 확인.</li>
+    <li><a href="https://zenodo.org/record/3726643" target="_blank" rel="noopener">혈관절증을 동반한 급성 무릎 손상의 감별 진단</a>. 여러 연구를 묶어 원인별 비율을 정리한 논문. 검색 요약만 확인.</li>
+    <li><a href="https://www.msdmanuals.com/ko/home/%EA%B8%B0%EB%B3%B8-%EC%A0%95%EB%B3%B4-%EB%B6%80%EC%83%81-%EB%B0%8F-%EC%A4%91%EB%8F%85/%EC%97%BC%EC%A2%8C-%EB%B0%8F-%EB%8B%A4%EB%A5%B8-%EC%97%B0%EC%A1%B0%EC%A7%81-%EC%86%90%EC%83%81/%EB%AC%B4%EB%A6%8E-%EC%97%BC%EC%A2%8C" target="_blank" rel="noopener">MSD 매뉴얼 일반인용, 무릎 염좌</a>, 2026-05 검토. 경증·중등도·중증 구분, 중증 시 4~6주 이상 보조기 또는 수술.</li>
+    <li><a href="https://www.hyunmyoung.co.kr/knee/knee-pain-causes-7-differential-diagnosis-by-specialist" target="_blank" rel="noopener">현명병원, 무릎 통증 원인 감별</a>. 방향 전환·비틀림 손상 기전.</li>
+    <li><a href="https://www.newsis.com/view/NISX20250515_0003177586" target="_blank" rel="noopener">뉴시스, 앉았다 일어날 때 무릎서 '뚝'…그냥 넘겨선 안 되는 이유</a>, 2025-05-15.</li>
+    <li><a href="https://www.howardluksmd.com/lateral-knee-pain-explained/" target="_blank" rel="noopener">무릎 바깥쪽 통증 해설</a>, 하워드 럭스(미국 정형외과 전문의). 바깥쪽 통증의 원인별 구분.</li>
+    <li><a href="https://www.physio-pedia.com/Popliteus_Tendinopathy" target="_blank" rel="noopener">오금근 힘줄병증</a>, 피지오피디아(물리치료 백과). 계단·내리막에서 아픈 오금 바깥쪽 통증.</li>
+    <li><a href="https://www.columbiadoctors.org/health-library/how-to/meniscus-tear-rehabilitation-exercises/" target="_blank" rel="noopener">반월상연골 파열 재활 운동</a>, 미국 컬럼비아대 의료진 건강정보, 2026-02-15 기준. 운동 방법과 횟수.</li>
+    <li><a href="https://www.thepharmacy.co.kr/%ED%95%B4%EC%97%B4%EC%86%8C%EC%97%BC%EC%A7%84%ED%86%B5%EC%A0%9C-%EB%B3%B5%EC%9A%A9-%EC%8B%9C-%EC%A3%BC%EC%9D%98%EC%82%AC%ED%95%AD" target="_blank" rel="noopener">더파머시(약사 운영), 해열소염진통제 복용 시 주의사항</a>, 2023-04-03 갱신.</li>
+    <li><a href="http://www.oshankook.net/theme/grape/mobile/sub04_10_p7.php" target="_blank" rel="noopener">오산한국병원 정형외과</a> · <a href="https://www.osanburtim.co.kr/" target="_blank" rel="noopener">버팀병원 오산점</a>. 2026-10-08 확인.</li>
+    <li>해부도: 그레이 해부학(1918) 348번·349번 그림, <a href="https://commons.wikimedia.org/wiki/File:Gray348.png" target="_blank" rel="noopener">위키미디어 공용</a>, 저작권 만료(퍼블릭 도메인).</li>
+    <li>맨 위 영상과 바깥쪽 해부 일러스트는 힉스필드로 만든 AI 생성물입니다. 이해를 돕는 그림이고 해부학적으로 정확하지 않을 수 있습니다.</li>
+  </ol>
+  <p class="small muted" style="margin-top:10px">회복 기간(1~3주, 4~8주, 6개월 이상)은 일반적인 범위를 적은 것으로, 위 자료에서 직접 확인한 숫자는 아닙니다. 실제 기간은 진찰 결과에 따라 달라집니다.</p>
+</section>
+
+<footer>이 페이지는 의료 행위가 아니며 의사의 진찰을 대신하지 않습니다. 2026-10-08 작성.</footer>
+</main>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) document.querySelectorAll('svg').forEach(s => { try { s.pauseAnimations(); } catch(e){} });
+
+  /* 오프닝 인사: 글자가 한 자씩 나오고, 끝나면 전체 문장이 그대로 남음 */
+  (function(){
+    const hi = document.getElementById('hi'), sub = document.getElementById('hiSub');
+    if (reduce || !hi) return;
+    const full = hi.innerHTML, plain = hi.textContent, subFull = sub.textContent;
+    const nameStart = plain.indexOf('김닥터모'), nameEnd = nameStart + 4;
+    let i = 0;
+    sub.style.opacity = 0; hi.classList.add('caret');
+    const render = n => {
+      const t = plain.slice(0, n);
+      hi.innerHTML = n <= nameStart ? t : t.slice(0, nameStart) + '<b>' + t.slice(nameStart, Math.min(n, nameEnd)) + '</b>' + t.slice(nameEnd);
+    };
+    hi.textContent = '';
+    const timer = setInterval(() => {
+      i++; render(i);
+      if (i >= plain.length){
+        clearInterval(timer); hi.innerHTML = full; hi.classList.remove('caret');
+        sub.style.transition = 'opacity .6s'; sub.style.opacity = 1;
+      }
+    }, 70);
+    sub.textContent = subFull;
+  })();
+  document.getElementById('goBtn').addEventListener('click', () => {
+    document.getElementById('heroTop').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  });
+
+  /* 해부도 핫스팟 */
+  const parts = {
+    pain:{nm:'래규가 가리킨 곳', tag:'통증 위치', hot:true, body:'무릎 바깥쪽, 접히는 주름 바로 앞입니다. 이 근처에 바깥쪽 인대, 허벅지 뒤 바깥쪽 힘줄, 바깥쪽 연골판 뒷부분, 오금근 힘줄이 모여 있습니다. 누르는 지점이 관절 틈(뼈와 뼈 사이)이면 연골판, 그보다 위나 뒤의 줄 같은 조직이면 인대나 힘줄 쪽에 가깝습니다.'},
+    lm:{nm:'바깥쪽 연골판', tag:'의심 1순위', hot:true, body:'정강뼈 위에 얹힌 초승달 모양 연골입니다. 충격을 흡수하고 무릎을 안정시킵니다. 비틀리면서 눌리면 찢어지고, 굽힐 때 아프거나 걸리는 느낌, "똑" 소리가 납니다. 한 번 찢어지면 저절로 잘 붙지 않습니다.'},
+    lcl:{nm:'바깥쪽 인대(외측측부인대)', tag:'의심 1순위', hot:true, body:'넙다리뼈에서 종아리뼈 머리까지 이어진 줄 모양 인대입니다. 무릎이 안쪽으로 꺾이는 걸 막습니다. 다치면 바깥쪽 한 지점을 누를 때 아프고, 심하면 방향을 틀 때 흔들립니다.'},
+    bf:{nm:'허벅지 뒤 바깥쪽 힘줄', tag:'의심 3순위', hot:false, body:'허벅지 뒤 근육(대퇴이두근)이 종아리뼈 머리에 붙는 힘줄입니다. 공을 차려고 다리를 강하게 뻗을 때 당겨질 수 있고, 오금 바깥쪽이 아픕니다.'},
+    acl:{nm:'전방십자인대', tag:'확인 필요', hot:true, body:'무릎 한가운데에서 정강뼈가 앞으로 밀리지 않게 잡는 인대입니다. 끊어질 때 "똑" 소리가 나고 몇 시간 안에 붓는 경우가 많습니다. 붓기가 빠지면 걷기는 할 수 있어 놓치기 쉽습니다. 방향을 틀 때 빠지는 느낌이 있는지가 단서입니다.'}
+  };
+  const info = document.getElementById('partInfo');
+  const hs = document.querySelectorAll('.hs');
+  function showPart(k){
+    const p = parts[k];
+    info.innerHTML = '<div class="nm"><h3>'+p.nm+'</h3><span class="chip'+(p.hot?' hot':'')+'">'+p.tag+'</span></div><p style="margin-top:8px">'+p.body+'</p>';
+    info.classList.remove('lv-anim'); void info.offsetWidth; info.classList.add('lv-anim');
+    hs.forEach(b => b.setAttribute('aria-pressed', b.dataset.k===k ? 'true':'false'));
+  }
+  hs.forEach(b => b.addEventListener('click', () => showPart(b.dataset.k)));
+  showPart('pain');
+
+  /* 중증도 */
+  const levels = {
+    1:{t:'하 · 가벼운 염좌', c:'var(--lv1)',
+      hurt:'인대가 늘어난 정도이거나 근육·힘줄이 놀란 상태입니다. 찢어진 곳은 없거나 아주 작습니다.',
+      sym:'통증이 가볍고 붓기가 거의 없습니다. 흔들림이 없고 걷기와 계단에 큰 문제가 없습니다.',
+      care:'2~3일 쉬고 냉찜질·압박·다리 올리기. 1단계 재활 운동.',
+      time:'대략 1~3주 안에 좋아집니다.',
+      go:'1~2주가 지나도 그대로면 진료.',
+      fit:'래규는 다친 날 부었기 때문에 이 단계보다는 무거워 보입니다.'},
+    2:{t:'중 · 부분 손상', c:'var(--lv2)',
+      hurt:'바깥쪽 인대 일부가 찢어졌거나, 연골판 일부가 찢어진 상태입니다. 두 가지가 같이 있을 수도 있습니다.',
+      sym:'다치는 순간 소리가 나고 그날이나 다음 날 붓습니다. 한 지점을 누르면 아프고, 뛰거나 계단을 오르거나 굽힐 때 아픕니다. 걷기는 됩니다.',
+      care:'진찰과 MRI로 확인. 보조기, 재활 운동, 연골판 손상 모양에 따라 주사나 관절내시경을 검토합니다.',
+      time:'대략 4~8주. 연골판 수술을 하면 더 걸립니다.',
+      go:'이번 주 안에 정형외과 진료.',
+      fit:'래규의 지금 증상과 가장 잘 맞는 단계입니다. 소리, 당일 붓기, 누르면 아픈 지점, 계단 통증이 모두 해당합니다.'},
+    3:{t:'상 · 완전 파열·복합 손상', c:'var(--lv3)',
+      hurt:'전방십자인대나 바깥쪽 인대가 완전히 끊어졌거나, 연골판이 크게 찢어진 상태입니다. 여러 곳이 함께 다친 경우도 많습니다.',
+      sym:'큰 소리와 함께 몇 시간 안에 크게 붓습니다. 무릎이 빠지거나 걸려서 안 펴지고, 체중을 싣기 어렵습니다.',
+      care:'MRI 후 관절내시경 수술(인대 재건, 연골판 봉합 등)을 검토합니다. 중증 염좌는 4~6주 이상 보조기를 차거나 수술합니다(MSD 매뉴얼).',
+      time:'수술하면 운동 복귀까지 대략 6개월 이상.',
+      go:'바로 진료. 걷지 못하면 응급실.',
+      fit:'래규는 무릎이 잘 펴지고 걸을 수 있어 지금은 해당하지 않아 보입니다. 다만 십자인대는 붓기가 빠지면 걸을 수 있어서, 빠지는 느낌이 있다면 이 단계일 수 있습니다.'}
+  };
+  const gauge = document.getElementById('gauge'), thumb = document.getElementById('thumb'), card = document.getElementById('lvCard');
+  const pctOf = {1:16.7, 2:50, 3:83.3};
+  let cur = 2;
+  function setLevel(n, anim){
+    n = Math.max(1, Math.min(3, n)); cur = n;
+    const L = levels[n];
+    gauge.style.setProperty('--pct', pctOf[n]+'%');
+    thumb.textContent = ['','하','중','상'][n];
+    gauge.setAttribute('aria-valuenow', n); gauge.setAttribute('aria-valuetext', ['','하','중','상'][n]);
+    card.style.setProperty('--lvc', L.c);
+    card.innerHTML = '<h3>'+L.t+'</h3><dl><dt>어떤 상태</dt><dd>'+L.hurt+'</dd><dt>증상</dt><dd>'+L.sym+'</dd><dt>치료</dt><dd>'+L.care+'</dd><dt>회복 기간</dt><dd>'+L.time+'</dd><dt>병원</dt><dd>'+L.go+'</dd></dl><p class="fit"><b>래규는?</b> '+L.fit+'</p>';
+    if (anim){ card.classList.remove('lv-anim'); void card.offsetWidth; card.classList.add('lv-anim'); }
+  }
+  function fromPointer(e){
+    const r = gauge.getBoundingClientRect();
+    const f = 1 - (e.clientY - r.top) / r.height;
+    const n = f < 1/3 ? 1 : f < 2/3 ? 2 : 3;
+    if (n !== cur) setLevel(n, true);
+  }
+  let drag = false;
+  gauge.addEventListener('pointerdown', e => { drag = true; try{ gauge.setPointerCapture(e.pointerId); }catch(_){} fromPointer(e); });
+  gauge.addEventListener('pointermove', e => { if (drag) fromPointer(e); });
+  gauge.addEventListener('pointerup', () => drag = false);
+  gauge.addEventListener('pointercancel', () => drag = false);
+  gauge.addEventListener('keydown', e => {
+    if (e.key==='ArrowUp'||e.key==='ArrowRight'){ e.preventDefault(); setLevel(cur+1, true); }
+    if (e.key==='ArrowDown'||e.key==='ArrowLeft'){ e.preventDefault(); setLevel(cur-1, true); }
+    if (e.key==='Home'){ e.preventDefault(); setLevel(1, true); }
+    if (e.key==='End'){ e.preventDefault(); setLevel(3, true); }
+  });
+
+  /* 증상 체크 */
+  const boxes = [...document.querySelectorAll('#checks input')];
+  const defaults = boxes.map(b => b.checked);
+  const pill = document.getElementById('scorePill'), num = document.getElementById('scoreNum');
+  function score(move){
+    let s = 0, severe = false;
+    boxes.forEach(b => { if (b.checked){ s += +b.dataset.w; if (+b.dataset.w===3) severe = true; } });
+    const n = (severe || s >= 6) ? 3 : s >= 3 ? 2 : 1;
+    pill.textContent = ['','하','중','상'][n];
+    pill.style.setProperty('--lvc', levels[n].c);
+    num.textContent = '점수 '+s+' · 0~2 하 / 3~5 중 / 6 이상 또는 굵은 신호 하나라도 있으면 상';
+    if (move) setLevel(n, true);
+  }
+  boxes.forEach(b => b.addEventListener('change', () => score(true)));
+  document.getElementById('resetBtn').addEventListener('click', () => { boxes.forEach((b,i) => b.checked = defaults[i]); score(true); });
+  setLevel(2, false); score(false);
+
+  /* 재활 탭 */
+  const tabs = [...document.querySelectorAll('.tabs [role="tab"]')];
+  function selectTab(t){
+    tabs.forEach(x => { const on = x===t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+    t.focus();
+  }
+  tabs.forEach((t,i) => {
+    t.addEventListener('click', () => selectTab(t));
+    t.addEventListener('keydown', e => {
+      if (e.key==='ArrowRight') selectTab(tabs[(i+1)%tabs.length]);
+      if (e.key==='ArrowLeft') selectTab(tabs[(i-1+tabs.length)%tabs.length]);
+    });
+  });
+
+  /* 복사 */
+  const msg = document.getElementById('copyMsg');
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const txt = document.getElementById('script').textContent;
+    const sel = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('script')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = '글이 선택되었습니다. 길게 눌러 복사하세요.'; };
+    try { navigator.clipboard.writeText(txt).then(() => msg.textContent = '복사했습니다.', sel); } catch(e){ sel(); }
+  });
+
+  /* 큰 항목 탭: 누른 항목 하나만 열기 */
+  const mtabs = [...document.querySelectorAll('.mtab')];
+  const secs = mtabs.map(t => document.getElementById(t.dataset.s));
+  const nav = document.querySelector('nav.toc');
+  secs.forEach((s, i) => {
+    s.setAttribute('role', 'tabpanel');
+    mtabs[i].id = 'tab-' + s.id; mtabs[i].setAttribute('aria-controls', s.id); s.setAttribute('aria-labelledby', 'tab-' + s.id);
+    const pg = document.createElement('div'); pg.className = 'pager';
+    const prev = document.createElement('button'); prev.type = 'button'; prev.className = 'btn';
+    const next = document.createElement('button'); next.type = 'button'; next.className = 'btn';
+    if (i > 0){ prev.textContent = '← ' + mtabs[i-1].textContent.replace(/^\d+/, ''); prev.onclick = () => openSec(i-1, true); } else prev.hidden = true;
+    if (i < secs.length-1){ next.textContent = mtabs[i+1].textContent.replace(/^\d+/, '') + ' →'; next.onclick = () => openSec(i+1, true); } else next.hidden = true;
+    pg.append(prev, next); s.append(pg);
+  });
+  function openSec(i, scroll, focusTab){
+    secs.forEach((s, j) => { s.hidden = j !== i; });
+    mtabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; });
+    secs[i].classList.remove('enter'); void secs[i].offsetWidth; secs[i].classList.add('enter');
+    mtabs[i].scrollIntoView({block:'nearest', inline:'center', behavior: reduce ? 'auto' : 'smooth'});
+    if (focusTab) mtabs[i].focus();
+    if (scroll && nav.getBoundingClientRect().top < 1) window.scrollTo({top: document.getElementById('panels').offsetTop - nav.offsetHeight, behavior: reduce ? 'auto' : 'smooth'});
+    try { history.replaceState(null, '', '#' + secs[i].id); } catch(e){}
+  }
+  mtabs.forEach((t, i) => {
+    t.addEventListener('click', () => openSec(i, true));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight'){ e.preventDefault(); openSec((i+1) % mtabs.length, false, true); }
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); openSec((i-1+mtabs.length) % mtabs.length, false, true); }
+    });
+  });
+  const start = Math.max(0, secs.findIndex(s => '#' + s.id === location.hash));
+  openSec(start, false);
+})();
+</script>
+
+</body>
+</html>
