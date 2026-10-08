@@ -915,11 +915,14 @@ footer{margin-top:40px;font-size:.82rem;color:var(--muted);border-top:1px solid 
     secs.forEach((s, j) => { s.hidden = j !== i; });
     mtabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; });
     secs[i].classList.remove('enter'); void secs[i].offsetWidth; secs[i].classList.add('enter');
-    mtabs[i].scrollIntoView({block:'nearest', inline:'center', behavior: reduce ? 'auto' : 'smooth'});
-    if (focusTab) mtabs[i].focus();
+    if (initial) return;
+    const bar = nav.querySelector('.in');
+    bar.scrollTo({left: mtabs[i].offsetLeft - (bar.clientWidth - mtabs[i].offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth'});
+    if (focusTab) mtabs[i].focus({preventScroll: true});
     if (scroll && nav.getBoundingClientRect().top < 1) window.scrollTo({top: document.getElementById('panels').offsetTop - nav.offsetHeight, behavior: reduce ? 'auto' : 'smooth'});
     try { history.replaceState(null, '', '#' + secs[i].id); } catch(e){}
   }
+  let initial = true;
   mtabs.forEach((t, i) => {
     t.addEventListener('click', () => openSec(i, true));
     t.addEventListener('keydown', e => {
@@ -929,6 +932,7 @@ footer{margin-top:40px;font-size:.82rem;color:var(--muted);border-top:1px solid 
   });
   const start = Math.max(0, secs.findIndex(s => '#' + s.id === location.hash));
   openSec(start, false);
+  initial = false;
 })();
 </script>
 
